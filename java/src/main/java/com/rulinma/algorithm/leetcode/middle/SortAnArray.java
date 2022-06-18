@@ -39,9 +39,7 @@ public class SortAnArray {
             for (int i = 0; i < nums.length - round - 1; i++) {
                 // 选择大的放到最后，这里是不正确的，则进行交换
                 if (nums[i] > nums[i + 1]) {
-                    int t = nums[i];
-                    nums[i] = nums[i + 1];
-                    nums[i + 1] = t;
+                    swap(nums, i + 1, i);
                     hasSwap = true;
                 }
             }
@@ -72,9 +70,7 @@ public class SortAnArray {
                 for (int j = 0; j < nums.length - i - 1; j++) {
                     // 选择大的放到最后，这里是不正确的，则进行交换
                     if (nums[j] > nums[j + 1]) {
-                        int t = nums[j];
-                        nums[j] = nums[j + 1];
-                        nums[j + 1] = t;
+                        swap(nums, j + 1, j);
                         flag = true;
                     }
                 }
@@ -103,11 +99,31 @@ public class SortAnArray {
             for (int j = 0; j < nums.length - i - 1; j++) {
                 // 选择大的放到最后，这里是不正确的，则进行交换
                 if (nums[j] > nums[j + 1]) {
-                    int t = nums[j];
-                    nums[j] = nums[j + 1];
-                    nums[j + 1] = t;
+                    swap(nums, j + 1, j);
                 }
             }
+        }
+
+        return nums;
+    }
+
+    /**
+     * 第一次从待排序的数据元素中选出最小（或最大）的一个元素，
+     * 存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，
+     * 然后放到已排序的序列的末尾。
+     * 以此类推，直到全部待排序的数据元素的个数为零
+     */
+    public int[] sortArrayBySelectOptimize(int[] nums) {
+        // 1. 进行n-1次选择
+        // 2. 每次选择最小的一个放入当前位置
+        for (int round = 0; round < nums.length - 1; round++) {
+            int minIndex = round;
+            for (int j = round + 1; j < nums.length; j++) {
+                if (nums[j] < nums[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            swap(nums, round, minIndex);
         }
 
         return nums;
@@ -126,13 +142,17 @@ public class SortAnArray {
             int min = getMinIndex(nums, round);
             if (round != min) {
                 // swap
-                int tmp = nums[min];
-                nums[min] = nums[round];
-                nums[round] = tmp;
+                swap(nums, round, min);
             }
         }
 
         return nums;
+    }
+
+    private void swap(int[] nums, int round, int min) {
+        int tmp = nums[min];
+        nums[min] = nums[round];
+        nums[round] = tmp;
     }
 
     public int getMinIndex(int[] nums, int cuurent) {
