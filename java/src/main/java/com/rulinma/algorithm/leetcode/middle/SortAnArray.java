@@ -169,4 +169,36 @@ public class SortAnArray {
         return minIndex;
     }
 
+
+    /**
+     * 插入排序：
+     * 1. 从第一个元素开始，该元素可以认为已经被排序
+     * 2. 取出下一个元素，在已经排序的元素序列中从后向前扫描
+     * 3. 如果该元素（已排序）大于新元素，将该元素移到下一位置
+     * 4. 重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
+     * 5. 将新元素插入到该位置后
+     * 6. 重复步骤2~5
+     */
+    public int[] sortArrayByInsert(int[] nums) {
+        // 1. 进行n-1次选择
+        // 2. 每次选择最小的一个放入当前位置
+        for (int round = 1; round < nums.length; round++) {
+            // 选择位置进行插入，
+            int newNum = nums[round];
+            int j;
+            for (j = round - 1; j >= 0; j--) {
+                // 如果比newNum大把值往后移动一位
+                if (nums[j] > newNum) {
+                    nums[j + 1] = nums[j];
+                } else {
+                    break;
+                }
+            }
+
+            nums[j + 1] = newNum;
+        }
+
+        return nums;
+    }
+
 }

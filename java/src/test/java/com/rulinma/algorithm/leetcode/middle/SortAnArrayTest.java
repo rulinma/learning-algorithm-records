@@ -51,7 +51,7 @@ public class SortAnArrayTest {
     public void testortArrayByOptimizeSelect() {
         int[] nums = new int[]{5, 2, 3, 1};
         SortAnArray sortAnArray = new SortAnArray();
-        sortAnArray.sortArrayBySelectOptimize(nums);
+        sortAnArray.sortArrayByInsert(nums);
         log.info("nums {}", nums);
         Assert.assertArrayEquals(nums, new int[]{1, 2, 3, 5});
     }
@@ -60,7 +60,7 @@ public class SortAnArrayTest {
     public void testortArrayBySelectOptimize2() {
         int[] nums = new int[]{5, 1, 1, 2, 0, 0};
         SortAnArray sortAnArray = new SortAnArray();
-        sortAnArray.sortArrayBySelectOptimize(nums);
+        sortAnArray.sortArrayByInsert(nums);
         log.info("nums {}", nums);
         Assert.assertArrayEquals(nums, new int[]{0, 0, 1, 1, 2, 5});
     }
