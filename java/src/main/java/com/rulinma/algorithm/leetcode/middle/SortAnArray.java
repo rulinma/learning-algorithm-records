@@ -23,18 +23,16 @@ public class SortAnArray {
             // 其中一次
             // 有交换记录则说明还需要继续，没有则可以退出。
             boolean hasSwap = false;
-            {
-                // 重置
-                // round 是已经确定了个数，无需继续排序，提高效率而已，最大位置必须是长度-2，所以是<len-1
-                // i 是开始比较的下标，需要比较的次数是 nums.length - roud - 1
-                for (int i = 0; i < nums.length - round - 1; i++) {
-                    // 选择大的放到最后，这里是不正确的，则进行交换
-                    if (nums[i] > nums[i + 1]) {
-                        int t = nums[i];
-                        nums[i] = nums[i + 1];
-                        nums[i + 1] = t;
-                        hasSwap = true;
-                    }
+            // 重置
+            // round 是已经确定了个数，无需继续排序，提高效率而已，最大位置必须是长度-2，所以是<len-1
+            // i 是开始比较的下标，需要比较的次数是 nums.length - roud - 1
+            for (int i = 0; i < nums.length - round - 1; i++) {
+                // 选择大的放到最后，这里是不正确的，则进行交换
+                if (nums[i] > nums[i + 1]) {
+                    int t = nums[i];
+                    nums[i] = nums[i + 1];
+                    nums[i + 1] = t;
+                    hasSwap = true;
                 }
             }
 
