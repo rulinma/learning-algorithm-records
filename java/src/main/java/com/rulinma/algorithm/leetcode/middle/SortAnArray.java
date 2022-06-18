@@ -113,5 +113,40 @@ public class SortAnArray {
         return nums;
     }
 
+    /**
+     * 选择排序原理：
+     * 1. 每次从数组中选择最小的那个放到当前位置
+     * 2. 遍历currentIndex
+     * 3. 遍历后面的数组，获取最小值，如果该值小于currentIndex，则交换2个数
+     */
+    public int[] sortArrayBySelect(int[] nums) {
+        // 1. 进行n-1次选择
+        // 2. 每次选择最小的一个放入当前位置
+        for (int round = 0; round < nums.length - 1; round++) {
+            int min = getMinIndex(nums, round);
+            if (round != min) {
+                // swap
+                int tmp = nums[min];
+                nums[min] = nums[round];
+                nums[round] = tmp;
+            }
+        }
+
+        return nums;
+    }
+
+    public int getMinIndex(int[] nums, int cuurent) {
+        int min = nums[cuurent];
+        int minIndex = cuurent;
+
+        for (int i = cuurent + 1; i <= nums.length - 1; i++) {
+            if (nums[i] < min) {
+                min = nums[i];
+                minIndex = i;
+            }
+        }
+
+        return minIndex;
+    }
 
 }
