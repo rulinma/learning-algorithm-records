@@ -1,4 +1,4 @@
-package com.rulinma.algorithm.leetcode;
+package com.rulinma.algorithm.leetcode.easy;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,10 +42,6 @@ public class TwoSum {
         }
 
         return new int[]{-1, -1};
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

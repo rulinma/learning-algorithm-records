@@ -1,5 +1,6 @@
-package com.rulinma.algorithm.leetcode;
+package com.rulinma.algorithm.leetcode.easy;
 
+import com.rulinma.algorithm.leetcode.easy.TwoSum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
