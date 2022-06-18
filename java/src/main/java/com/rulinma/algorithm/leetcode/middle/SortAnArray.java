@@ -3,13 +3,14 @@ package com.rulinma.algorithm.leetcode.middle;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * // 912. 排序数组
+ * // 给你一个整数数组 nums，请你将该数组升序排列。
+ *
  * @author 马如林
  * @Data 2022/6/18 18:19
  */
 @Slf4j
 public class SortAnArray {
-    // 912. 排序数组
-    // 给你一个整数数组 nums，请你将该数组升序排列。
 
     public int[] sortArrayByFlagBubbleOptimize(int[] nums) {
         // 1. 每次最近的2个进行判断，大的放到后面，最终此次排序的一个放到最后
@@ -43,7 +44,6 @@ public class SortAnArray {
 
         return nums;
     }
-
 
     public int[] sortArrayByFlagBubble(int[] nums) {
         // 1. 每次最近的2个进行判断，大的放到后面，最终此次排序的一个放到最后
