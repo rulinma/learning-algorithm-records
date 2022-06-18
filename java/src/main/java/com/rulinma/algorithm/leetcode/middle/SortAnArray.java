@@ -186,17 +186,23 @@ public class SortAnArray {
         for (int round = 1; round < nums.length; round++) {
             // 选择位置进行插入，
             int newNum = nums[round];
-            int j;
-            for (j = round - 1; j >= 0; j--) {
-                // 如果比newNum大把值往后移动一位
-                if (nums[j] > newNum) {
-                    nums[j + 1] = nums[j];
-                } else {
-                    break;
-                }
+            int j = round - 1;
+            while (j >= 0 && (nums[j] > newNum)) {
+                nums[j + 1] = nums[j];
+                j--;
             }
-
             nums[j + 1] = newNum;
+//            int j;
+//            for (j = round - 1; j >= 0; j--) {
+//                // 如果比newNum大把值往后移动一位
+//                if (nums[j] > newNum) {
+//                    nums[j + 1] = nums[j];
+//                } else {
+//                    break;
+//                }
+//            }
+//
+//            nums[j + 1] = newNum;
         }
 
         return nums;
