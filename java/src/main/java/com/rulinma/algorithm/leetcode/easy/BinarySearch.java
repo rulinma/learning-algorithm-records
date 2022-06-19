@@ -13,18 +13,17 @@ public class BinarySearch {
         int low = 0;
         int high = nums.length - 1;
 
-        int middle = (low + high) / 2;
         while (low <= high) {
+            int middle = (low + high) / 2;
+
             if (nums[middle] == target) {
                 return middle;
-            }
-
-            if (nums[middle] < target) {
+            } else if (nums[middle] < target) {
                 low = middle + 1;
             } else {
                 high = middle - 1;
             }
-            middle = (low + high) / 2;
+
         }
 
         return -1;
