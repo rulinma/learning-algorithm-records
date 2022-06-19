@@ -14,7 +14,8 @@ public class BinarySearch {
         int high = nums.length - 1;
 
         while (low <= high) {
-            int middle = (low + high) / 2;
+//            int middle = (low + high) / 2;
+            int middle = (high - low) / 2 + low;
 
             if (nums[middle] == target) {
                 return middle;
