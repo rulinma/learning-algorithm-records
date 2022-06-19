@@ -21,7 +21,28 @@ public class ClimbStaris {
         if (n == 2) {
             return 2;
         }
+
         return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+    public int climbStairsDynamic(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+
+        int t1 = 1;
+        int t2 = 2;
+        int t = t1 + t2;
+        for (int i = 3; i <= n; i++) {
+            t = t1 + t2;
+            t1 = t2;
+            t2 = t;
+        }
+
+        return t;
     }
 
 }
