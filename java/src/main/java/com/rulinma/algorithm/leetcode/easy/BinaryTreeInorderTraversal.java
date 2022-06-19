@@ -15,6 +15,12 @@ import java.util.List;
  */
 public class BinaryTreeInorderTraversal {
 
+    /**
+     * 递归解法
+     *
+     * @param root
+     * @return
+     */
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         inOrderTraversal(root, list);
@@ -30,4 +36,5 @@ public class BinaryTreeInorderTraversal {
         inOrderTraversal(root.right, list);
     }
 
+    // TODO: 迭代解法
 }
