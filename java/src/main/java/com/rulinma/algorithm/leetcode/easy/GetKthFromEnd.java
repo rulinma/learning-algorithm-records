@@ -41,6 +41,12 @@ public class GetKthFromEnd {
             count--;
         }
 
+//        int i = 0;
+//        while(i<count) {
+//            cur = cur.next;
+//            i++;
+//        }
+
         return cur;
     }
 
