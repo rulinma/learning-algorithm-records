@@ -199,6 +199,8 @@ public class SortAnArray {
                 if (nums[j] > newNum) {
                     nums[j + 1] = nums[j];
                 } else {
+                    System.out.println("break");
+                    // 非常关键的break
                     break;
                 }
             }

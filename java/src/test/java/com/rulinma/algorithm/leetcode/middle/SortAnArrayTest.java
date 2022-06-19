@@ -65,4 +65,22 @@ public class SortAnArrayTest {
         Assert.assertArrayEquals(nums, new int[]{0, 0, 1, 1, 2, 5});
     }
 
+    @Test
+    public void testortArrayByOptimizeSelect3() {
+        int[] nums = new int[]{2, 1};
+        SortAnArray sortAnArray = new SortAnArray();
+        sortAnArray.sortArrayByInsert(nums);
+        log.info("nums {}", nums);
+        Assert.assertArrayEquals(nums, new int[]{1, 2});
+    }
+
+    @Test
+    public void testortArrayByOptimizeSelect4() {
+        int[] nums = new int[]{1, 2};
+        SortAnArray sortAnArray = new SortAnArray();
+        sortAnArray.sortArrayByInsert(nums);
+        log.info("nums {}", nums);
+        Assert.assertArrayEquals(nums, new int[]{1, 2});
+    }
+
 }
