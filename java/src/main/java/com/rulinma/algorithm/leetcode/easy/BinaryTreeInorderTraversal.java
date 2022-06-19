@@ -14,19 +14,20 @@ import java.util.List;
  * @Data 2022/6/19 18:44
  */
 public class BinaryTreeInorderTraversal {
-    private List<Integer> list = new ArrayList<>();
 
     public List<Integer> inorderTraversal(TreeNode root) {
-        inOrderTraversal(root);
+        List<Integer> list = new ArrayList<>();
+        inOrderTraversal(root, list);
         return list;
     }
 
-    public void inOrderTraversal(TreeNode root) {
+    public void inOrderTraversal(TreeNode root, List<Integer> list) {
         if (root == null) {
             return;
         }
-        inorderTraversal(root.left);
+        inOrderTraversal(root.left, list);
         list.add(root.val);
-        inorderTraversal(root.right);
+        inOrderTraversal(root.right, list);
     }
+
 }
