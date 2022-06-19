@@ -13,6 +13,12 @@ import com.rulinma.algorithm.leetcode.common.ListNode;
 public class MergeTwoSortedLists {
 
     /**
+     *      * 1. 创建一个新链表
+     *      * 2. 比较1和2的头结点，选择小的添加到新链表，1或者2指针前进直到为空
+     *      * 3. 为空则把未遍历完的链表指针添加到新链表尾部即可
+     */
+
+    /**
      * 首先，设定一个虚拟节点 dummy 用来存储结果，循环对比 L1 和 L2 节点上的数字，通过调整 p节点的 next 指针来调整 dummy 的结果。
      * 如果 L1 当前位置的值小于等于 L2 ，我们就把  L1 的值接在  dummy 节点的后面同时将  L1 指针往后移一个
      * 如果 L2 当前位置的值小于 L2 ，我们就把  L2 的值接在  p 节点的后面同时将  L2 指针往后移一个
