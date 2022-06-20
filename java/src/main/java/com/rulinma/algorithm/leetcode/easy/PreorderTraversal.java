@@ -36,4 +36,6 @@ public class PreorderTraversal {
         treaversal(node.left, list);
         treaversal(node.right, list);
     }
+
+    // TODO: 迭代解法
 }
