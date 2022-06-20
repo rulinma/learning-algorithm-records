@@ -12,6 +12,14 @@ import com.rulinma.algorithm.leetcode.common.ListNode;
  * @Data 2022/6/20 10:44
  */
 public class DeleteDuplicates {
+
+    /**
+     * 时间复杂度：O(n)，其中 n 是链表的长度。
+     * 空间复杂度：O(1)。
+     *
+     * @param head
+     * @return
+     */
     public ListNode deleteDuplicates(ListNode head) {
         // 1. 开始条件、结束条件
         // 2. 处理
@@ -60,7 +68,7 @@ public class DeleteDuplicates {
                 cur = cur.next;
             }
         }
-        return head;
 
+        return head;
     }
 }
