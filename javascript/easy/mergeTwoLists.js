@@ -25,6 +25,13 @@ var mergeTwoLists = function(list1, list2) {
         head.next = list1;
     }
 
+    let x = result.next;
+    while (x != null) { 
+        console.log(x);
+        // console.log(x.val);
+        x = x.next;
+    }
+
     return result.next;
 };
 
