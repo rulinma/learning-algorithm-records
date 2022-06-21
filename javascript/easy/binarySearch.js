@@ -32,6 +32,6 @@ var search = function(nums, target) {
     return -1;
 };
 
-console.log("result " , search([1,2,3,4,5],2))
-console.log("result ", search([-1, 0, 3, 5, 9, 12], 9))
-console.log("result " , search([-1,0,3,5,9,12], 19))
+console.log("result ", search([1, 2, 3, 4, 5], 2));
+console.log("result ", search([-1, 0, 3, 5, 9, 12], 9));
+console.log("result ", search([-1, 0, 3, 5, 9, 12], 19));
