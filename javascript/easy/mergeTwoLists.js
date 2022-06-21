@@ -7,7 +7,7 @@ var mergeTwoLists = function(list1, list2) {
     let result = new ListNode(-1);
     let head = result;
     while (list1 != null && list2 != null) { 
-        if (list1.val > list2.val) {
+        if (list1.val < list2.val) {
             head.next = list1;
             list1 = list1.next;
         } else { 
@@ -33,4 +33,12 @@ function ListNode(val, next) {
     this.next = (next===undefined ? null : next)
 }
 
-console.log(reverseList())
+let one = new ListNode(1);
+let two = new ListNode(2);
+let three = new ListNode(3);
+let four = new ListNode(4);
+
+one.next = two;
+three.next = four;
+
+console.log(mergeTwoLists(one, three))
