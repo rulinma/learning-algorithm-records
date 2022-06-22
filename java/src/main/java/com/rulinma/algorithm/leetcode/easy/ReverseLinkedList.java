@@ -13,7 +13,19 @@ import com.rulinma.algorithm.leetcode.common.ListNode;
  */
 public class ReverseLinkedList {
 
+    /**
+     * 递归实现
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head) {
+        // TODO:
+
+        return head;
+    }
+
+    public ListNode reverseList2(ListNode head) {
         ListNode cur = null;
         ListNode pre = head;
         // cur pre 结构
