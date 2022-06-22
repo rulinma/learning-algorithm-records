@@ -3,8 +3,16 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {
+    let pre = head;
+    let cur = null;
+    while (pre != null) { 
+        let next = pre.next;
+        pre.next = cur;
+        cur = pre;
+        pre = next;
+    }
 
-    return head;
+    return cur;
 };
 
 function ListNode(val, next) {
