@@ -15,7 +15,7 @@ import com.rulinma.algorithm.leetcode.common.ListNode;
  * @author 马如林
  * @Data 2022/6/22 17:02
  */
-public class linkedListCycle {
+public class LinkedListCycle {
     public boolean hasCycle(ListNode head) {
         // slow fast
         ListNode slow = head;
