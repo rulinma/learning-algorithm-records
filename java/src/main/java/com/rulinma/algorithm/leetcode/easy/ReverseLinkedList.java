@@ -3,6 +3,11 @@ package com.rulinma.algorithm.leetcode.easy;
 import com.rulinma.algorithm.leetcode.common.ListNode;
 
 /**
+ * 206. 反转链表
+ * 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+ * <p>
+ * https://leetcode.cn/problems/reverse-linked-list/
+ *
  * @author 马如林
  * @Data 2022/6/21 22:40
  */
