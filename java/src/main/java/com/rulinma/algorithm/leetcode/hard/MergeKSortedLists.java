@@ -2,7 +2,6 @@ package com.rulinma.algorithm.leetcode.hard;
 
 import com.rulinma.algorithm.leetcode.common.ListNode;
 
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
