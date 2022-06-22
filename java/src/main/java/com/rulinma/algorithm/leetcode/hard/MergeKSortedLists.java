@@ -20,7 +20,7 @@ public class MergeKSortedLists {
         // 我们简单是因为有PrioriQueue
         // 1. 创建一个ListNode
         // 2. K个ListNode放入PrioriQueue
-        if (lists.length == 0) {
+        if (lists == null || lists.length == 0) {
             return null;
         }
 
