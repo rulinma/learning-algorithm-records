@@ -19,6 +19,7 @@ public class MaxSubArray {
         dp[0] = nums[0];
 
         for (int i = 1; i < len; i++) {
+            // 前面子串的子数组最大和的值>0，累加才有可能变大
             if (dp[i - 1] > 0) {
                 dp[i] = dp[i - 1] + nums[i];
             } else {
