@@ -60,7 +60,8 @@
     快速排序
     堆排序
     插入排序
-    折半查找的多个应用
+    二分半查找
+    * https://leetcode.cn/study-plan/binary-search
     
 * 链表
     双指针
