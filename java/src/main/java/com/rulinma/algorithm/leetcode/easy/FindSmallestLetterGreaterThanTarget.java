@@ -44,7 +44,7 @@ public class FindSmallestLetterGreaterThanTarget {
             }
         }
 
-        // 最后一个
+        // 最后一个，越界处理
         if (low == letters.length) {
             low = letters.length - 1;
         }
