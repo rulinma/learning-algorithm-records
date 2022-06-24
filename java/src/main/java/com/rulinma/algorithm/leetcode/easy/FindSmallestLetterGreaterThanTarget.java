@@ -29,7 +29,30 @@ package com.rulinma.algorithm.leetcode.easy;
  */
 public class FindSmallestLetterGreaterThanTarget {
 
-    public char nextGreatestLetter(char[] letters, char target) {
+    public static char nextGreatestLetter(char[] letters, char target) {
+        int low = 0;
+        int high = letters.length - 1;
+        while (low <= high) {
+            int middle = (low + high) / 2;
+            if (letters[middle] > target) {
+                high = middle - 1;
+            } else if (letters[middle] < target) {
+                low = low + 1;
+            } else {
+                // 相等
+                low = low + 1;
+            }
+        }
+
+        // 最后一个
+        if (low == letters.length) {
+            low = letters.length - 1;
+        }
+
+        return letters[low] > target ? letters[low] : letters[0];
+    }
+
+    public char nextGreatestLetter1(char[] letters, char target) {
         char head = letters[0];
 
         for (char ch : letters) {
@@ -40,6 +63,13 @@ public class FindSmallestLetterGreaterThanTarget {
         }
 
         return head;
+    }
+
+    public static void main(String[] args) {
+        char[] letters = new char[]{'c', 'f', 'j'};
+        char target = 'j';
+
+        System.out.println(nextGreatestLetter(letters, target));
     }
 
 }
