@@ -34,7 +34,7 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
         while (low <= high) {
             int middle = (high - low) / 2 + low;
             if (nums[middle] == target) {
-                // get it
+                // get it，或者说至少是这个及其右边的元素
                 rightIndex = middle;
                 low = middle + 1;
             } else if (nums[middle] < target) {
@@ -53,7 +53,7 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
         while (low <= high) {
             int middle = (high - low) / 2 + low;
             if (nums[middle] == target) {
-                // get it
+                // get it，或者说至少是这个及其左边的元素
                 leftIndex = middle;
                 high = middle - 1;
             } else if (nums[middle] < target) {
