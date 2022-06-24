@@ -37,10 +37,10 @@ public class FindSmallestLetterGreaterThanTarget {
             if (letters[middle] > target) {
                 high = middle - 1;
             } else if (letters[middle] < target) {
-                low = low + 1;
+                low = middle + 1;
             } else {
                 // 相等
-                low = low + 1;
+                low = middle + 1;
             }
         }
 
