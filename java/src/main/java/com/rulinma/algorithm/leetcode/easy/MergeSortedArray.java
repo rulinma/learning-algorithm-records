@@ -13,7 +13,7 @@ package com.rulinma.algorithm.leetcode.easy;
  * @author 马如林
  * @Data 2022/6/25 12:36
  */
-public class mergeSortedArray {
+public class MergeSortedArray {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int n1 = m - 1;
