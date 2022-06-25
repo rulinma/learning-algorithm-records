@@ -23,7 +23,7 @@ package com.rulinma.algorithm.leetcode.easy;
  * @author 马如林
  * @Data 2022/6/25 18:46
  */
-public class singleNumber {
+public class SingleNumber {
     public int singleNumber(int[] nums) {
         int result = nums[0];
         for (int i = 1; i < nums.length; i++) {
