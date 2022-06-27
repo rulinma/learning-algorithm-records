@@ -1,5 +1,7 @@
 package com.rulinma.algorithm.leetcode.easy;
 
+import java.util.Arrays;
+
 /**
  * 566. 重塑矩阵
  * 在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同（r x c）的新矩阵，但保留其原始数据。
@@ -31,6 +33,16 @@ public class MatrixReshape {
         }
 
         return result;
+    }
+
+    public static void main(String[] args) {
+        int[][] mat = new int[][]{{1, 2}, {3, 4}};
+
+        MatrixReshape matrixReshape = new MatrixReshape();
+        int[][] result = matrixReshape.matrixReshape(mat, 1, 4);
+        System.out.println("row: " + result.length);
+        System.out.println("col: " + result[0].length);
+        System.out.println(Arrays.toString(result));
     }
 
 }
