@@ -103,6 +103,7 @@ public class MyLinkedList {
     public void deleteAtIndex(int index) {
         if (index == 0) {
             head = head.next;
+            return;
         }
 
         ListNode pos = head;
