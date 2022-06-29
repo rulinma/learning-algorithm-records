@@ -29,17 +29,17 @@ import java.util.List;
  */
 public class MergeIntervals {
 
-    public int[][] merge(int[][] a) {
+    public int[][] merge(int[][] intervals) {
         List<int[]> res = new ArrayList<>();
-        Arrays.sort(a, (x, y) -> x[0] - y[0]);
-        int l = a[0][0], r = a[0][1];
-        for (int i = 1; i < a.length; i++) {
-            if (a[i][0] > r) {
+        Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+        int l = intervals[0][0], r = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] > r) {
                 res.add(new int[]{l, r});
-                l = a[i][0];
-                r = a[i][1];
+                l = intervals[i][0];
+                r = intervals[i][1];
             } else {
-                r = Math.max(r, a[i][1]);
+                r = Math.max(r, intervals[i][1]);
             }
         }
         res.add(new int[]{l, r});
