@@ -29,6 +29,23 @@ package com.rulinma.algorithm.leetcode.easy;
 public class FindPivotIndex {
 
     public int pivotIndex(int[] nums) {
+        int total = 0;
+        int ls = 0;
+        for (int n : nums) {
+            total += n;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (total - ls - nums[i] == ls) {
+                return i;
+            }
+            ls += nums[i];
+        }
+
+        return -1;
+    }
+
+    public int pivotIndex0(int[] nums) {
         int pivot = 0;
 
         while (pivot < nums.length) {
