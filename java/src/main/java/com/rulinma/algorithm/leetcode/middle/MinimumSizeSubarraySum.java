@@ -21,6 +21,10 @@ package com.rulinma.algorithm.leetcode.middle;
 public class MinimumSizeSubarraySum {
 
     public int minSubArrayLen(int target, int[] nums) {
+        return 0;
+    }
+
+    public int minSubArrayLen1(int target, int[] nums) {
         int sum = 0;
         int len = nums.length;
         int minLen = Integer.MAX_VALUE;
