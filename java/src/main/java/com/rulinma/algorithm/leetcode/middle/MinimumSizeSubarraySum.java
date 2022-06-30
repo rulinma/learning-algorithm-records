@@ -24,15 +24,28 @@ public class MinimumSizeSubarraySum {
         int sum = 0;
         int len = nums.length;
         int minLen = Integer.MAX_VALUE;
+        int totalSum = 0;
 
+        // 第一次快速遍历
         for (int i = 0; i < len; i++) {
             sum = nums[i];
             if (sum >= target) {
                 // 只有一个就OK的，可以直接返回。
                 return 1;
             }
+        }
+
+        for (int n : nums) {
+            totalSum += n;
+        }
+        if (totalSum < target) {
+            return 0;
+        }
+
+        for (int i = 0; i < len; i++) {
             // 测试长度为1，2，3... n的情况下是否满足条件，有则返回。
             // 向下寻找
+            sum = nums[i];
             for (int j = i + 1; j < len; j++) {
                 sum += nums[j];
                 if (sum >= target) {
@@ -65,8 +78,12 @@ public class MinimumSizeSubarraySum {
 //        result = minimumSizeSubarraySum.minSubArrayLen(11, nums);
 //        System.out.println(result);
 
-        int[] nums = new int[]{10, 2, 3};
-        int result = minimumSizeSubarraySum.minSubArrayLen(6, nums);
+//        int[] nums = new int[]{10, 2, 3};
+//        int result = minimumSizeSubarraySum.minSubArrayLen(6, nums);
+//        System.out.println(result);
+
+        int[] nums = new int[]{1, 2, 3, 4, 5};
+        int result = minimumSizeSubarraySum.minSubArrayLen(11, nums);
         System.out.println(result);
     }
 }
