@@ -1,5 +1,8 @@
 package com.rulinma.algorithm.leetcode.middle;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 3. 无重复字符的最长子串
  * <p>
@@ -37,6 +40,55 @@ package com.rulinma.algorithm.leetcode.middle;
 public class LongestSubstringWithoutRepeatingCharacters {
 
     public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        if (n <= 1) {
+            return n;
+        }
+
+        int maxLen = 1;
+        int l = 0;
+        int r = 0;
+
+        Set<Character> window = new HashSet<>();
+        while (r < s.length()) {
+            if (!window.contains(s.charAt(r))) {
+                maxLen = Math.max(maxLen, r - l + 1);
+                window.add(s.charAt(r));
+                r++;
+            } else {
+                window.remove(s.charAt(l));
+                l++;
+            }
+        }
+
+        return maxLen;
+    }
+
+    public int lengthOfLongestSubstring2(String s) {
+        int n = s.length();
+        if (n <= 1) {
+            return n;
+        }
+
+        int maxLen = 1;
+        int l = 0;
+        int r = 0;
+
+        Set<Character> window = new HashSet<>();
+        while (r < s.length()) {
+            while (window.contains(s.charAt(r))) {
+                window.remove(s.charAt(l));
+                l++;
+            }
+            maxLen = Math.max(maxLen, r - l + 1);
+            window.add(s.charAt(r));
+            r++;
+        }
+
+        return maxLen;
+    }
+
+    public int lengthOfLongestSubstring1(String s) {
         int maxLen = 0;
         // 1. 当前字符串集合
         // 2. 遍历字符串，不存在，j继续； 存在，查看下标，缩减到下标位+1，j继续；
@@ -68,8 +120,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
         LongestSubstringWithoutRepeatingCharacters longestSubstringWithoutRepeatingCharacters = new LongestSubstringWithoutRepeatingCharacters();
-//        String s = "abcabcbb";
-        String s = " ";
+        String s = "abcabcbb";
+//        String s = " ";
         int result = longestSubstringWithoutRepeatingCharacters.lengthOfLongestSubstring(s);
         System.out.println(result);
     }
