@@ -101,5 +101,6 @@ public class LetterCombinationsOfAPhoneNumber {
         String s = "23";
         List<String> result = letterCombinationsOfAPhoneNumber.letterCombinations(s);
         System.out.println(result);
+        Integer.parseInt("1");
     }
 }
