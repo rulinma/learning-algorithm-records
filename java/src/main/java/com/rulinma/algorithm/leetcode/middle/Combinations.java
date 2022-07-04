@@ -66,7 +66,6 @@ public class Combinations {
         }
     }
 
-
     public static void main(String[] args) {
         Combinations combinations = new Combinations();
         List<List<Integer>> result = combinations.combine(4, 2);
