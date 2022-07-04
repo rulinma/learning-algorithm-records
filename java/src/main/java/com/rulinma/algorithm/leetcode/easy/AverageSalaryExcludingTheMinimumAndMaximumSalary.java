@@ -30,6 +30,19 @@ import java.util.Arrays;
 public class AverageSalaryExcludingTheMinimumAndMaximumSalary {
 
     public double average(int[] salary) {
+        double sum = 0;
+        int max = salary[0];
+        int min = salary[0];
+        for (int i = 0; i < salary.length; i++) {
+            sum += salary[i];
+            max = Math.max(max, salary[i]);
+            min = Math.min(min, salary[i]);
+        }
+        return (sum - max - min) / (salary.length - 2);
+    }
+
+
+    public double average0(int[] salary) {
         Arrays.sort(salary);
         int len = salary.length - 2;
         double sum = 0;
