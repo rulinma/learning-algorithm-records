@@ -1,5 +1,8 @@
 package com.rulinma.algorithm.leetcode.easy;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 202. 快乐数
  * <p>
@@ -31,24 +34,44 @@ package com.rulinma.algorithm.leetcode.easy;
  */
 public class HappyNumber {
 
-    public int squareSum(int n) {
-        int sum = 0;
+    private int getNext(int n) {
+        int totalSum = 0;
         while (n > 0) {
-            int digit = n % 10;
-            sum += digit * digit;
-            n /= 10;
+            int d = n % 10;
+            n = n / 10;
+            totalSum += d * d;
         }
-        return sum;
+        return totalSum;
     }
 
     public boolean isHappy(int n) {
-        int slow = n, fast = squareSum(n);
-        while (slow != fast) {
-            slow = squareSum(slow);
-            fast = squareSum(squareSum(fast));
+        Set<Integer> seen = new HashSet<>();
+        while (n != 1 && !seen.contains(n)) {
+            seen.add(n);
+            n = getNext(n);
         }
-        return slow == 1;
+        return n == 1;
     }
+
+
+//    public int squareSum(int n) {
+//        int sum = 0;
+//        while (n > 0) {
+//            int digit = n % 10;
+//            sum += digit * digit;
+//            n /= 10;
+//        }
+//        return sum;
+//    }
+//
+//    public boolean isHappy(int n) {
+//        int slow = n, fast = squareSum(n);
+//        while (slow != fast) {
+//            slow = squareSum(slow);
+//            fast = squareSum(squareSum(fast));
+//        }
+//        return slow == 1;
+//    }
 
     public static void main(String[] args) {
         HappyNumber happyNumber = new HappyNumber();
