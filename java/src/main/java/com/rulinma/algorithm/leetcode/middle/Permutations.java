@@ -26,6 +26,7 @@ import java.util.List;
  * https://leetcode.cn/problems/permutations
  *
  * @author 马如林
+ *
  * @Data 2022/7/8 16:44
  */
 public class Permutations {
@@ -51,12 +52,12 @@ public class Permutations {
             return;
         }
 
-        // 添加数据
+        // 选择数据
         for (int num : nums) {
             if (path.contains(num)) {
                 continue;
             }
-
+            // 添加
             path.add(num);
             backtrace(nums, path, result);
             // 回退
