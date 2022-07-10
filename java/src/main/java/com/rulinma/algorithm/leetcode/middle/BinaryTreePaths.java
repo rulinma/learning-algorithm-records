@@ -25,24 +25,32 @@ public class BinaryTreePaths {
 
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList();
-        traverse(root, "", result);
+        LinkedList<Integer> path = new LinkedList();
+        traverse(root, path, result);
         return result;
     }
 
-    public void traverse(TreeNode node, String path, List<String> result) {
+    public void traverse(TreeNode node, LinkedList<Integer> path, List<String> result) {
         if (node == null) {
             return;
         }
-        StringBuffer newPath = new StringBuffer(path);
-        newPath.append(Integer.toString(node.val));
+        LinkedList<Integer> newPath = new LinkedList<>();
+        newPath.addAll(path);
+        newPath.add(node.val);
         // 叶子节点
         if (node.left == null && node.right == null) {
-            result.add(newPath.toString());
-        } else {
-            newPath.append("->");
-            traverse(node.left, newPath.toString(), result);
-            traverse(node.right, newPath.toString(), result);
+            StringBuilder sb = new StringBuilder();
+            for (Integer i : newPath) {
+                sb.append(i + "->");
+            }
+            String s = sb.toString();
+            result.add(s.substring(0, s.length() - 2));
+            return;
         }
+
+        traverse(node.left, newPath, result);
+        traverse(node.right, newPath, result);
+
     }
 
     public static void main(String[] args) {
