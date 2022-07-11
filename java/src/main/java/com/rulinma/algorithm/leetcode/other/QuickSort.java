@@ -36,7 +36,7 @@ public class QuickSort {
             while (l < h && pivot < nums[h]) {
                 h--;
             }
-            // 限定边界，等于时需要存放pivot
+            // 小于时，才能存放数据，否则则是等于时需要存放pivot
             if (l < h) {
                 nums[l] = nums[h];
                 l++;
@@ -46,7 +46,7 @@ public class QuickSort {
             while (l < h && nums[l] < pivot) {
                 l++;
             }
-            // 限定边界，等于时需要存放pivot
+            // 小于时，才能存放数据，否则则是等于时需要存放pivot
             if (l < h) {
                 nums[h] = nums[l];
                 h--;
