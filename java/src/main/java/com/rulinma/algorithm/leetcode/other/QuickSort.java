@@ -29,7 +29,7 @@ public class QuickSort {
         // get partion
         int pivot = nums[l];
         // 3, 2, 4, 1, 5
-        // 终止条件是l==h
+        // 终止条件是l==h，从右边开始，再左边开始的大循环
         while (l < h) {
             // 从右边开始寻找位置，比pivot小的数据，放到空缺坑位
             // 为什么从右边开始寻找？因为pivot刚好是最左边的位置空缺出来，否则需要使用swap交换位置，有额外消耗，这里无需再swap。
