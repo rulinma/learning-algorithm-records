@@ -37,20 +37,20 @@ public class QuickSort {
                 h--;
             }
             // 小于时，才能存放数据，否则则是等于时需要存放pivot
-//            if (l < h) {
+            if (l < h) {
                 nums[l] = nums[h];
-//                l++;
-//            }
+                l++;
+            }
 
             // 从左边边开始寻找位置，比pivot大的数据，放到空缺坑位
             while (l < h && nums[l] <= pivot) {
                 l++;
             }
             // 小于时，才能存放数据，否则则是等于时需要存放pivot
-//            if (l < h) {
+            if (l < h) {
                 nums[h] = nums[l];
-//                h--;
-//            }
+                h--;
+            }
         }
 
         // 寻找到的最后空坑位，放入pivot数据
