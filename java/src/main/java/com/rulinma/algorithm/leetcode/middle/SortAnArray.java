@@ -212,24 +212,23 @@ public class SortAnArray {
         return nums;
     }
 
-    public int[] quickSortArray(int[] nums) {
+    /**
+     * 快速排序
+     *
+     * @param nums
+     * @return
+     */
+    public int[] sortArray(int[] nums) {
         quicksort(nums, 0, nums.length - 1);
         return nums;
     }
 
     public void quicksort(int[] nums, int l, int r) {
         if (l < r) {
-            int pos = firstPartition(nums, l, r);
+            int pos = partition(nums, l, r);
             quicksort(nums, l, pos - 1);
             quicksort(nums, pos + 1, r);
         }
-    }
-
-    public int firstPartition(int[] nums, int l, int r) {
-        // 随机选一个作为我们的主元
-        int i = l;
-        swap2(nums, l, i);
-        return partition(nums, l, r);
     }
 
     public int partition(int[] nums, int l, int r) {
@@ -238,7 +237,7 @@ public class SortAnArray {
         for (int j = l; j <= r - 1; ++j) {
             if (nums[j] <= pivot) {
                 i = i + 1;
-                swap(nums, i, j);
+                swap2(nums, i, j);
             }
         }
         swap2(nums, i + 1, r);
@@ -250,6 +249,5 @@ public class SortAnArray {
         nums[i] = nums[j];
         nums[j] = temp;
     }
-
 
 }

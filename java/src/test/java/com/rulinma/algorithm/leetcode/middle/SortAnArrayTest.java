@@ -87,7 +87,7 @@ public class SortAnArrayTest {
     public void testSortArrayByQuick() {
         int[] nums = new int[]{1, 2};
         SortAnArray sortAnArray = new SortAnArray();
-        sortAnArray.quickSortArray(nums);
+        sortAnArray.sortArray(nums);
         log.info("nums {}", nums);
         Assert.assertArrayEquals(nums, new int[]{1, 2});
     }
