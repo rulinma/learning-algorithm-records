@@ -239,7 +239,7 @@ public class SortAnArray {
             while (i < j && s[j] >= x)
                 j--;
             if (i < j) {
-                s[i] = s[j]; //将s[j]填到s[i]中，s[j]就形成了一个新的坑
+                s[i] = s[j]; // 将s[j]填到s[i]中，s[j]就形成了一个新的坑
                 i++;
             }
 
@@ -247,11 +247,11 @@ public class SortAnArray {
             while (i < j && s[i] < x)
                 i++;
             if (i < j) {
-                s[j] = s[i]; //将s[i]填到s[j]中，s[i]就形成了一个新的坑
+                s[j] = s[i]; // 将s[i]填到s[j]中，s[i]就形成了一个新的坑
                 j--;
             }
         }
-        //退出时，i等于j。将x填到这个坑中。
+        // 退出时，i等于j。将x填到这个坑中。
         s[i] = x;
 
         return i;
