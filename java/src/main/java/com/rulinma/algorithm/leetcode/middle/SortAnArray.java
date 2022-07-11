@@ -257,7 +257,6 @@ public class SortAnArray {
         }
         // 退出时，i等于j。将x填到这个坑中。
         s[i] = x;
-
         return i;
     }
 
