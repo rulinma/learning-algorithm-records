@@ -233,23 +233,25 @@ public class SortAnArray {
 
     public int partition(int[] s, int l, int r) {
         int i = l, j = r;
-        int x = s[l]; //s[l]即s[i]就是第一个坑
+        // s[l]即s[i]就是第一个坑
+        int x = s[l];
         while (i < j) {
             // 从右向左找小于x的数来填s[i]
             while (i < j && s[j] >= x) {
                 j--;
             }
             if (i < j) {
-                s[i] = s[j]; // 将s[j]填到s[i]中，s[j]就形成了一个新的坑
+                // 将s[j]填到s[i]中，s[j]就形成了一个新的坑
+                s[i] = s[j];
                 i++;
             }
-
             // 从左向右找大于或等于x的数来填s[j]
             while (i < j && s[i] < x) {
                 i++;
             }
             if (i < j) {
-                s[j] = s[i]; // 将s[i]填到s[j]中，s[i]就形成了一个新的坑
+                // 将s[i]填到s[j]中，s[i]就形成了一个新的坑
+                s[j] = s[i];
                 j--;
             }
         }
