@@ -33,24 +33,24 @@ public class QuickSort {
         while (l < h) {
             // 从右边开始寻找位置，比pivot小的数据，放到空缺坑位
             // 为什么从右边开始寻找？因为pivot刚好是最左边的位置空缺出来，否则需要使用swap交换位置，有额外消耗，这里无需再swap。
-            while (l < h && pivot < nums[h]) {
+            while (l < h && pivot <= nums[h]) {
                 h--;
             }
             // 小于时，才能存放数据，否则则是等于时需要存放pivot
-            if (l < h) {
+//            if (l < h) {
                 nums[l] = nums[h];
-                l++;
-            }
+//                l++;
+//            }
 
             // 从左边边开始寻找位置，比pivot大的数据，放到空缺坑位
-            while (l < h && nums[l] < pivot) {
+            while (l < h && nums[l] <= pivot) {
                 l++;
             }
             // 小于时，才能存放数据，否则则是等于时需要存放pivot
-            if (l < h) {
+//            if (l < h) {
                 nums[h] = nums[l];
-                h--;
-            }
+//                h--;
+//            }
         }
 
         // 寻找到的最后空坑位，放入pivot数据
