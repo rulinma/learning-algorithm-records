@@ -83,4 +83,13 @@ public class SortAnArrayTest {
         Assert.assertArrayEquals(nums, new int[]{1, 2});
     }
 
+    @Test
+    public void testSortArrayByQuick() {
+        int[] nums = new int[]{1, 2};
+        SortAnArray sortAnArray = new SortAnArray();
+        sortAnArray.quickSortArray(nums);
+        log.info("nums {}", nums);
+        Assert.assertArrayEquals(nums, new int[]{1, 2});
+    }
+
 }
