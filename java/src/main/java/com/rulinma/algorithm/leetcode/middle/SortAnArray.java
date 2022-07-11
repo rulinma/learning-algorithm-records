@@ -231,7 +231,33 @@ public class SortAnArray {
         }
     }
 
-    public int partition(int[] nums, int l, int r) {
+    public int partition(int[] s, int l, int r) {
+        int i = l, j = r;
+        int x = s[l]; //s[l]即s[i]就是第一个坑
+        while (i < j) {
+            // 从右向左找小于x的数来填s[i]
+            while (i < j && s[j] >= x)
+                j--;
+            if (i < j) {
+                s[i] = s[j]; //将s[j]填到s[i]中，s[j]就形成了一个新的坑
+                i++;
+            }
+
+            // 从左向右找大于或等于x的数来填s[j]
+            while (i < j && s[i] < x)
+                i++;
+            if (i < j) {
+                s[j] = s[i]; //将s[i]填到s[j]中，s[i]就形成了一个新的坑
+                j--;
+            }
+        }
+        //退出时，i等于j。将x填到这个坑中。
+        s[i] = x;
+
+        return i;
+    }
+
+    public int partition2(int[] nums, int l, int r) {
         int pivot = nums[r];
         int i = l - 1;
         for (int j = l; j <= r - 1; ++j) {
