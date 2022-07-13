@@ -56,7 +56,7 @@ public class WordPattern {
             ch2str.put(ch, tmp);
             i = j + 1;
         }
-        return i > m;
+        return i == m + 1;
     }
 
     public static void main(String[] args) {
