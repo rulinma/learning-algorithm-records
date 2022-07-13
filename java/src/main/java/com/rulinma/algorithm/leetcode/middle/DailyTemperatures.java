@@ -3,6 +3,7 @@ package com.rulinma.algorithm.leetcode.middle;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * 739. 每日温度
@@ -31,6 +32,22 @@ import java.util.LinkedList;
 public class DailyTemperatures {
 
     public int[] dailyTemperatures(int[] temperatures) {
+        int[] rs = new int[temperatures.length];
+        Stack<Integer> stack = new Stack<Integer>();
+
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.empty() && temperatures[i] > temperatures[stack.peek()]) {
+                int index = stack.pop();
+                rs[index] = i - index;
+            }
+            stack.push(i);
+        }
+
+        return rs;
+    }
+
+
+    public int[] dailyTemperatures1(int[] temperatures) {
         int length = temperatures.length;
         int[] ans = new int[length];
         // 单调递减栈，一旦大于，则可以出栈并计算值，直到栈是递减的
