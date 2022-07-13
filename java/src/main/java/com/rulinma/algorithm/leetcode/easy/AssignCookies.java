@@ -43,7 +43,6 @@ public class AssignCookies {
         Set<Integer> indexSet = new HashSet<>();
 
         for (int i : g) {
-            //
             for (int j = 0; j < s.length; j++) {
                 // set
                 if (s[j] >= i && !indexSet.contains(j)) {
