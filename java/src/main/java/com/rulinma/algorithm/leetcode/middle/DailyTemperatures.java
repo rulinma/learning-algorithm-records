@@ -33,13 +33,16 @@ public class DailyTemperatures {
     public int[] dailyTemperatures(int[] temperatures) {
         int length = temperatures.length;
         int[] ans = new int[length];
+        // 单调递减栈，一旦大于，则可以出栈并计算值，直到栈是递减的
         Deque<Integer> stack = new LinkedList<Integer>();
         for (int i = 0; i < length; i++) {
             int temperature = temperatures[i];
+            // 比较下标对应的值
             while (!stack.isEmpty() && temperature > temperatures[stack.peek()]) {
                 int prevIndex = stack.pop();
                 ans[prevIndex] = i - prevIndex;
             }
+            // 栈存储的是index
             stack.push(i);
         }
 
