@@ -32,6 +32,7 @@ import java.util.Stack;
 public class DailyTemperatures {
 
     public int[] dailyTemperatures(int[] temperatures) {
+        // 栈的后进先出的道理，使用单调递减栈
         int[] rs = new int[temperatures.length];
         Stack<Integer> stack = new Stack<Integer>();
 
