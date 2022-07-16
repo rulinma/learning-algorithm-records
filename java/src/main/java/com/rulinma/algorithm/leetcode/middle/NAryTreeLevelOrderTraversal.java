@@ -42,16 +42,17 @@ public class NAryTreeLevelOrderTraversal {
         q.add(root);
 
         while (!q.isEmpty()) {
-            int cnt = q.size();
             List<Integer> level = new ArrayList<>();
-            for (int i = 0; i < cnt; i++) {
+            List<Node> nodes = new ArrayList<Node>();
+            for (int i = 0; i < q.size(); i++) {
                 Node cur = q.poll();
                 level.add(cur.val);
                 for (Node node : cur.children) {
-                    q.add(node);
+                    nodes.add(node);
                 }
             }
             rs.add(level);
+            q.addAll(nodes);
         }
 
         return rs;
