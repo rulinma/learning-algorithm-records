@@ -39,6 +39,7 @@ public class CoinChange {
         Arrays.fill(dp, max);
         dp[0] = 0;
         for (int i = 1; i <= amount; i++) {
+            // 状态转换，当前状态和前面状态的转换
             for (int j = 0; j < coins.length; j++) {
                 if (coins[j] <= i) {
                     dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
