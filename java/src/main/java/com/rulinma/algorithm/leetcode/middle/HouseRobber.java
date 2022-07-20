@@ -49,6 +49,24 @@ public class HouseRobber {
         return dp[length - 1];
     }
 
+    // 考虑到每间房屋的最高总金额只和该房屋的前两间房屋的最高总金额相关
+    public int rob2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int first = nums[0], second = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < length; i++) {
+            int temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+
     public static void main(String[] args) {
         HouseRobber houseRobber = new HouseRobber();
         int[] x = new int[]{1, 2, 3, 1};
