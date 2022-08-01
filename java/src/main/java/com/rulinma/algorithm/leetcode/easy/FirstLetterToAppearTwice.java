@@ -30,7 +30,22 @@ import java.util.Set;
  * @Data 2022/8/1 18:11
  */
 public class FirstLetterToAppearTwice {
+
     public char repeatedCharacter(String s) {
+        char[] chars = new char[26];
+        char[] ss = s.toCharArray();
+        for (char ch : ss) {
+            if (chars[ch - 'a'] == 1) {
+                return ch;
+            }
+
+            chars[ch - 'a'] = 1;
+        }
+
+        return ' ';
+    }
+
+    public char repeatedCharacter1(String s) {
         Set<Character> set = new HashSet<Character>();
         char[] chars = s.toCharArray();
         for (char ch : chars) {
