@@ -1,5 +1,8 @@
 package com.rulinma.algorithm.leetcode.middle;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 200. 岛屿数量
  * <p>
@@ -44,7 +47,55 @@ package com.rulinma.algorithm.leetcode.middle;
  * @Data 2022/8/2 16:32
  */
 public class NumberOfIslands {
+
     public int numIslands(char[][] grid) {
+        int count = 0;
+        // bfs
+        int r = grid.length;
+        int c = grid[0].length;
+
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    bfs(grid, i, j);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public void bfs(char[][] grid, int i, int j) {
+        // 处理所有相邻的陆地
+        Queue<int[]> list = new LinkedList<>();
+        list.add(new int[]{i, j});
+        while (!list.isEmpty()) {
+            int[] cur = list.remove();
+            i = cur[0];
+            j = cur[1];
+
+            if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length) {
+                continue;
+            }
+            // 碰到水域或已经访问过 grid[i][j] == '0' || grid[i][j] == '2'
+//        if (grid[i][j] != '1') {
+//            return;
+//        }
+            if (grid[i][j] == '0' || grid[i][j] == '2') {
+                continue;
+            }
+
+            grid[i][j] = '2';
+            list.add(new int[]{i + 1, j});
+            list.add(new int[]{i - 1, j});
+            list.add(new int[]{i, j + 1});
+            list.add(new int[]{i, j - 1});
+        }
+
+    }
+
+    public int numIslands1(char[][] grid) {
         int count = 0;
 
         // 2种解题方法：
@@ -115,8 +166,8 @@ public class NumberOfIslands {
                 {'0', '0', '1', '0', '0'},
                 {'0', '0', '0', '1', '1'}
         };
+
         int rs1 = numberOfIslands.numIslands(grid1);
         System.out.println(rs1);
-
     }
 }
