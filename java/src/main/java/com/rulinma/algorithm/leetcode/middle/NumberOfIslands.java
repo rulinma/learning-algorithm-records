@@ -108,5 +108,15 @@ public class NumberOfIslands {
 
         int rs = numberOfIslands.numIslands(grid);
         System.out.println(rs);
+
+        char[][] grid1 = new char[][]{
+                {'1', '1', '0', '0', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '1', '1'}
+        };
+        int rs1 = numberOfIslands.numIslands(grid1);
+        System.out.println(rs1);
+
     }
 }
