@@ -62,7 +62,6 @@ public class NumberOfIslands {
             for (int j = 0; j < c; j++) {
                 if (grid[i][j] == '1') {
                     count++;
-                    //
                     dfs(grid, i, j);
                 }
             }
@@ -76,14 +75,20 @@ public class NumberOfIslands {
         // 四个方向同时进行处理
         int r = grid.length;
         int c = grid[0].length;
-        // 越界或碰到水域
-        if (i < 0 || j < 0 || i >= r || j >= c || grid[i][j] == '0') {
+        // 越界
+        if (i < 0 || j < 0 || i >= r || j >= c) {
+            return;
+        }
+        // 碰到水域或已经访问过 grid[i][j] == '0' || grid[i][j] == '2'
+//        if (grid[i][j] != '1') {
+//            return;
+//        }
+        if (grid[i][j] == '0' || grid[i][j] == '2') {
             return;
         }
 
-        if (grid[i][j] == '1') {
-            grid[i][j] = '0';
-        }
+        // 标记已经访问过
+        grid[i][j] = '2';
 
         dfs(grid, i - 1, j);
         dfs(grid, i + 1, j);
