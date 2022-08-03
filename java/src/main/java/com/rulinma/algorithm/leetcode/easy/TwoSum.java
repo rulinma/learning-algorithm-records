@@ -2,6 +2,9 @@ package com.rulinma.algorithm.leetcode.easy;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 1. 两数之和
  * <p>
@@ -16,6 +19,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TwoSum {
 
+    public int[] twoSumSimple(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] rs = new int[]{-1, -1};
+        int index = 0;
+        for (int n : nums) {
+            if (map.containsKey(target - n)) {
+                return new int[]{map.get(target - n), index};
+            }
+
+            map.put(n, index++);
+        }
+
+        return new int[]{-1, -1};
+    }
+
+
     /**
      * 1. 暴力破解
      *
@@ -23,7 +42,7 @@ public class TwoSum {
      * @param target
      * @return
      */
-    public int[] twoSumSimple(int[] nums, int target) {
+    public int[] twoSumSimple1(int[] nums, int target) {
         log.info("simple");
         if (nums == null || nums.length < 2) {
             return new int[]{-1, -1};
