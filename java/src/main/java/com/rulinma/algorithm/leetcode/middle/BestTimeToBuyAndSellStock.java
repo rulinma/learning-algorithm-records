@@ -24,6 +24,22 @@ package com.rulinma.algorithm.leetcode.middle;
 public class BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
+        // 算法步骤
+        // maxProfit = Max(maxProfit, [当前值 - 到当前位置的最小值])
+        int maxProfit = 0;
+        int min = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            int x = prices[i];
+            if (x < min) {
+                min = x;
+            }
+            maxProfit = Math.max(maxProfit, x - min);
+        }
+
+        return maxProfit;
+    }
+
+    public int maxProfit1(int[] prices) {
         // 1. 选择当前日期前的最小值，保存目前能获得的最大值
         int maxProfit = 0;
         int minPrice = prices[0];
