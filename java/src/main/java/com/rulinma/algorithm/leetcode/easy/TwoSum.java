@@ -21,7 +21,6 @@ public class TwoSum {
 
     public int[] twoSumSimple(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
-        int[] rs = new int[]{-1, -1};
         int index = 0;
         for (int n : nums) {
             if (map.containsKey(target - n)) {
