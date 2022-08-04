@@ -44,6 +44,49 @@ public class DetermineWhetherMatrixCanBeObtainedByRotation {
 
     public boolean findRotation(int[][] mat, int[][] target) {
         int n = mat.length;
+        // 最多四次转换
+        // rotate90
+        for (int x = 0; x < 4; x++) {
+            if (same(mat, target)) {
+                return true;
+            }
+            mat = rotate(mat);
+        }
+
+        return false;
+    }
+
+    public boolean same(int[][] mat, int[][] target) {
+        int n = mat.length;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (mat[i][j] != target[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int[][] rotate(int[][] matrix) {
+        int n = matrix.length;
+        int[][] matrix_new = new int[n][n];
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix_new[j][n - i - 1] = matrix[i][j];
+            }
+        }
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                matrix[i][j] = matrix_new[i][j];
+            }
+        }
+        return matrix;
+    }
+
+    public boolean findRotation1(int[][] mat, int[][] target) {
+        int n = mat.length;
 
         boolean b1 = true, b2 = true, b3 = true, b4 = true;
 
