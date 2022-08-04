@@ -43,7 +43,7 @@ import java.util.List;
  * @author 马如林
  * @Data 2022/8/4 09:28
  */
-public class MinSubsequence {
+public class MinimumSubsequenceInNonIncreasingOrder {
 
     public List<Integer> minSubsequence(int[] nums) {
         List<Integer> rs = new ArrayList<>();
