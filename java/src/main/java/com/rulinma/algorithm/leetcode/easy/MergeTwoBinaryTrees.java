@@ -33,7 +33,7 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
  * }
  * }
  */
-class mergeTwoBinaryTrees {
+class MergeTwoBinaryTrees {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1 == null) {
             return root2;
