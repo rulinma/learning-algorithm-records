@@ -1,7 +1,6 @@
 package com.rulinma.algorithm.leetcode.middle;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * 6139. 受限条件下可到达节点的数目
@@ -53,27 +52,45 @@ public class ReachableNodesWithRestrictions {
     public int reachableNodes(int n, int[][] edges, int[] restricted) {
         // 广度遍历即可 BFS
         // 默认0节点存在
-        int count = 1;
+        Set<Integer> set = new HashSet<>();
         // 1. 添加0节点
         // 2. bfs 访问节点，遇到restricted节点则skip，记录顶点个数
         // 双端队列
         Deque<Integer> deque = new LinkedList<>();
-        // edges 从排序
+        set.add(0);
+
+        // 遍历edges，并过滤掉每个边的restricted
+        // node的下一个边，能够立刻获取
+        Map<Integer, Set<Integer>> map = new HashMap<>();
         for (int[] e : edges) {
-            // 0节点
-            if (e[0] > e[1]) {
-                int t = e[1];
-                e[1] = e[0];
-                e[0] = t;
+            // 0节点的下一个节点
+            if (!isRestricted(e[1], restricted)) {
+                Set<Integer> set1 = map.get(e[0]);
+                if (set1 == null || set1.isEmpty()) {
+                    set1 = new HashSet<>();
+                }
+                set1.add(e[1]);
+                map.put(e[0], set1);
+            }
+
+            if (!isRestricted(e[0], restricted)) {
+                Set<Integer> set1 = map.get(e[1]);
+                if (set1 == null || set1.isEmpty()) {
+                    set1 = new HashSet<>();
+                }
+                set1.add(e[0]);
+                map.put(e[1], set1);
             }
         }
 
-        // 寻找节点为0的节点
-        for (int[] e : edges) {
-            // 0节点的下一个节点
-            if (e[0] == 0 && !isRestricted(e[1], restricted)) {
-                deque.add(e[1]);
-                count++;
+        // 添加0节点开始并且有效的节点
+        if (map.get(0) == null) {
+            set.add(0);
+            return set.size();
+        } else {
+            set.addAll(map.get(0));
+            for (Integer x : map.get(0)) {
+                deque.add(x);
             }
         }
 
@@ -82,19 +99,20 @@ public class ReachableNodesWithRestrictions {
             int size = deque.size();
             for (int i = 0; i < size; i++) {
                 int head = deque.poll();
-                // 添加head相关的下一个节点，判断节点是否restricted，是则跳过
                 // 获取head的所有下一个节点
-                for (int[] e : edges) {
-                    // 0节点的下一个节点
-                    if (e[0] == head && !isRestricted(e[1], restricted)) {
-                        deque.add(e[1]);
-                        count++;
+                Set<Integer> t = map.get(head);
+                if (t != null) {
+                    for (Integer x : t) {
+                        if (!set.contains(x)) {
+                            set.add(x);
+                            deque.add(x);
+                        }
                     }
                 }
             }
         }
 
-        return count;
+        return set.size();
     }
 
     private boolean isRestricted(int x, int[] restricted) {
@@ -111,16 +129,27 @@ public class ReachableNodesWithRestrictions {
     public static void main(String[] args) {
 
         ReachableNodesWithRestrictions reachableNodesWithRestrictions = new ReachableNodesWithRestrictions();
-        int n = 7;
-        int[][] edges = new int[][]{{0, 1}, {1, 2}, {3, 1}, {4, 0}, {0, 5}, {5, 6}};
-        int[] restricted = new int[]{4, 5};
+//        int n = 7;
+//        int[][] edges = new int[][]{{0, 1}, {1, 2}, {3, 1}, {4, 0}, {0, 5}, {5, 6}};
+//        int[] restricted = new int[]{4, 5};
 
+//        int n = 7;
 //        int[][] edges = new int[][]{{0, 1}, {0, 2}, {0, 5}, {0, 4}, {3, 2}, {6, 5}};
 //        int[] restricted = new int[]{4, 2, 1};
 
 //        int n = 4;
 //        int[][] edges = new int[][]{{2, 1}, {1, 0}, {0, 3}};
 //        int[] restricted = new int[]{3, 2};
+
+
+        int n = 10;
+        int[][] edges = new int[][]{{4, 1}, {1, 3}, {1, 5}, {0, 5}, {3, 6}, {8, 4}, {5, 7}, {6, 9}, {3, 2}};
+        int[] restricted = new int[]{2, 7};
+
+//        int n = 4;
+//        int[][] edges = new int[][]{{0, 1}, {1, 0}, {0, 3}};
+//        int[] restricted = new int[]{3, 2};
+
 
         System.out.println(reachableNodesWithRestrictions.reachableNodes(n, edges, restricted));
     }
