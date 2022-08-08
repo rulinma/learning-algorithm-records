@@ -60,6 +60,60 @@ public class CheckIfThereIsAValidPartitionForTheArray {
         return dp[len - 1];
     }
 
+    public boolean validPartition1(int[] nums) {
+        // 1. 2个或3个相等的元素
+        // 3个连续递增元素
+        // 递归出口
+
+        boolean rs = valid(nums, 0);
+
+        // 递归调用
+
+        return rs;
+    }
+
+    public boolean valid(int nums[], int start) {
+        // 递归出口
+        if (nums.length - start == 2 && nums[start] == nums[start + 1]) {
+            return true;
+        }
+        if (nums.length - start == 3 && nums[start] == nums[start + 1] && nums[start + 1] == nums[start + 2]) {
+            return true;
+        }
+        if (nums.length - start == 3 && nums[start] == nums[start + 1] - 1 && nums[start + 1] == nums[start + 2] - 1) {
+            return true;
+        }
+
+        // 2 相同
+        // 3 相同
+        // 3 递增
+        boolean same2 = false;
+        // 3 递增
+        boolean same3 = false;
+        // 3 递增
+        boolean inc3 = false;
+
+        if (start + 1 < nums.length) {
+            if (nums[start] == nums[start + 1]) {
+                //  从2开始
+                int x = start + 2;
+                same2 = valid(nums, x);
+            }
+        }
+
+        if (start + 2 < nums.length) {
+            if (nums[start] == nums[start + 1] && nums[start + 1] == nums[start + 2]) {
+                int x = start + 3;
+                same3 = valid(nums, x);
+            } else if (nums[start] == nums[start + 1] - 1 && nums[start + 1] == nums[start + 2] - 1) {
+                int x = start + 3;
+                inc3 = valid(nums, x);
+            }
+        }
+
+        return false || same2 || same3 || inc3;
+    }
+
     public static void main(String[] args) {
 
         CheckIfThereIsAValidPartitionForTheArray checkIfThereIsAValidPartitionForTheArray = new CheckIfThereIsAValidPartitionForTheArray();
