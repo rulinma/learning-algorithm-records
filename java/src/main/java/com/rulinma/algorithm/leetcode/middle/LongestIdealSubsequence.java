@@ -1,5 +1,7 @@
 package com.rulinma.algorithm.leetcode.middle;
 
+import java.util.Arrays;
+
 /**
  * 6138. 最长理想子序列
  * <p>
@@ -42,42 +44,27 @@ package com.rulinma.algorithm.leetcode.middle;
 public class LongestIdealSubsequence {
 
     public int longestIdealString(String s, int k) {
-        // 1. 从第1个开始，进行k的计算，获得值
-        // 2. 从第2个开始，进行k的计算，获得值
-        // 10的5次方个
-        if (k == 0) {
-            return 0;
-        }
-
-        // 动态规划
-        // s[i] = s[i-1] + k范围内的数据是否满足条件?:1:0
-        char[] chars = s.toCharArray();
-        int len = chars.length;
-        int[] dp = new int[len];
-        dp[0] = 1;
-
-        for (int i = 1; i < len; i++) {
-            int v = 0;
-            if (Math.abs(chars[i] - chars[i - 1]) <= k) {
-                System.out.println(chars[i]);
-                v = 1;
+        int[] f = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            int c = s.charAt(i) - 'a';
+            for (int j = Math.max(c - k, 0); j <= Math.min(c + k, 25); j++) {
+                f[c] = Math.max(f[c], f[j]);
             }
-
-            dp[i] = dp[i - 1] + v;
+            f[c]++;
         }
 
-        return dp[len - 1];
+        return Arrays.stream(f).max().getAsInt();
     }
 
     public static void main(String[] args) {
         LongestIdealSubsequence longestIdealSubsequence = new LongestIdealSubsequence();
-//        String s = "acfgbd";
-//        int k = 2;
-//        System.out.println(longestIdealSubsequence.longestIdealString(s, k));
-//
-//        String s1 = "abcd";
-//        int k1 = 3;
-//        System.out.println(longestIdealSubsequence.longestIdealString(s1, k1));
+        String s = "acfgbd";
+        int k = 2;
+        System.out.println(longestIdealSubsequence.longestIdealString(s, k));
+
+        String s1 = "abcd";
+        int k1 = 3;
+        System.out.println(longestIdealSubsequence.longestIdealString(s1, k1));
 
         String s2 = "jxhwaysa";
         int k2 = 14;
