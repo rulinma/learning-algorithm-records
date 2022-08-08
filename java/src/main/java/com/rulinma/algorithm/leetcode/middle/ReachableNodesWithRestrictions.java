@@ -61,10 +61,15 @@ public class ReachableNodesWithRestrictions {
 
         // 遍历edges，并过滤掉每个边的restricted
         // node的下一个边，能够立刻获取
+        Set<Integer> restrictedSet = new HashSet<>();
+        for (int r : restricted) {
+            restrictedSet.add(r);
+        }
+
         Map<Integer, Set<Integer>> map = new HashMap<>();
         for (int[] e : edges) {
             // 0节点的下一个节点
-            if (!isRestricted(e[1], restricted)) {
+            if (!restrictedSet.contains(e[1])) {
                 Set<Integer> set1 = map.get(e[0]);
                 if (set1 == null || set1.isEmpty()) {
                     set1 = new HashSet<>();
@@ -73,7 +78,7 @@ public class ReachableNodesWithRestrictions {
                 map.put(e[0], set1);
             }
 
-            if (!isRestricted(e[0], restricted)) {
+            if (!restrictedSet.contains(e[0])) {
                 Set<Integer> set1 = map.get(e[1]);
                 if (set1 == null || set1.isEmpty()) {
                     set1 = new HashSet<>();
@@ -89,9 +94,7 @@ public class ReachableNodesWithRestrictions {
             return set.size();
         } else {
             set.addAll(map.get(0));
-            for (Integer x : map.get(0)) {
-                deque.add(x);
-            }
+            deque.addAll(map.get(0));
         }
 
         // 从0开始添加节点
@@ -113,17 +116,6 @@ public class ReachableNodesWithRestrictions {
         }
 
         return set.size();
-    }
-
-    private boolean isRestricted(int x, int[] restricted) {
-
-        for (int r : restricted) {
-            if (r == x) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public static void main(String[] args) {
