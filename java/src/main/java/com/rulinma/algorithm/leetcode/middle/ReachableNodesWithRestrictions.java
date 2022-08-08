@@ -68,7 +68,7 @@ public class ReachableNodesWithRestrictions {
 
         Map<Integer, Set<Integer>> map = new HashMap<>();
         for (int[] e : edges) {
-            // 0节点的下一个节点
+            // 节点的下一个节点
             if (!restrictedSet.contains(e[1])) {
                 Set<Integer> set1 = map.get(e[0]);
                 if (set1 == null || set1.isEmpty()) {
@@ -90,8 +90,7 @@ public class ReachableNodesWithRestrictions {
 
         // 添加0节点开始并且有效的节点
         if (map.get(0) == null) {
-            set.add(0);
-            return set.size();
+            return 1;
         } else {
             set.addAll(map.get(0));
             deque.addAll(map.get(0));
