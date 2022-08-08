@@ -36,69 +36,45 @@ public class CheckIfThereIsAValidPartitionForTheArray {
     public boolean validPartition(int[] nums) {
         // 1. 2个或3个相等的元素
         // 3个连续递增元素
-        // 递归出口
+        int len = nums.length;
+        // dp[i]表示第i位结尾是否可行
+        boolean[] dp = new boolean[len];
+        dp[0] = false;
+        dp[1] = (nums[1] == nums[0]);
 
-        boolean rs = valid(nums, 0);
-
-        // 递归调用
-
-        return rs;
-    }
-
-    public boolean valid(int nums[], int start) {
-        // 递归出口
-        if (nums.length - start == 2 && nums[start] == nums[start + 1]) {
-            return true;
-        }
-        if (nums.length - start == 3 && nums[start] == nums[start + 1] && nums[start + 1] == nums[start + 2]) {
-            return true;
-        }
-        if (nums.length - start == 3 && nums[start] == nums[start + 1] - 1 && nums[start + 1] == nums[start + 2] - 1) {
-            return true;
-        }
-
-        // 2 相同
-        // 3 相同
-        // 3 递增
-        boolean same2 = false;
-        // 3 递增
-        boolean same3 = false;
-        // 3 递增
-        boolean inc3 = false;
-
-        if (start + 1 < nums.length) {
-            if (nums[start] == nums[start + 1]) {
-                //  从2开始
-                int x = start + 2;
-                same2 = valid(nums, x);
+        for (int i = 2; i < len; i++) {
+            // 按第一种分法
+            if (nums[i] == nums[i - 1] && dp[i - 2]) {
+                dp[i] = true;
+            }
+            // 按第二种分法
+            if (nums[i] == nums[i - 2] && nums[i - 2] == nums[i - 1] && (i == 2 || dp[i - 3])) {
+                dp[i] = true;
+            }
+            // 按第三种分法
+            if (nums[i] == nums[i - 1] + 1 && nums[i] == nums[i - 2] + 2 && (i == 2 || dp[i - 3])) {
+                dp[i] = true;
             }
         }
 
-        if (start + 2 < nums.length) {
-            if (nums[start] == nums[start + 1] && nums[start + 1] == nums[start + 2]) {
-                int x = start + 3;
-                same3 = valid(nums, x);
-            } else if (nums[start] == nums[start + 1] - 1 && nums[start + 1] == nums[start + 2] - 1) {
-                int x = start + 3;
-                inc3 = valid(nums, x);
-            }
-        }
-
-        return false || same2 || same3 || inc3;
+        return dp[len - 1];
     }
 
     public static void main(String[] args) {
 
         CheckIfThereIsAValidPartitionForTheArray checkIfThereIsAValidPartitionForTheArray = new CheckIfThereIsAValidPartitionForTheArray();
 
-        int[] nums = {4, 4, 4, 5, 6};
-        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums));
+//        int[] nums = {4, 4, 4, 5, 6};
+//        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums));
+//
+//        int[] nums1 = {1, 1, 1, 2};
+//        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums1));
+//
+//        int[] nums2 = {803201, 803201, 803201, 803201, 803202, 803203};
+//        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums2));
 
-        int[] nums1 = {1, 1, 1, 2};
-        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums1));
-
-        int[] nums2 = {803201, 803201, 803201, 803201, 803202, 803203};
-        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums2));
+        int[] nums3 = {1, 1};
+        System.out.println(checkIfThereIsAValidPartitionForTheArray.validPartition(nums3));
 
     }
 
