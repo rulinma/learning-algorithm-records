@@ -27,6 +27,11 @@ package com.rulinma.algorithm.leetcode.middle;
  * 解释：该数组不存在有效划分。
  * <p>
  * https://leetcode.cn/problems/check-if-there-is-a-valid-partition-for-the-array
+ * <p>
+ * 提示：
+ * <p>
+ * 2 <= nums.length <= 105
+ * 1 <= nums[i] <= 106
  *
  * @author 马如林
  * @Data 2022/8/8 14:19
