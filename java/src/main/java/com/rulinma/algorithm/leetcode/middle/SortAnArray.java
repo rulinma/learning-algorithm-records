@@ -49,7 +49,7 @@ public class SortAnArray {
         if (min != index) {
             swaps(nums, index, min);
             // fix
-            heapify(nums, len, min);
+//            heapify(nums, len, min);
         }
 
     }
@@ -84,7 +84,7 @@ public class SortAnArray {
 
     public static void main(String[] args) {
         SortAnArray sortAnArray = new SortAnArray();
-        int[] nums = new int[]{11, 30, 2, 4, 15, 60};
+        int[] nums = new int[]{11, 30, 2, 4, 15, 60 , 1, 3, 5, 8};
 //        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
         int[] rs = sortAnArray.sortArrayByHeap(nums);
         System.out.println(Arrays.toString(rs));
