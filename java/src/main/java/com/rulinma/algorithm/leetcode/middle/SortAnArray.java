@@ -2,6 +2,8 @@ package com.rulinma.algorithm.leetcode.middle;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+
 /**
  * 912. 排序数组
  * <p>
@@ -13,6 +15,53 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class SortAnArray {
+
+    public void swaps(int[] nums, int index, int min) {
+        int temp = nums[index];
+        nums[index] = nums[min];
+        nums[min] = temp;
+    }
+
+    public void heapify(int[] nums, int index) {
+        // 向下处理
+        int min = index;
+        int left = 2 * index + 1;
+        int right = 2 * index + 2;
+
+        if (left < nums.length && nums[left] < nums[index]) {
+            min = left;
+        }
+        if (right < nums.length && nums[right] < nums[min]) {
+            min = right;
+        }
+
+        if (min != index) {
+            swaps(nums, index, min);
+        }
+    }
+
+    // heapify
+    public int[] sortArrayByHeap(int[] nums) {
+        // 堆排序
+        // 1. 完全二叉树，父节点都小于子节点（小根对）
+
+        // 1. buildHeap
+        for (int i = nums.length / 2 - 1; i >= 0; i--) {
+            heapify(nums, i);
+        }
+
+        // 2. 输出堆数据
+
+
+        return nums;
+    }
+
+    public static void main(String[] args) {
+        SortAnArray sortAnArray = new SortAnArray();
+        int[] nums = new int[]{11, 30, 2, 4, 15, 60};
+        int[] rs = sortAnArray.sortArrayByHeap(nums);
+        System.out.println(Arrays.toString(rs));
+    }
 
     /**
      * 冒泡排序原理：
