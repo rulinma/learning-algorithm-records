@@ -22,22 +22,36 @@ public class SortAnArray {
         nums[min] = temp;
     }
 
-    public void heapify(int[] nums, int index) {
+    /**
+     * 保证顶点是最小值，其他不保证
+     *
+     * @param nums
+     * @param index
+     */
+    public void heapify(int[] nums, int len, int index) {
+        // 递归出口
+        if (index > len) {
+            return;
+        }
+
         // 向下处理
         int min = index;
         int left = 2 * index + 1;
         int right = 2 * index + 2;
 
-        if (left < nums.length && nums[left] < nums[index]) {
+        if (left < len && nums[left] < nums[index]) {
             min = left;
         }
-        if (right < nums.length && nums[right] < nums[min]) {
+        if (right < len && nums[right] < nums[min]) {
             min = right;
         }
 
         if (min != index) {
             swaps(nums, index, min);
+            // fix
+            heapify(nums, len, min);
         }
+
     }
 
     // heapify
@@ -47,18 +61,27 @@ public class SortAnArray {
 
         // 1. buildHeap
         for (int i = nums.length / 2 - 1; i >= 0; i--) {
-            heapify(nums, i);
+            heapify(nums, nums.length, i);
         }
 
         // 2. 输出堆数据
-
+        // sortHeap
+        sortHeap(nums, nums.length);
 
         return nums;
+    }
+
+    public void sortHeap(int[] nums, int len) {
+        for (int i = len - 1; i >= 0; i--) {
+            swap(nums, i, 0);
+            heapify(nums, i, 0);
+        }
     }
 
     public static void main(String[] args) {
         SortAnArray sortAnArray = new SortAnArray();
         int[] nums = new int[]{11, 30, 2, 4, 15, 60};
+//        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
         int[] rs = sortAnArray.sortArrayByHeap(nums);
         System.out.println(Arrays.toString(rs));
     }
