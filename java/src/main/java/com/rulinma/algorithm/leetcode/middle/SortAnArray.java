@@ -49,12 +49,22 @@ public class SortAnArray {
         if (min != index) {
             swaps(nums, index, min);
             // fix
+            // 变化的地方，有可能破坏了堆的性质，需要重新调整，没有变化的地方则无需处理。
             heapify(nums, len, min);
         }
 
     }
 
-    // heapify
+    /**
+     * 堆是一种数据结构，一种叫做完全二叉树的数据结构。
+     * <p>
+     * 大顶堆：每个节点的值都大于或者等于它的左右子节点的值。
+     * 小顶堆：每个节点的值都小于或者等于它的左右子节点的值。
+     *
+     * @param nums
+     * @return
+     * @ref https://blog.csdn.net/qq_28063811/article/details/93034625/
+     */
     public int[] sortArrayByHeap(int[] nums) {
         // 堆排序
         // 1. 完全二叉树，父节点都小于子节点（小根对）
@@ -70,6 +80,7 @@ public class SortAnArray {
     }
 
     private void buildHeap(int[] nums) {
+        // 自底向上处理，会保证后面的数据是相对较好的，减少处理次数
         for (int i = nums.length / 2 - 1; i >= 0; i--) {
             heapify(nums, nums.length, i);
         }
@@ -78,13 +89,14 @@ public class SortAnArray {
     public void sortHeap(int[] nums) {
         for (int i = nums.length - 1; i >= 0; i--) {
             swap(nums, i, 0);
+            // 将剩余的元素重新构建大顶堆，其实就是调整根节点以及其调整后影响的子节点，因为其他节点之前已经满足大顶堆性质。
             heapify(nums, i, 0);
         }
     }
 
     public static void main(String[] args) {
         SortAnArray sortAnArray = new SortAnArray();
-        int[] nums = new int[]{11, 30, 2, 4, 15, 60 , 1, 3, 5, 8};
+        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1, 3, 5, 8};
 //        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
         int[] rs = sortAnArray.sortArrayByHeap(nums);
         System.out.println(Arrays.toString(rs));
