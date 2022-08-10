@@ -29,7 +29,7 @@ public class SortAnArray {
      * @param index
      */
     public void heapify(int[] nums, int len, int index) {
-        // 递归出口
+        // 递归出口，可以不写，因为后面的条件都不会满足，但是这个更合理些，否则看不到递归出口。
         if (index > len) {
             return;
         }
