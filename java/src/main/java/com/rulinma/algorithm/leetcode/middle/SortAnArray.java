@@ -49,7 +49,7 @@ public class SortAnArray {
         if (min != index) {
             swaps(nums, index, min);
             // fix
-//            heapify(nums, len, min);
+            heapify(nums, len, min);
         }
 
     }
