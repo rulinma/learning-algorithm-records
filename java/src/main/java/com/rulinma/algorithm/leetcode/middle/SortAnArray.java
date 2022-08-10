@@ -87,6 +87,8 @@ public class SortAnArray {
     }
 
     public void sortHeap(int[] nums) {
+        buildHeap(nums);
+
         for (int i = nums.length - 1; i >= 0; i--) {
             swap(nums, i, 0);
             // 将剩余的元素重新构建大顶堆，其实就是调整根节点以及其调整后影响的子节点，因为其他节点之前已经满足大顶堆性质。
