@@ -60,19 +60,23 @@ public class SortAnArray {
         // 1. 完全二叉树，父节点都小于子节点（小根对）
 
         // 1. buildHeap
-        for (int i = nums.length / 2 - 1; i >= 0; i--) {
-            heapify(nums, nums.length, i);
-        }
+        buildHeap(nums);
 
         // 2. 输出堆数据
         // sortHeap
-        sortHeap(nums, nums.length);
+        sortHeap(nums);
 
         return nums;
     }
 
-    public void sortHeap(int[] nums, int len) {
-        for (int i = len - 1; i >= 0; i--) {
+    private void buildHeap(int[] nums) {
+        for (int i = nums.length / 2 - 1; i >= 0; i--) {
+            heapify(nums, nums.length, i);
+        }
+    }
+
+    public void sortHeap(int[] nums) {
+        for (int i = nums.length - 1; i >= 0; i--) {
             swap(nums, i, 0);
             heapify(nums, i, 0);
         }
