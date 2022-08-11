@@ -463,16 +463,17 @@ public class SortAnArray {
     }
 
     public void mergeSort(int[] nums, int left, int right) {
+        // 分到不能分为止，也就是间隔为0。
         if (left < right) {
             int mid = (left + right) / 2;
             mergeSort(nums, left, mid);
             mergeSort(nums, mid + 1, right);
+            // 合并当前的left和right数据
             merges(nums, left, mid, right);
         } else {
             // 这里会退出， 一般else没必要写，写这里可以明确递归的退出条件
             return;
         }
     }
-
 
 }
