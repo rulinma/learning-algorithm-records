@@ -468,6 +468,9 @@ public class SortAnArray {
             mergeSort(nums, left, mid);
             mergeSort(nums, mid + 1, right);
             merges(nums, left, mid, right);
+        } else {
+            // 这里会退出， 一般else没必要写，写这里可以明确递归的退出条件
+            return;
         }
     }
 
