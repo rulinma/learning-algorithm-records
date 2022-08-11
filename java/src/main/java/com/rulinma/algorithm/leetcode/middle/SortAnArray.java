@@ -466,8 +466,9 @@ public class SortAnArray {
     }
 
     public void shellSort(int[] nums) {
-        int len = nums.length; //数组的长度
-        int d = len / 2;         //增量置初值
+        int len = nums.length;
+        // 增量置初值
+        int d = len / 2;
         while (d >= 1) {
             for (int i = d; i < len; i++) {
                 // 对所有组采用直接插入排序
