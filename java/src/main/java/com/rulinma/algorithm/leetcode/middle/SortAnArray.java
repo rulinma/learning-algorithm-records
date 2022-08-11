@@ -415,17 +415,6 @@ public class SortAnArray {
 
     // mergeSort
 
-    public static void main(String[] args) {
-        SortAnArray sortAnArray = new SortAnArray();
-//        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1, 3, 5, 8};
-////        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
-//        int[] rs = sortAnArray.sortArrayByHeap(nums);
-//        System.out.println(Arrays.toString(rs));
-
-        int[] arr = {9, 8, 17, 6, 5, 4, 13, 2, 1};
-        sortAnArray.mergeSortMy(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 
     public void mergeSortMy(int[] nums) {
         mergeSort(nums, 0, nums.length - 1);
@@ -475,5 +464,38 @@ public class SortAnArray {
             return;
         }
     }
+
+    public void shellSort(int[] nums) {
+        int len = nums.length; //数组的长度
+        int d = len / 2;         //增量置初值
+        while (d >= 1) {
+            for (int i = d; i < len; i++) {
+                // 对所有组采用直接插入排序
+                int current = nums[i];
+                // 对相隔d个位置的一组采用直接插入排序
+                int j = i - d;
+                while (j >= 0 && current < nums[j]) {
+                    nums[j + d] = nums[j];
+                    j = j - d;
+                }
+                nums[j + d] = current;
+            }
+            // 减小增量
+            d = d / 2;
+        }
+    }
+
+    public static void main(String[] args) {
+        SortAnArray sortAnArray = new SortAnArray();
+//        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1, 3, 5, 8};
+////        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
+//        int[] rs = sortAnArray.sortArrayByHeap(nums);
+//        System.out.println(Arrays.toString(rs));
+
+        int[] arr = {9, 8, 17, 6, 5, 4, 13, 2, 1};
+        sortAnArray.shellSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
 
 }
