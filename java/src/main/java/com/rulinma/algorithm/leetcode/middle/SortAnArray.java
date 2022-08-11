@@ -147,17 +147,6 @@ public class SortAnArray {
         }
     }
 
-    public static void main(String[] args) {
-        SortAnArray sortAnArray = new SortAnArray();
-//        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1, 3, 5, 8};
-////        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
-//        int[] rs = sortAnArray.sortArrayByHeap(nums);
-//        System.out.println(Arrays.toString(rs));
-
-        int[] arr = {9, 8, 17, 6, 5, 4, 13, 2, 1};
-        sortAnArray.mergeSort(arr);
-        System.out.println(Arrays.toString(arr));
-    }
 
     /**
      * 冒泡排序原理：
@@ -423,5 +412,64 @@ public class SortAnArray {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    // mergeSort
+
+    public static void main(String[] args) {
+        SortAnArray sortAnArray = new SortAnArray();
+//        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1, 3, 5, 8};
+////        int[] nums = new int[]{11, 30, 2, 4, 15, 60, 1};
+//        int[] rs = sortAnArray.sortArrayByHeap(nums);
+//        System.out.println(Arrays.toString(rs));
+
+        int[] arr = {9, 8, 17, 6, 5, 4, 13, 2, 1};
+        sortAnArray.mergeSortMy(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void mergeSortMy(int[] nums) {
+        mergeSort(nums, 0, nums.length - 1);
+    }
+
+    private void merges(int[] nums, int left, int mid, int right) {
+        // tmp 数组
+        int[] tmp = new int[right - left + 1];
+
+        // 合并从left -> mid 和 mid + 1 -> right的有序数组，并复制到nums[left] -> nums[right]位置
+        int i = left;
+        int j = mid + 1;
+        int k = 0;
+        while (i <= mid && j <= right) {
+            if (nums[i] < nums[j]) {
+                tmp[k++] = nums[i++];
+            } else {
+                tmp[k++] = nums[j++];
+            }
+        }
+
+        while (i <= mid) {
+            tmp[k++] = nums[i++];
+        }
+
+        while (j <= right) {
+            tmp[k++] = nums[j++];
+        }
+
+        // 复制
+        k = 0;
+        while (left <= right) {
+            nums[left++] = tmp[k++];
+        }
+    }
+
+    public void mergeSort(int[] nums, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            mergeSort(nums, left, mid);
+            mergeSort(nums, mid + 1, right);
+            merges(nums, left, mid, right);
+        }
+    }
+
 
 }
