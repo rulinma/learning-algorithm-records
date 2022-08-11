@@ -463,7 +463,7 @@ public class SortAnArray {
     }
 
     public void mergeSort(int[] nums, int left, int right) {
-        // 分到不能分为止，也就是间隔为0。
+        // 分到不能分为止，也就是间隔为0。和mid的取值有关，是个技巧处理。
         if (left < right) {
             int mid = (left + right) / 2;
             mergeSort(nums, left, mid);
