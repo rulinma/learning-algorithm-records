@@ -1,6 +1,7 @@
 package com.rulinma.algorithm.leetcode.easy;
 
 import com.rulinma.algorithm.leetcode.common.ListNode;
+import com.rulinma.algorithm.leetcode.common.TreeNode;
 
 import java.util.*;
 
@@ -81,35 +82,6 @@ public class Test {
         return rs;
     }
 
-    public static void main(String[] args) {
-        // 合并2个有序链表
-        // 链表反转
-
-        ListNode l1 = new ListNode(1);
-        ListNode l11 = new ListNode(4);
-        ListNode l12 = new ListNode(5);
-        ListNode l13 = new ListNode(15);
-        l1.next = l11;
-        l11.next = l12;
-        l12.next = l13;
-
-        ListNode x = l1;
-        while (x != null) {
-            System.out.println(x.val);
-            x = x.next;
-        }
-
-        // reverse list
-        System.out.println("-----");
-
-//        merge2List();
-        ListNode listNode = reverseNode(l1);
-        while (listNode != null) {
-            System.out.println(listNode.val);
-            listNode = listNode.next;
-        }
-
-    }
 
     public static ListNode reverseNode(ListNode listNode) {
         ListNode pre = null;
@@ -176,5 +148,66 @@ public class Test {
         return dummy.next;
     }
 
+
+    private static void revertedListNode() {
+        // 链表反转
+
+        ListNode l1 = new ListNode(1);
+        ListNode l11 = new ListNode(4);
+        ListNode l12 = new ListNode(5);
+        ListNode l13 = new ListNode(15);
+        l1.next = l11;
+        l11.next = l12;
+        l12.next = l13;
+
+        ListNode x = l1;
+        while (x != null) {
+            System.out.println(x.val);
+            x = x.next;
+        }
+
+        // reverse list
+        System.out.println("-----");
+
+//        merge2List();
+        ListNode listNode = reverseNode(l1);
+        while (listNode != null) {
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        treeHeight();
+    }
+
+    private static void treeHeight() {
+        // Tree的深度和遍历
+        TreeNode root = new TreeNode(1);
+
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(3);
+
+        TreeNode left_l = new TreeNode(4);
+        TreeNode left_r = new TreeNode(5);
+
+        root.left = left;
+        root.right = right;
+
+        left.left = left_l;
+        left.right = left_r;
+
+        int rs = treeHeight(root);
+
+        System.out.println(rs);
+    }
+
+    public static int treeHeight(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return Math.max(treeHeight(root.left), treeHeight(root.right)) + 1;
+    }
 
 }
