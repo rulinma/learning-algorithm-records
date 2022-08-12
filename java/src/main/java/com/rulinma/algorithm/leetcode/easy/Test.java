@@ -88,6 +88,49 @@ public class Test {
         ListNode l1 = new ListNode(1);
         ListNode l11 = new ListNode(4);
         ListNode l12 = new ListNode(5);
+        ListNode l13 = new ListNode(15);
+        l1.next = l11;
+        l11.next = l12;
+        l12.next = l13;
+
+        ListNode x = l1;
+        while (x != null) {
+            System.out.println(x.val);
+            x = x.next;
+        }
+
+        // reverse list
+        System.out.println("-----");
+
+//        merge2List();
+        ListNode listNode = reverseNode(l1);
+        while (listNode != null) {
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
+
+    }
+
+    public static ListNode reverseNode(ListNode listNode) {
+        ListNode pre = null;
+        ListNode head = listNode;
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        return pre;
+    }
+
+
+    private static void merge2List() {
+        ListNode l1 = new ListNode(1);
+        ListNode l11 = new ListNode(4);
+        ListNode l12 = new ListNode(5);
         l1.next = l11;
         l11.next = l12;
 
@@ -101,7 +144,6 @@ public class Test {
             System.out.println(listNode.val);
             listNode = listNode.next;
         }
-
     }
 
     public static ListNode mergeOrderListNode(ListNode l1, ListNode l2) {
