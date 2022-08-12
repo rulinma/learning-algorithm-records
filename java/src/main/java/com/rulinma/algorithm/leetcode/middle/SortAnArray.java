@@ -499,6 +499,28 @@ public class SortAnArray {
 
         insertSort(arr);
         System.out.println(Arrays.toString(arr));
+
+        int rs = binarySearch(arr, 13);
+        System.out.println(rs);
+    }
+
+    public static int binarySearch(int[] arr, int num) {
+        int rs = -1;
+
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (arr[mid] == num) {
+                return mid;
+            } else if (arr[mid] > num) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return rs;
     }
 
     public static void insertSort(int[] nums) {
