@@ -494,8 +494,42 @@ public class SortAnArray {
 //        System.out.println(Arrays.toString(rs));
 
         int[] arr = {9, 8, 17, 6, 5, 4, 13, 2, 1};
-        sortAnArray.shellSort(arr);
+//        sortAnArray.shellSort(arr);
+//        System.out.println(Arrays.toString(arr));
+
+        insertSort(arr);
         System.out.println(Arrays.toString(arr));
+    }
+
+    public static void insertSort(int[] nums) {
+        // 插入排序
+        if (nums.length <= 1) {
+            return;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            int current = nums[i];
+
+            int j = i - 1;
+//            while (j >= 0 && nums[j] > current) {
+//                // 后移
+//                nums[j + 1] = nums[j];
+//                j--;
+//            }
+
+            while (j >= 0) {
+                // 后移
+                if (nums[j] > current) {
+                    nums[j + 1] = nums[j];
+                    j--;
+                } else {
+                    break;
+                }
+            }
+
+            nums[j + 1] = current;
+        }
+
     }
 
 
