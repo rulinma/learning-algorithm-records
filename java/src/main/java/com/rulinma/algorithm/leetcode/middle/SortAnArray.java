@@ -506,7 +506,7 @@ public class SortAnArray {
 
     public static int binarySearch(int[] arr, int num) {
         int rs = -1;
-
+        // 双向指针收缩即可，无需递归
         int left = 0;
         int right = arr.length - 1;
         while (left <= right) {
