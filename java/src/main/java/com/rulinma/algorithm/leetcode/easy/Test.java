@@ -1,5 +1,7 @@
 package com.rulinma.algorithm.leetcode.easy;
 
+import com.rulinma.algorithm.leetcode.common.ListNode;
+
 import java.util.*;
 
 /**
@@ -78,5 +80,59 @@ public class Test {
 
         return rs;
     }
+
+    public static void main(String[] args) {
+        // 合并2个有序链表
+        // 链表反转
+
+        ListNode l1 = new ListNode(1);
+        ListNode l11 = new ListNode(4);
+        ListNode l12 = new ListNode(5);
+        l1.next = l11;
+        l11.next = l12;
+
+        ListNode l2 = new ListNode(1);
+        ListNode l21 = new ListNode(3);
+        l2.next = l21;
+
+        ListNode listNode = mergeOrderListNode(l1, l2);
+
+        while (listNode != null) {
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
+
+    }
+
+    public static ListNode mergeOrderListNode(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode head = dummy;
+
+        while (l1 != null && l2 != null) {
+            if (l1.val > l2.val) {
+                head.next = l2;
+                l2 = l2.next;
+            } else {
+                head.next = l1;
+                l1 = l1.next;
+            }
+            head = head.next;
+        }
+
+        while (l1 != null) {
+            head.next = l1;
+            l1 = l1.next;
+            head = head.next;
+        }
+
+        while (l2 != null) {
+            head.next = l2;
+            l2 = l2.next;
+            head = head.next;
+        }
+
+        return dummy.next;
+    }
+
 
 }
