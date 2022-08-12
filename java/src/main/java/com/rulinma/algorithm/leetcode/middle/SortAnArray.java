@@ -508,8 +508,9 @@ public class SortAnArray {
         }
 
         for (int i = 1; i < nums.length; i++) {
+            // 每次插入的数
             int current = nums[i];
-
+            // 从此开始继续比较的第一个数
             int j = i - 1;
 //            while (j >= 0 && nums[j] > current) {
 //                // 后移
@@ -517,6 +518,7 @@ public class SortAnArray {
 //                j--;
 //            }
 
+            // 首先保证下标有效
             while (j >= 0) {
                 // 后移
                 if (nums[j] > current) {
