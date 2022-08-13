@@ -284,14 +284,15 @@ public class Test {
 //            System.out.println(s);
 //        }
 
-        List<List<Integer>> rs = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        int[] nums = new int[]{1, 2, 3};
-        backtrace1(list, rs, nums);
+//        List<List<Integer>> rs = new ArrayList<>();
+//        List<Integer> list = new ArrayList<>();
+//        int[] nums = new int[]{1, 2, 3};
+//        backtrace1(list, rs, nums);
+//
+//        for (List<Integer> s : rs) {
+//            System.out.println(s);
+//        }
 
-        for (List<Integer> s : rs) {
-            System.out.println(s);
-        }
     }
 
     public static void backtrace(List<Character> list, List<String> rs, char[] s) {
@@ -318,7 +319,7 @@ public class Test {
 
     public static void backtrace1(List<Integer> list, List<List<Integer>> rs, int[] arr) {
         if (list.size() == arr.length) {
-            List<Integer> newList=new ArrayList<Integer>(list);
+            List<Integer> newList = new ArrayList<Integer>(list);
             rs.add(newList);
             return;
         }
