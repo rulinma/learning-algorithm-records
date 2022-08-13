@@ -276,11 +276,20 @@ public class Test {
     public static void main(String[] args) {
         // 回溯和递归
         // abc字符的全排列
-        List<String> rs = new ArrayList<>();
-        List<Character> list = new ArrayList<>();
-        backtrace(list, rs, "abc".toCharArray());
+//        List<String> rs = new ArrayList<>();
+//        List<Character> list = new ArrayList<>();
+//        backtrace(list, rs, "abc".toCharArray());
+//
+//        for (String s : rs) {
+//            System.out.println(s);
+//        }
 
-        for (String s : rs) {
+        List<List<Integer>> rs = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        int[] nums = new int[]{1, 2, 3};
+        backtrace1(list, rs, nums);
+
+        for (List<Integer> s : rs) {
             System.out.println(s);
         }
     }
@@ -301,7 +310,26 @@ public class Test {
                 backtrace(list, rs, s);
                 list.remove(list.size() - 1);
             } else {
-               //
+                //
+            }
+        }
+
+    }
+
+    public static void backtrace1(List<Integer> list, List<List<Integer>> rs, int[] arr) {
+        if (list.size() == arr.length) {
+            List<Integer> newList=new ArrayList<Integer>(list);
+            rs.add(newList);
+            return;
+        }
+
+        for (int ch : arr) {
+            if (!list.contains(ch)) {
+                list.add(ch);
+                backtrace1(list, rs, arr);
+                list.remove(list.size() - 1);
+            } else {
+                //
             }
         }
 
