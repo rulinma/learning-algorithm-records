@@ -82,7 +82,6 @@ public class Test {
         return rs;
     }
 
-
     public static ListNode reverseNode(ListNode listNode) {
         ListNode pre = null;
         ListNode head = listNode;
@@ -97,7 +96,6 @@ public class Test {
 
         return pre;
     }
-
 
     private static void merge2List() {
         ListNode l1 = new ListNode(1);
@@ -148,7 +146,6 @@ public class Test {
         return dummy.next;
     }
 
-
     private static void revertedListNode() {
         // 链表反转
 
@@ -175,10 +172,6 @@ public class Test {
             System.out.println(listNode.val);
             listNode = listNode.next;
         }
-    }
-
-    public static void main(String[] args) {
-        treeHeight();
     }
 
     private static void treeHeight() {
@@ -208,6 +201,110 @@ public class Test {
         }
 
         return Math.max(treeHeight(root.left), treeHeight(root.right)) + 1;
+    }
+
+    public static int treeHeight2(TreeNode root) {
+        int rs = 0;
+
+        if (root == null) {
+            return 0;
+        }
+
+        Deque<TreeNode> list = new LinkedList<>();
+        list.add(root);
+        while (!list.isEmpty()) {
+            // 添加左右孩子
+            List tmp = new ArrayList();
+            for (int i = 0; i < list.size(); i++) {
+                TreeNode node = list.poll();
+                if (node.left != null) {
+                    tmp.add(node.left);
+                }
+                if (node.right != null) {
+                    tmp.add(node.right);
+                }
+            }
+            list.addAll(tmp);
+
+            rs++;
+        }
+
+        return rs;
+    }
+
+    private static void bfsTreeHeight() {
+        TreeNode root = new TreeNode(1);
+
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(3);
+
+        TreeNode left_l = new TreeNode(4);
+        TreeNode left_r = new TreeNode(5);
+
+        root.left = left;
+        root.right = right;
+
+        left.left = left_l;
+        left.right = left_r;
+
+        int rs = treeHeight2(root);
+        System.out.println(rs);
+    }
+
+    private int climbStairs(int n) {
+        int[] s = new int[n + 1];
+
+        if (n == 1) {
+            return 1;
+        }
+
+        if (n == 2) {
+            return 2;
+        }
+        s[1] = 1;
+        s[2] = 2;
+
+        int k = 3;
+        while (k <= n) {
+            s[k] = s[k - 1] + s[k - 2];
+            k++;
+        }
+
+        return s[n];
+    }
+
+    public static void main(String[] args) {
+        // 回溯和递归
+        // abc字符的全排列
+        List<String> rs = new ArrayList<>();
+        List<Character> list = new ArrayList<>();
+        backtrace(list, rs, "abc".toCharArray());
+
+        for (String s : rs) {
+            System.out.println(s);
+        }
+    }
+
+    public static void backtrace(List<Character> list, List<String> rs, char[] s) {
+        if (list.size() == s.length) {
+            StringBuilder sb = new StringBuilder();
+            for (Character character : list) {
+                sb.append(character);
+            }
+            rs.add(sb.toString());
+            return;
+        }
+
+        for (char ch : s) {
+            if (!list.contains(ch)) {
+                list.add(ch);
+                backtrace(list, rs, s);
+                list.remove(list.size() - 1);
+            } else {
+               //
+            }
+        }
+
     }
 
 }
