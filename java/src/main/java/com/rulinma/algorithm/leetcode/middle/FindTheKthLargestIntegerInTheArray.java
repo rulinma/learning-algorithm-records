@@ -3,7 +3,7 @@ package com.rulinma.algorithm.leetcode.middle;
 import java.util.Arrays;
 
 /**
- * 1985. 找出数组中的第 K 大整数
+ * 1985. 找出数组中的第 knapsack 大整数
  * 给你一个字符串数组 nums 和一个整数 k 。nums 中的每个字符串都表示一个不含前导零的整数。
  * <p>
  * 返回 nums 中表示第 k 大整数的字符串。
