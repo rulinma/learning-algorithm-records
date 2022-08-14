@@ -274,6 +274,45 @@ public class Test {
     }
 
     public static void main(String[] args) {
+
+//        String s = "011101";
+//        String s = "00111";
+        String s = "1111";
+
+        char[] chars = s.toCharArray();
+
+        int first = 0;
+        int left = 0;
+        int leftOne = 0;
+        int last = 0;
+
+        first = chars[0] == '0' ? 1 : 0;
+        last = chars[s.length() - 1] == '1' ? 1 : 0;
+        int totalOne = 0;
+
+        for (int i = 1; i < s.length() - 1; i++) {
+            if (chars[i] == '1') {
+                totalOne++;
+            }
+        }
+
+        int max = totalOne;
+
+        for (int i = 1; i < s.length() - 1; i++) {
+            // i 时的0的个数
+            if (chars[i] == '0') {
+                left++;
+            } else {
+                leftOne++;
+                // i 时的右边1的个数
+            }
+            max = Math.max(left + totalOne - leftOne, max);
+        }
+
+
+        int result = first + max + last;
+        System.out.println(result);
+
         // 回溯和递归
         // abc字符的全排列
 //        List<String> rs = new ArrayList<>();
