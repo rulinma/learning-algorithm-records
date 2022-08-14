@@ -273,10 +273,40 @@ public class Test {
         return s[n];
     }
 
+    public int coinChange(int[] coins, int amount) {
+        // 自底向上的动态规划
+        if (coins.length == 0) {
+            return -1;
+        }
+
+        // memo[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
+        int[] memo = new int[amount + 1];
+        memo[0] = 0;
+        // amout是金额
+        for (int i = 1; i <= amount; i++) {
+            int min = Integer.MAX_VALUE;
+            // j 金币的价值
+            for (int v : coins) {
+                if ((i - v >= 0) && (memo[i - v] < min)) {
+                    min = memo[i - v] + 1;
+                }
+            }
+            // memo[i] = (min == Integer.MAX_VALUE ? Integer.MAX_VALUE : min);
+            memo[i] = min;
+        }
+
+        return memo[amount] == Integer.MAX_VALUE ? -1 : memo[amount];
+    }
+
     public static void main(String[] args) {
 
-//        String s = "011101";
+
+    }
+
+    private static void arrTest() {
+        //        String s = "011101";
 //        String s = "00111";
+//        arrTest();
         String s = "1111";
 
         char[] chars = s.toCharArray();
@@ -331,7 +361,6 @@ public class Test {
 //        for (List<Integer> s : rs) {
 //            System.out.println(s);
 //        }
-
     }
 
     public static void backtrace(List<Character> list, List<String> rs, char[] s) {

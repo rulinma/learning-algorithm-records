@@ -33,7 +33,7 @@ import java.util.Arrays;
  */
 public class CoinChange {
 
-    public int coinChange(int[] coins, int amount) {
+    public int coinChange1(int[] coins, int amount) {
         int max = amount + 1;
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, max);
@@ -49,13 +49,38 @@ public class CoinChange {
         return dp[amount] > amount ? -1 : dp[amount];
     }
 
+    public int coinChange(int[] coins, int amount) {
+        // dp[n]表示n值时需要的最小硬币个数
+        // max表示非法值，不可能由amount +1个组成，假设都是1组成，最多也是amount个
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            // 获取dp[i]的最小硬币个数
+
+            int min = max;
+            for (int coin : coins) {
+                // dp[i] = dp[i-coin] + 1
+                // 有效
+                if (i - coin >= 0) {
+                    min = Math.min(min, dp[i - coin] + 1);
+                }
+            }
+
+            dp[i] = min;
+        }
+
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
     public static void main(String[] args) {
         CoinChange coinChange = new CoinChange();
-//        int[] coins = new int[]{1, 2, 5};
-//        int amount = 11;
+        int[] coins = new int[]{1, 2, 5};
+        int amount = 11;
 
-        int[] coins = new int[]{2};
-        int amount = 3;
+//        int[] coins = new int[]{2};
+//        int amount = 3;
         int rs = coinChange.coinChange(coins, amount);
         System.out.println(rs);
     }
