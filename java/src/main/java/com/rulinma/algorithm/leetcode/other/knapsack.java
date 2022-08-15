@@ -13,7 +13,7 @@ public class knapsack {
         testweightbagproblem(weight, value, bagSize);
     }
 
-//    再回顾一下dp[i][j]的含义：从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。
+    //    再回顾一下dp[i][j]的含义：从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。
 //
 //    那么可以有两个方向推出来dp[i][j]，
 //
@@ -25,10 +25,17 @@ public class knapsack {
         int wlen = weight.length;
         // 定义dp数组：dp[i][j]表示背包容量为j时，前i个物品能获得的最大价值
         int[][] dp = new int[wlen + 1][bagSize + 1];
+
         // 初始化：背包容量为0时，能获得的价值都为0
         for (int i = 0; i <= wlen; i++) {
             dp[i][0] = 0;
         }
+
+        // 初始化：选择物品0时，
+//        for (int j = weight[0]; j <= bagSize; j++) {
+//            dp[0][j] = value[0];
+//        }
+
         // 遍历顺序：先遍历物品，再遍历背包容量
         for (int i = 1; i <= wlen; i++) {
             for (int j = 1; j <= bagSize; j++) {
@@ -36,6 +43,7 @@ public class knapsack {
                     // 背包容量小于物品i的重量
                     dp[i][j] = dp[i - 1][j];
                 } else {
+                    // 第i件物品，对应的下标是i-1，比如第1件物品，则对应下标为0
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1]);
                 }
             }
