@@ -43,7 +43,7 @@ public class knapsack {
                     // 背包容量小于物品i的重量
                     dp[i][j] = dp[i - 1][j];
                 } else {
-                    // 第i件物品，对应的下标是i-1，比如第1件物品，则对应下标为0
+                    //
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
                 }
             }
