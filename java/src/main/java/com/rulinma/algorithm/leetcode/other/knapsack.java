@@ -7,8 +7,8 @@ package com.rulinma.algorithm.leetcode.other;
 public class knapsack {
 
     public static void main(String[] args) {
-        int[] weight = {1, 3, 4};
-        int[] value = {15, 20, 30};
+        int[] weight = {0, 1, 3, 4};
+        int[] value = {0, 15, 20, 30};
         int bagSize = 4;
         testweightbagproblem(weight, value, bagSize);
     }
@@ -24,12 +24,12 @@ public class knapsack {
     public static void testweightbagproblem(int[] weight, int[] value, int bagSize) {
         int wlen = weight.length;
         // 定义dp数组：dp[i][j]表示背包容量为j时，前i个物品能获得的最大价值
-        int[][] dp = new int[wlen + 1][bagSize + 1];
+        int[][] dp = new int[wlen][bagSize + 1];
 
         // 初始化：背包容量为0时，能获得的价值都为0
-        for (int i = 0; i <= wlen; i++) {
-            dp[i][0] = 0;
-        }
+//        for (int i = 0; i <= wlen; i++) {
+//            dp[i][0] = 0;
+//        }
 
         // 初始化：选择物品0时，
 //        for (int j = weight[0]; j <= bagSize; j++) {
@@ -37,19 +37,19 @@ public class knapsack {
 //        }
 
         // 遍历顺序：先遍历物品，再遍历背包容量
-        for (int i = 1; i <= wlen; i++) {
+        for (int i = 1; i < wlen; i++) {
             for (int j = 1; j <= bagSize; j++) {
-                if (j < weight[i - 1]) {
+                if (j < weight[i]) {
                     // 背包容量小于物品i的重量
                     dp[i][j] = dp[i - 1][j];
                 } else {
                     // 第i件物品，对应的下标是i-1，比如第1件物品，则对应下标为0
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1]);
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
                 }
             }
         }
         // 打印dp数组
-        for (int i = 0; i <= wlen; i++) {
+        for (int i = 0; i < wlen; i++) {
             for (int j = 0; j <= bagSize; j++) {
                 System.out.print(dp[i][j] + " ");
             }
