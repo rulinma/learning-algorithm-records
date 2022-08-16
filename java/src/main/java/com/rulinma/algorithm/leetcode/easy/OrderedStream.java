@@ -89,6 +89,6 @@ public class OrderedStream {
         os.insert(5, "eeeee");
         // 插入 (4, "ddddd")，返回 ["ddddd", "eeeee"]
         os.insert(4, "ddddd");
-
-
     }
+
+}
