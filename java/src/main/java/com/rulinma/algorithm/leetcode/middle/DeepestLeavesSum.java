@@ -2,8 +2,7 @@ package com.rulinma.algorithm.leetcode.middle;
 
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 1302. 层数最深叶子节点的和
@@ -40,8 +39,8 @@ public class DeepestLeavesSum {
         int rs = 0;
 
         // 遍历到最后一层，统计值
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
         while (!queue.isEmpty()) {
             // 统计每一层的和
             rs = 0;
@@ -61,6 +60,7 @@ public class DeepestLeavesSum {
 
         return rs;
     }
+
 
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(1);
