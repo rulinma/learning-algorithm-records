@@ -34,8 +34,31 @@ import java.util.*;
  * @Data 2022/8/17 09:26
  */
 public class DeepestLeavesSum {
+    int sum = 0;
+    int maxLevel = -1;
 
     public int deepestLeavesSum(TreeNode root) {
+        dfs(root, 0);
+        return sum;
+    }
+
+    private void dfs(TreeNode node, int level) {
+        if (node == null) {
+            return;
+        }
+
+        if (level > maxLevel) {
+            maxLevel = level;
+            sum = node.val;
+        } else if (level == maxLevel) {
+            sum += node.val;
+        }
+
+        dfs(node.left, level + 1);
+        dfs(node.right, level + 1);
+    }
+
+    public int deepestLeavesSum1(TreeNode root) {
         int rs = 0;
 
         // 遍历到最后一层，统计值
