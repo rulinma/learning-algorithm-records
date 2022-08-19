@@ -8,7 +8,7 @@ public class Indent {
 
     public static void printIndent(int n) {
         for (int i = 0; i < n; i++) {
-            System.out.println(("   ");
+            System.out.println("   ");
         }
     }
 
