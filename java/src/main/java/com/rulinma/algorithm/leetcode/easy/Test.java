@@ -441,6 +441,7 @@ public class Test {
         return count;
     }
 
+    Map<String, Character> kv = new HashMap<>();
 
     public String shiftingLetters(String s, int[][] shifts) {
         // 统计每个位置的移动次数，最后每个位置进行替换即可
@@ -465,7 +466,8 @@ public class Test {
         chars = s.toCharArray();
         for (int i = 0; i < len; i++) {
             if (changePos[i] != 0) {
-                char replaced = replace(chars[i], changePos[i]%26);
+                // 同样的参数可以直接获取记录
+                char replaced = replace(chars[i], changePos[i] % 26);
                 chars[i] = replaced;
             }
         }
@@ -475,12 +477,21 @@ public class Test {
 
 
     private char replace(char ch, int pos) {
+        String key = ch + "_" + pos;
+        if (kv.get(key) != null) {
+            return kv.get(key);
+        }
+        char rs = ' ';
         int zIndex = (int) 'z';
         if (pos < 0) {
-            return (char) (ch + 26 + pos > zIndex ? ch + pos : ch + 26 + pos);
+            rs = (char) (ch + 26 + pos > zIndex ? ch + pos : ch + 26 + pos);
+        } else {
+            rs = (char) (ch + pos > zIndex ? ch + pos - 26 : ch + pos);
         }
 
-        return (char) (ch + pos > zIndex ? ch + pos - 26 : ch + pos);
+        kv.put(key, rs);
+
+        return rs;
     }
 
     public static void main(String[] args) {
@@ -492,31 +503,41 @@ public class Test {
 //        int rs = test.secondsToRemoveOccurrences(s);
 //        System.out.println(rs);
 
-        int[][] shifts = new int[][]{
-                {0, 0, 0},
-                {1, 1, 1}
-        };
-        String s = "dztz";
-        // catz
-        String rs = test.shiftingLetters(s, shifts);
-        System.out.println(rs);
+//        int[][] shifts = new int[][]{
+//                {0, 0, 0},
+//                {1, 1, 1}
+//        };
+//        String s = "dztz";
+//        // catz
+//        String rs = test.shiftingLetters(s, shifts);
+//        System.out.println(rs);
+//
+//        int[][] shifts2 = new int[][]{
+//                {0, 1, 0},
+//                {1, 2, 1},
+//                {0, 2, 1}
+//        };
+//        String s2 = "abc";
+//        // ace
+//        String rs2 = test.shiftingLetters(s2, shifts2);
+//        System.out.println(rs2);
+//
 
-        int[][] shifts2 = new int[][]{
-                {0, 1, 0},
-                {1, 2, 1},
-                {0, 2, 1}
+        int[][] shifts3 = new int[][]{
+                {4, 8, 0}, {4, 4, 0}, {2, 4, 0}, {2, 4, 0},
+                {6, 7, 1}, {2, 2, 1}, {0, 2, 1}, {8, 8, 0},
+                {1, 3, 1}
         };
-        String s2 = "abc";
-        // ace
-        String rs2 = test.shiftingLetters(s2, shifts2);
-        System.out.println(rs2);
-
+        String s3 = "xuwdbdqik";
+        // "ywxcxcqii"
+        String rs3 = test.shiftingLetters(s3, shifts3);
+        System.out.println(rs3);
 
 
         int pos = 2;
         int i = 'b' - 'a' + pos;
 //        char ch = (char) ('a' + i);
-        char ch = test.replace('z', 36);
+        char ch = test.replace('z', -27 % 26);
         // 加入是负数，就是26-x
         System.out.println(ch);
     }
