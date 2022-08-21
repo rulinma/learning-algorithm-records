@@ -430,10 +430,25 @@ public class Test {
         return min;
     }
 
+    public int secondsToRemoveOccurrences(String s) {
+        int count = 0;
+
+        while (s.contains("01")) {
+            s = s.replaceAll("01", "10");
+            count++;
+        }
+
+        return count;
+    }
+
 
     public static void main(String[] args) {
         Test test = new Test();
-        int rs = test.minimumRecolors("WBWBBBW", 2);
+//        int rs = test.minimumRecolors("WBWBBBW", 2);
+//        System.out.println(rs);
+
+        String s = "0110101";
+        int rs = test.secondsToRemoveOccurrences(s);
         System.out.println(rs);
     }
 
