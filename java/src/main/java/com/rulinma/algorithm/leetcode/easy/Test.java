@@ -298,10 +298,6 @@ public class Test {
         return memo[amount] == Integer.MAX_VALUE ? -1 : memo[amount];
     }
 
-    public static void main(String[] args) {
-
-
-    }
 
     private static void arrTest() {
         //        String s = "011101";
@@ -402,6 +398,43 @@ public class Test {
             }
         }
 
+    }
+
+    public int minimumRecolors(String blocks, int k) {
+        // K区间范围的个数-B的个数就是就是需要翻转的个数，取最小值
+        int min = k;
+
+        char[] chars = blocks.toCharArray();
+
+        int blackCount = 0;
+        int left = 0;
+
+        for (int i = 0; i < chars.length; i++) {
+            // k个区间取值
+
+            if (chars[i] == 'B') {
+                blackCount++;
+            }
+
+            // K个长度了，进行判定
+            if (i - left == k - 1) {
+                min = Math.min(k - blackCount, min);
+                // 左指针移动
+                if (chars[left] == 'B') {
+                    blackCount--;
+                }
+                left++;
+            }
+        }
+
+        return min;
+    }
+
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        int rs = test.minimumRecolors("WBWBBBW", 2);
+        System.out.println(rs);
     }
 
 }

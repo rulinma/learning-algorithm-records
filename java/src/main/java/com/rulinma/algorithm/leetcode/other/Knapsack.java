@@ -4,7 +4,7 @@ package com.rulinma.algorithm.leetcode.other;
  * @author 马如林
  * @Data 2022/8/14 20:12
  */
-public class knapsack {
+public class Knapsack {
 
     public static void main(String[] args) {
         int[] weight = {0, 1, 3, 4};
