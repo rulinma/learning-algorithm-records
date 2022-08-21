@@ -442,14 +442,83 @@ public class Test {
     }
 
 
+    public String shiftingLetters(String s, int[][] shifts) {
+        // 统计每个位置的移动次数，最后每个位置进行替换即可
+        int len = s.length();
+        char[] chars = new char[len];
+        int[] changePos = new int[len];
+
+        for (int i = 0; i < shifts.length; i++) {
+            int pos = 1;
+            if (shifts[i][2] == 0) {
+                // 向前移位置
+                pos = -1;
+            }
+
+            for (int m = shifts[i][0]; m <= shifts[i][1]; m++) {
+                // 有移动
+                // 移动最终数
+                changePos[m] += pos;
+            }
+        }
+
+        chars = s.toCharArray();
+        for (int i = 0; i < len; i++) {
+            if (changePos[i] != 0) {
+                char replaced = replace(chars[i], changePos[i]%26);
+                chars[i] = replaced;
+            }
+        }
+
+        return String.valueOf(chars);
+    }
+
+
+    private char replace(char ch, int pos) {
+        int zIndex = (int) 'z';
+        if (pos < 0) {
+            return (char) (ch + 26 + pos > zIndex ? ch + pos : ch + 26 + pos);
+        }
+
+        return (char) (ch + pos > zIndex ? ch + pos - 26 : ch + pos);
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
 //        System.out.println(rs);
 
-        String s = "0110101";
-        int rs = test.secondsToRemoveOccurrences(s);
+//        String s = "0110101";
+//        int rs = test.secondsToRemoveOccurrences(s);
+//        System.out.println(rs);
+
+        int[][] shifts = new int[][]{
+                {0, 0, 0},
+                {1, 1, 1}
+        };
+        String s = "dztz";
+        // catz
+        String rs = test.shiftingLetters(s, shifts);
         System.out.println(rs);
+
+        int[][] shifts2 = new int[][]{
+                {0, 1, 0},
+                {1, 2, 1},
+                {0, 2, 1}
+        };
+        String s2 = "abc";
+        // ace
+        String rs2 = test.shiftingLetters(s2, shifts2);
+        System.out.println(rs2);
+
+
+
+        int pos = 2;
+        int i = 'b' - 'a' + pos;
+//        char ch = (char) ('a' + i);
+        char ch = test.replace('z', 36);
+        // 加入是负数，就是26-x
+        System.out.println(ch);
     }
 
 }
