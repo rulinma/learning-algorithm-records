@@ -443,7 +443,7 @@ public class Test {
 
     Map<String, Character> kv = new HashMap<>();
 
-    public String shiftingLetters(String s, int[][] shifts) {
+    public String shiftingLetters1(String s, int[][] shifts) {
         // 统计每个位置的移动次数，最后每个位置进行替换即可
         int len = s.length();
         char[] chars = new char[len];
@@ -494,6 +494,50 @@ public class Test {
         return rs;
     }
 
+    public String shiftingLetters(String s, int[][] shifts) {
+        char[] chars = s.toCharArray();
+        int[] cs = new int[chars.length];
+        // 原始字符串的每个字符的ascii码
+        for (int i = 0; i < chars.length; i++) {
+            cs[i] = chars[i] - 'a';
+        }
+
+        // 建立差分数组
+        int[] difference = new int[cs.length];
+        difference[0] = cs[0];
+        for (int i = 1; i < cs.length; i++) {
+            difference[i] = cs[i] - cs[i - 1];
+        }
+
+        // 差分数组上区间操作
+        for (int[] shift : shifts) {
+            int start = shift[0], end = shift[1];
+            int direction = shift[2];
+            direction = (direction == 1) ? 1 : -1;
+            difference[start] += direction;
+            if (end + 1 < difference.length) {
+                difference[end + 1] -= direction;
+            }
+        }
+
+        // 差分数组反推出原数组
+        int[] result = new int[cs.length];
+        result[0] = (difference[0]) % 26;
+        for (int i = 1; i < difference.length; i++) {
+            result[i] = (result[i - 1] + difference[i]) % 26;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int j : result) {
+            // 有可能是负数(范围在[-25,0] )，所以要加上26
+            if (j < 0) j = 26 + j;
+            j = j % 26;
+            sb.append((char) (j + 'a'));
+        }
+        return sb.toString();
+    }
+
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -503,25 +547,25 @@ public class Test {
 //        int rs = test.secondsToRemoveOccurrences(s);
 //        System.out.println(rs);
 
-//        int[][] shifts = new int[][]{
-//                {0, 0, 0},
-//                {1, 1, 1}
-//        };
-//        String s = "dztz";
-//        // catz
-//        String rs = test.shiftingLetters(s, shifts);
-//        System.out.println(rs);
-//
-//        int[][] shifts2 = new int[][]{
-//                {0, 1, 0},
-//                {1, 2, 1},
-//                {0, 2, 1}
-//        };
-//        String s2 = "abc";
-//        // ace
-//        String rs2 = test.shiftingLetters(s2, shifts2);
-//        System.out.println(rs2);
-//
+        int[][] shifts = new int[][]{
+                {0, 0, 0},
+                {1, 1, 1}
+        };
+        String s = "dztz";
+        // catz
+        String rs = test.shiftingLetters(s, shifts);
+        System.out.println(rs);
+
+        int[][] shifts2 = new int[][]{
+                {0, 1, 0},
+                {1, 2, 1},
+                {0, 2, 1}
+        };
+        String s2 = "abc";
+        // ace
+        String rs2 = test.shiftingLetters(s2, shifts2);
+        System.out.println(rs2);
+
 
         int[][] shifts3 = new int[][]{
                 {4, 8, 0}, {4, 4, 0}, {2, 4, 0}, {2, 4, 0},
