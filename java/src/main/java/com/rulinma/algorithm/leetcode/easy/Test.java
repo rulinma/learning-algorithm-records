@@ -530,13 +530,108 @@ public class Test {
         StringBuilder sb = new StringBuilder();
         for (int j : result) {
             // 有可能是负数(范围在[-25,0] )，所以要加上26
-            if (j < 0) j = 26 + j;
+            if (j < 0) {
+                j = 26 + j;
+            }
             j = j % 26;
             sb.append((char) (j + 'a'));
         }
         return sb.toString();
     }
 
+    public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience) {
+        // 精力是所有精力的累加，不够则添加训练时间
+        int sum = 0;
+        // 精力是所有精力的累加，不够则添加训练时间
+        int sumEnergy = 0;
+        for (int e : energy) {
+            sumEnergy += e;
+        }
+        if (sumEnergy >= initialEnergy) {
+            sum = sumEnergy - initialEnergy + 1;
+        }
+        System.out.println(sum);
+
+        // 遍历进行处理
+        int current = initialExperience;
+        int sumExperience = 0;
+        for (int i = 0; i < experience.length; i++) {
+            if (current <= experience[i]) {
+                int addExp = experience[i] - current + 1;
+                current += addExp;
+                sumExperience += addExp;
+            }
+            current += experience[i];
+        }
+
+        sum += sumExperience;
+
+        return sum;
+    }
+
+    public String largestPalindromic(String num) {
+        StringBuilder sb = new StringBuilder();
+        // 统计字符串每个ch的出现次数
+        // 9-0 统计个数
+        // 从9->0开始放字符串，偶数刚好添加一半，奇数则保存为中间值，继续添加后面的值
+        int max = -1;
+        char[] chars = num.toCharArray();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (char ch : chars) {
+            int count = map.getOrDefault(Integer.parseInt(String.valueOf(ch)), 0);
+            map.put(Integer.parseInt(String.valueOf(ch)), count + 1);
+        }
+
+        for (int i = 9; i >= 0; i--) {
+            int c = map.getOrDefault(i, 0);
+            if (c == 0) {
+                continue;
+            }
+
+            // 偶数
+            if (c % 2 == 0) {
+            } else {
+                // 奇数
+                if (max == -1) {
+                    max = i;
+                }
+            }
+            int rc = c / 2;
+            for (int j = 0; j < rc; j++) {
+                sb.append(i);
+            }
+        }
+
+        // 最后处理
+        String t = sb.toString();
+        StringBuilder rt = new StringBuilder(t).reverse();
+        if (max != -1) {
+            sb.append(max);
+        }
+
+        sb.append(rt);
+
+        // 检查是否前导0的情况，如果是则去掉前面的所有0
+        String result = sb.toString();
+        int zeros = 0;
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == '0') {
+                zeros++;
+            } else {
+                break;
+            }
+        }
+
+        if (zeros == result.length()) {
+            return "0";
+        }
+
+        if (zeros > 0) {
+            return result.substring(zeros, result.length() - zeros);
+        }
+
+        return result;
+    }
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -546,44 +641,63 @@ public class Test {
 //        String s = "0110101";
 //        int rs = test.secondsToRemoveOccurrences(s);
 //        System.out.println(rs);
+//
+//        int[][] shifts = new int[][]{
+//                {0, 0, 0},
+//                {1, 1, 1}
+//        };
+//        String s = "dztz";
+//        // catz
+//        String rs = test.shiftingLetters(s, shifts);
+//        System.out.println(rs);
+//
+//        int[][] shifts2 = new int[][]{
+//                {0, 1, 0},
+//                {1, 2, 1},
+//                {0, 2, 1}
+//        };
+//        String s2 = "abc";
+//        // ace
+//        String rs2 = test.shiftingLetters(s2, shifts2);
+//        System.out.println(rs2);
+//
+//
+//        int[][] shifts3 = new int[][]{
+//                {4, 8, 0}, {4, 4, 0}, {2, 4, 0}, {2, 4, 0},
+//                {6, 7, 1}, {2, 2, 1}, {0, 2, 1}, {8, 8, 0},
+//                {1, 3, 1}
+//        };
+//        String s3 = "xuwdbdqik";
+//        // "ywxcxcqii"
+//        String rs3 = test.shiftingLetters(s3, shifts3);
+//        System.out.println(rs3);
+//
+//
+//        int pos = 2;
+//        int i = 'b' - 'a' + pos;
+////        char ch = (char) ('a' + i);
+//        char ch = test.replace('z', -27 % 26);
+//        // 加入是负数，就是26-x
+//        System.out.println(ch);
 
-        int[][] shifts = new int[][]{
-                {0, 0, 0},
-                {1, 1, 1}
-        };
-        String s = "dztz";
-        // catz
-        String rs = test.shiftingLetters(s, shifts);
-        System.out.println(rs);
+//        int initialEnergy = 1;
+//        int initialExperience = 1;
+//        int[] energy = new int[]{1, 1, 1, 1};
+//        int[] experience = new int[]{1, 1, 1, 50};
 
-        int[][] shifts2 = new int[][]{
-                {0, 1, 0},
-                {1, 2, 1},
-                {0, 2, 1}
-        };
-        String s2 = "abc";
-        // ace
-        String rs2 = test.shiftingLetters(s2, shifts2);
-        System.out.println(rs2);
-
-
-        int[][] shifts3 = new int[][]{
-                {4, 8, 0}, {4, 4, 0}, {2, 4, 0}, {2, 4, 0},
-                {6, 7, 1}, {2, 2, 1}, {0, 2, 1}, {8, 8, 0},
-                {1, 3, 1}
-        };
-        String s3 = "xuwdbdqik";
-        // "ywxcxcqii"
-        String rs3 = test.shiftingLetters(s3, shifts3);
-        System.out.println(rs3);
-
-
-        int pos = 2;
-        int i = 'b' - 'a' + pos;
-//        char ch = (char) ('a' + i);
-        char ch = test.replace('z', -27 % 26);
-        // 加入是负数，就是26-x
-        System.out.println(ch);
+//        int initialEnergy = 43;
+//        int initialExperience = 76;
+//        int[] energy = new int[]{11, 65, 22};
+//        int[] experience = new int[]{85, 29, 22};
+//
+//        int rs = test.minNumberOfHours(initialEnergy, initialExperience, energy, experience);
+//        System.out.println(rs);
+        System.out.println(test.largestPalindromic("444947137"));
+        System.out.println(test.largestPalindromic("00009"));
+        System.out.println(test.largestPalindromic("000099"));
+        System.out.println(test.largestPalindromic("0000991"));
+        System.out.println(test.largestPalindromic("00000"));
     }
+
 
 }
