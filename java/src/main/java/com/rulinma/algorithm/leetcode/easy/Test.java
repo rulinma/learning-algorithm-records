@@ -633,6 +633,91 @@ public class Test {
         return result;
     }
 
+
+    public int amountOfTime(TreeNode root, int start) {
+
+        Map<TreeNode, TreeNode> parentMap = new HashMap<>();
+
+        int c = -1;
+        // 算法：BFS
+        // 1. visitedSet记录所有已经访问的节点
+        // 2. 从节点开始获取对应的parent和child，并进行扩散，需要记录节点的父节点map
+        // 3. 每次迭代，队列里所有节点的父和子节点，直到队列为空
+        Set<Integer> visitedSet = new HashSet<>();
+
+        // 设置每个node的父节点
+        traverTree(root, parentMap);
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        // 获取开始节点
+        TreeNode startNode = traver(root, start);
+        queue.add(startNode);
+        while (!queue.isEmpty()) {
+            System.out.println(queue.size());
+            c++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                visitedSet.add(node.val);
+                // get parent
+                TreeNode p = parentMap.get(node);
+                if (p != null && !visitedSet.contains(p.val)) {
+                    queue.add(p);
+                }
+
+                // get child
+                if (node.left != null) {
+                    if (!visitedSet.contains(node.left.val)) {
+                        queue.add(node.left);
+                    }
+                }
+
+                if (node.right != null) {
+                    if (!visitedSet.contains(node.right.val)) {
+                        queue.add(node.right);
+
+                    }
+                }
+
+            }
+        }
+
+        return c;
+    }
+
+    private TreeNode traver(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == val) {
+            return root;
+        }
+
+        TreeNode left = traver(root.left, val);
+        if (left == null) {
+            TreeNode right = traver(root.right, val);
+            return right;
+        }
+
+        return left;
+    }
+
+
+    private void traverTree(TreeNode root, Map<TreeNode, TreeNode> parentMap) {
+        // dfs
+        if (root == null) {
+            return;
+        }
+        if (root.left != null) {
+            parentMap.put(root.left, root);
+        }
+        if (root.right != null) {
+            parentMap.put(root.right, root);
+        }
+        traverTree(root.left, parentMap);
+        traverTree(root.right, parentMap);
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -692,11 +777,31 @@ public class Test {
 //
 //        int rs = test.minNumberOfHours(initialEnergy, initialExperience, energy, experience);
 //        System.out.println(rs);
-        System.out.println(test.largestPalindromic("444947137"));
-        System.out.println(test.largestPalindromic("00009"));
-        System.out.println(test.largestPalindromic("000099"));
-        System.out.println(test.largestPalindromic("0000991"));
-        System.out.println(test.largestPalindromic("00000"));
+//        System.out.println(test.largestPalindromic("444947137"));
+//        System.out.println(test.largestPalindromic("00009"));
+//        System.out.println(test.largestPalindromic("000099"));
+//        System.out.println(test.largestPalindromic("0000991"));
+//        System.out.println(test.largestPalindromic("00000"));
+        TreeNode root = new TreeNode(1);
+        TreeNode root2 = new TreeNode(2);
+        TreeNode root3 = new TreeNode(3);
+        TreeNode root4 = new TreeNode(4);
+        TreeNode root5 = new TreeNode(5);
+        TreeNode root6 = new TreeNode(6);
+        TreeNode root9 = new TreeNode(9);
+        TreeNode root10 = new TreeNode(10);
+        root.left = root5;
+        root.right = root3;
+
+        root5.right = root4;
+        root4.left = root9;
+        root4.right = root2;
+
+        root3.left = root10;
+        root3.right = root6;
+
+
+        System.out.println(test.amountOfTime(root, 3));
     }
 
 
