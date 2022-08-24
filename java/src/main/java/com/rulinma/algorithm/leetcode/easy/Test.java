@@ -753,6 +753,54 @@ public class Test {
         return count;
     }
 
+    public int reachableNodes(int n, int[][] edges, int[] restricted) {
+        int count = 0;
+        // 访问0节点
+        // 访问非受限的0节点对应的节点，并添加新节点
+        // 继续循环上个步骤，直到节点为空
+        Set<Integer> visited = new HashSet<>();
+
+        Set<Integer> filter = new HashSet<>();
+        for (int x : restricted) {
+            filter.add(x);
+        }
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            int v1 = edges[i][0];
+            int v2 = edges[i][1];
+            List list = map.getOrDefault(v1, new ArrayList<>());
+            list.add(v2);
+            map.put(v1, list);
+
+            // 反向
+            List list1 = map.getOrDefault(v2, new ArrayList<>());
+            list1.add(v1);
+            map.put(v2, list1);
+        }
+
+        // bfs
+        Deque<Integer> queue = new LinkedList<>();
+        queue.add(0);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            count += size;
+            for (int i = 0; i < size; i++) {
+                int node = queue.poll();
+                visited.add(node);
+                // 获取node的相邻节点，
+                List<Integer> list = map.getOrDefault(node, new ArrayList<>());
+                for (Integer t : list) {
+                    if (!filter.contains(t) && !visited.contains(t)) {
+                        queue.add(t);
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -840,6 +888,12 @@ public class Test {
 //
 //        System.out.println(test.amountOfTime(root, 3));
 
+        int n = 7;
+        int[][] edges = new int[][]{
+                {0, 1}, {0, 2}, {0, 5}, {0, 4}, {3, 2}, {6, 5}
+        };
+        int[] restricted = new int[]{4, 2, 1};
+        System.out.println(test.reachableNodes(n, edges, restricted));
 
     }
 
