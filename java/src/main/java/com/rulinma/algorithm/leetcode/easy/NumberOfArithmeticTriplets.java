@@ -1,5 +1,8 @@
 package com.rulinma.algorithm.leetcode.easy;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 6136. 算术三元组的数目
  * <p>
@@ -43,6 +46,27 @@ package com.rulinma.algorithm.leetcode.easy;
 public class NumberOfArithmeticTriplets {
 
     public int arithmeticTriplets(int[] nums, int diff) {
+
+        int count = 0;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
+
+        // 检查条件
+        for (int i = 0; i < nums.length; i++) {
+            int v = nums[i];
+            if (set.contains(v + diff)) {
+                if (set.contains(v + diff + diff)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public int arithmeticTriplets1(int[] nums, int diff) {
         int count = 0;
         for (int i = 0; i < nums.length - 2; i++) {
             for (int j = 1; j < nums.length - 1; j++) {
