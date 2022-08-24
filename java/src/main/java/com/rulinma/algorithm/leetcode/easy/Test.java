@@ -858,6 +858,60 @@ public class Test {
         }
     }
 
+    public boolean validPartition(int[] nums) {
+        // 算法：
+        //        n个数的2, 3组合个数
+        //
+        //        dfs(n) 存储
+        //        dfs(0) dfs(1) dfs(2) -> dfs(3) -> dfs(n)
+        //        dfs(n): 2 && dfs(n-2) || 3-1 dfs(n-3) || 3-2 dfs(n-3)
+        //        dfs(4) = 2 && dfs(4-2)
+        //        dfs(5) = 2 && dfs(5-2) || 3-1 dfs(5-3) || 3-2 dfs(5-3)
+
+        boolean[] dp = new boolean[nums.length];
+        dp[0] = false;
+        if (nums[1] == nums[0]) {
+            dp[1] = true;
+        }
+        if (nums.length >= 3) {
+            if (nums[0] == nums[1] - 1 && nums[1] == nums[2] - 1) {
+                dp[2] = true;
+            } else if (nums[0] == nums[1] && nums[1] == nums[2]) {
+                dp[2] = true;
+            }
+
+            // 后续递进
+            for (int i = 3; i < nums.length; i++) {
+                //
+                // 2 && dfs(i-2) || 3-1 && dfs(i-3) && 3-2 && dfs(i-3)
+                dp[i] = false;
+
+                if (dp[i - 2] && nums[i] == nums[i - 1]) {
+                    dp[i] = true;
+                    if (dp[i] == true) {
+                        continue;
+                    }
+                }
+
+                if (dp[i - 3] && nums[i] == nums[i - 1] + 1 && nums[i - 1] == nums[i - 2] + 1) {
+                    dp[i] = true;
+                    if (dp[i] == true) {
+                        continue;
+                    }
+                }
+
+                if (dp[i - 3] && nums[i] == nums[i - 1] && nums[i - 1] == nums[i - 2]) {
+                    dp[i] = true;
+                    if (dp[i] == true) {
+                        continue;
+                    }
+                }
+
+            }
+        }
+
+        return dp[nums.length - 1];
+    }
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -945,14 +999,21 @@ public class Test {
 //
 //
 //        System.out.println(test.amountOfTime(root, 3));
+//        int n = 7;
+//        int[][] edges = new int[][]{
+//                {0, 1}, {0, 2}, {0, 5}, {0, 4}, {3, 2}, {6, 5}
+//        };
+//        int[] restricted = new int[]{4, 2, 1};
+//        System.out.println(test.reachableNodes(n, edges, restricted));
 
-        int n = 7;
-        int[][] edges = new int[][]{
-                {0, 1}, {0, 2}, {0, 5}, {0, 4}, {3, 2}, {6, 5}
-        };
-        int[] restricted = new int[]{4, 2, 1};
-        System.out.println(test.reachableNodes(n, edges, restricted));
+        int[] nums = new int[]{4, 4, 4, 5, 6};
+        System.out.println(test.validPartition(nums));
+
+        int[] nums1 = new int[]{1, 1, 1, 2};
+        System.out.println(test.validPartition(nums1));
+
+        int[] nums2 = new int[]{993335, 993336, 993337, 993338, 993339, 993340, 993341};
+        System.out.println(test.validPartition(nums2));
     }
-
 
 }
