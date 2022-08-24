@@ -1,6 +1,8 @@
 package com.rulinma.algorithm.leetcode.middle;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 6138. 最长理想子序列
@@ -43,7 +45,53 @@ import java.util.Arrays;
  */
 public class LongestIdealSubsequence {
 
+    public int longestIdealString2(String s, int k) {
+        int[] dp = new int[s.length()];
+        int res = 0;
+        Arrays.fill(dp, 1);
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                // 绝对值相差不大于 k
+                if (Math.abs(s.charAt(i) - s.charAt(j)) <= k) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+
     public int longestIdealString(String s, int k) {
+        int res = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        int[] dp = new int[s.length()];
+        Arrays.fill(dp, 1);
+
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            // 第二层循环最多 26 次
+            for (int j = 0; j <= k; j++) {
+                // 比 cur 少 j 的字母
+                char t1 = (char) (cur - j);
+                // 比 cur 多 j 的字母
+                char t2 = (char) (cur + j);
+                if (map.containsKey(t1)) {
+                    dp[i] = Math.max(dp[i], map.get(t1) + 1);
+                }
+                if (map.containsKey(t2)) {
+                    dp[i] = Math.max(dp[i], map.get(t2) + 1);
+                }
+            }
+            // 更新以 cur 结尾的最长子序列的长度
+            map.put(cur, dp[i]);
+            res = Math.max(res, dp[i]);
+        }
+
+        return res;
+    }
+
+    public int longestIdealString1(String s, int k) {
         int[] f = new int[26];
         for (int i = 0; i < s.length(); i++) {
             int c = s.charAt(i) - 'a';
