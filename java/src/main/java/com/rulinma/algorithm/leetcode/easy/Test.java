@@ -913,6 +913,17 @@ public class Test {
         return dp[nums.length - 1];
     }
 
+    public int longestIdealString(String s, int k) {
+        int count = 0;
+
+        // 算法
+        // 首先考虑暴力解法，在考虑优化
+        // 1. n和n+1进行对比
+        // 2. len(n+1) = len(n) + (n+1,n)是否在k的范围内?1:0
+
+        return count;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1006,14 +1017,19 @@ public class Test {
 //        int[] restricted = new int[]{4, 2, 1};
 //        System.out.println(test.reachableNodes(n, edges, restricted));
 
-        int[] nums = new int[]{4, 4, 4, 5, 6};
-        System.out.println(test.validPartition(nums));
+//        int[] nums = new int[]{4, 4, 4, 5, 6};
+//        System.out.println(test.validPartition(nums));
+//
+//        int[] nums1 = new int[]{1, 1, 1, 2};
+//        System.out.println(test.validPartition(nums1));
+//
+//        int[] nums2 = new int[]{993335, 993336, 993337, 993338, 993339, 993340, 993341};
+//        System.out.println(test.validPartition(nums2));
 
-        int[] nums1 = new int[]{1, 1, 1, 2};
-        System.out.println(test.validPartition(nums1));
+        String s = "acfgbd";
+        int k = 2;
+        System.out.println(test.longestIdealString(s, k));
 
-        int[] nums2 = new int[]{993335, 993336, 993337, 993338, 993339, 993340, 993341};
-        System.out.println(test.validPartition(nums2));
     }
 
 }
