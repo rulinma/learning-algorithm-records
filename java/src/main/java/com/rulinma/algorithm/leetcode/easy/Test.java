@@ -718,6 +718,22 @@ public class Test {
         traverTree(root.right, parentMap);
     }
 
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+
+//        for (int i = 0; i < target.length; i++) {
+//            if (target[i] != arr[i]) {
+//                return false;
+//            }
+//        }
+
+        Arrays.equals(target, arr);
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -782,26 +798,28 @@ public class Test {
 //        System.out.println(test.largestPalindromic("000099"));
 //        System.out.println(test.largestPalindromic("0000991"));
 //        System.out.println(test.largestPalindromic("00000"));
-        TreeNode root = new TreeNode(1);
-        TreeNode root2 = new TreeNode(2);
-        TreeNode root3 = new TreeNode(3);
-        TreeNode root4 = new TreeNode(4);
-        TreeNode root5 = new TreeNode(5);
-        TreeNode root6 = new TreeNode(6);
-        TreeNode root9 = new TreeNode(9);
-        TreeNode root10 = new TreeNode(10);
-        root.left = root5;
-        root.right = root3;
 
-        root5.right = root4;
-        root4.left = root9;
-        root4.right = root2;
-
-        root3.left = root10;
-        root3.right = root6;
-
-
-        System.out.println(test.amountOfTime(root, 3));
+//
+//        TreeNode root = new TreeNode(1);
+//        TreeNode root2 = new TreeNode(2);
+//        TreeNode root3 = new TreeNode(3);
+//        TreeNode root4 = new TreeNode(4);
+//        TreeNode root5 = new TreeNode(5);
+//        TreeNode root6 = new TreeNode(6);
+//        TreeNode root9 = new TreeNode(9);
+//        TreeNode root10 = new TreeNode(10);
+//        root.left = root5;
+//        root.right = root3;
+//
+//        root5.right = root4;
+//        root4.left = root9;
+//        root4.right = root2;
+//
+//        root3.left = root10;
+//        root3.right = root6;
+//
+//
+//        System.out.println(test.amountOfTime(root, 3));
     }
 
 
