@@ -850,7 +850,7 @@ public class Test {
         count++;
         visited.add(i);
         // dfs 当前i节点的相邻有效节点
-        Set<Integer> set = map.get(i);
+        Set<Integer> set = map.getOrDefault(i, new HashSet<>());
         for (Integer t : set) {
             if (!restrictedSet.contains(t) && !visited.contains(t)) {
                 dfs(t, map, restrictedSet, visited);
