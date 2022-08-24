@@ -45,6 +45,28 @@ import java.util.Map;
  */
 public class LongestIdealSubsequence {
 
+    public int longestIdealStringOpt(String s, int k) {
+        // Map<Character, Integer> map = new HashMap<>();
+        int[] dp = new int[26];
+        int res = 0;
+        // Arrays.fill(dp, 1);
+        for (int i = 0; i < s.length(); i++) {
+            // 把字母转换成对应的数字，从 0 开始
+            int cur = s.charAt(i) - 'a';
+            for (int j = 0; j <= k; j++) {
+                int t1 = cur - j;
+                int t2 = cur + j;
+                // 在 [0, 26) 范围内
+                if (t1 >= 0 && t1 < 26) dp[cur] = Math.max(dp[cur], dp[t1]);
+                if (t2 >= 0 && t2 < 26) dp[cur] = Math.max(dp[cur], dp[t2]);
+            }
+            // 切记不能直接在 Math.max(dp[cur], dp[t1] + 1) 中更新
+            dp[cur]++;
+            res = Math.max(res, dp[cur]);
+        }
+        return res;
+    }
+
     public int longestIdealString2(String s, int k) {
         int[] dp = new int[s.length()];
         int res = 0;
