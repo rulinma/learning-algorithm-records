@@ -733,6 +733,25 @@ public class Test {
         return true;
     }
 
+    public int arithmeticTriplets(int[] nums, int diff) {
+        int count = 0;
+        Set<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
+
+        // 检查条件
+        for (int i = 0; i < nums.length; i++) {
+            int v = nums[i];
+            if (set.contains(v + diff)) {
+                if (set.contains(v + diff + diff)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -820,6 +839,8 @@ public class Test {
 //
 //
 //        System.out.println(test.amountOfTime(root, 3));
+
+
     }
 
 
