@@ -753,7 +753,7 @@ public class Test {
         return count;
     }
 
-    public int reachableNodes(int n, int[][] edges, int[] restricted) {
+    public int reachableNodes1(int n, int[][] edges, int[] restricted) {
         int count = 0;
         // 访问0节点
         // 访问非受限的0节点对应的节点，并添加新节点
@@ -800,6 +800,64 @@ public class Test {
 
         return count;
     }
+
+    int count = 0;
+
+    public int reachableNodes(int n, int[][] edges, int[] restricted) {
+        // DFS
+        // 默认0节点存在
+        Set<Integer> set = new HashSet<>();
+        // 1. 添加0节点
+        // 2. bfs 访问节点，遇到restricted节点则skip，记录顶点个数
+        // 双端队列
+        // 遍历edges，并过滤掉每个边的restricted
+        // node的下一个边，能够立刻获取
+        Set<Integer> restrictedSet = new HashSet<>();
+        for (int r : restricted) {
+            restrictedSet.add(r);
+        }
+
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int[] e : edges) {
+            // 节点的下一个节点
+            if (!restrictedSet.contains(e[1])) {
+                Set<Integer> set1 = map.get(e[0]);
+                if (set1 == null || set1.isEmpty()) {
+                    set1 = new HashSet<>();
+                }
+                set1.add(e[1]);
+                map.put(e[0], set1);
+            }
+
+            if (!restrictedSet.contains(e[0])) {
+                Set<Integer> set1 = map.get(e[1]);
+                if (set1 == null || set1.isEmpty()) {
+                    set1 = new HashSet<>();
+                }
+                set1.add(e[0]);
+                map.put(e[1], set1);
+            }
+        }
+
+        Set<Integer> visited = new HashSet<>();
+
+        dfs(0, map, restrictedSet, visited);
+
+        return count;
+    }
+
+    private void dfs(int i, Map<Integer, Set<Integer>> map, Set<Integer> restrictedSet, Set<Integer> visited) {
+        count++;
+        visited.add(i);
+        // dfs 当前i节点的相邻有效节点
+        Set<Integer> set = map.get(i);
+        for (Integer t : set) {
+            if (!restrictedSet.contains(t) && !visited.contains(t)) {
+                dfs(t, map, restrictedSet, visited);
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -894,7 +952,6 @@ public class Test {
         };
         int[] restricted = new int[]{4, 2, 1};
         System.out.println(test.reachableNodes(n, edges, restricted));
-
     }
 
 
