@@ -56,7 +56,7 @@ public class LongestIdealSubsequence {
             for (int j = 0; j <= k; j++) {
                 int t1 = cur - j;
                 int t2 = cur + j;
-                // 在 [0, 26) 范围内
+                // 在 [0, 26) 范围内\
                 if (t1 >= 0 && t1 < 26) {
                     dp[cur] = Math.max(dp[cur], dp[t1]);
                 }
