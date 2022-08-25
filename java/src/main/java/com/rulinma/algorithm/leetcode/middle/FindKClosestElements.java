@@ -46,7 +46,8 @@ public class FindKClosestElements {
         // 二次查找的x，没有找到，则寻找最接近的该值，获取位置，并从left和right进行比较添加k个数
 
         int mid = binarySearch(arr, x);
-        if (mid != -1 && arr[mid] == k) {
+        System.out.println("mid " + mid);
+        if (mid != -1 && arr[mid] == x) {
             // 找到了
             rs.add(arr[mid]);
             // 向左或向右再添加k-1个
@@ -57,7 +58,9 @@ public class FindKClosestElements {
             getData2(arr, k, x, rs, mid);
         }
 
-        int[] xa = new int[rs.size()];
+        Integer[] xa = new Integer[rs.size()];
+        rs.toArray(xa);
+
         Arrays.sort(xa);
         List<Integer> ans = new ArrayList<>();
         for (int t : xa) {
@@ -67,64 +70,75 @@ public class FindKClosestElements {
         return ans;
     }
 
-    private void getData(int[] arr, int k, int x, List<Integer> rs, int mid) {
+    private void getData(int[] arr, int c, int x, List<Integer> rs, int mid) {
         int left = mid - 1;
         int right = mid + 1;
         int count = 0;
-        while (count < k - 1) {
+        while (count < c) {
+            if (left < 0) {
+                rs.add(arr[right]);
+                right++;
+                count++;
+                continue;
+            }
+
+            if (right >= arr.length && left >= 0) {
+                rs.add(arr[left]);
+                left++;
+                count++;
+                continue;
+            }
+
             if (left >= 0 && right < arr.length
                     && ((Math.abs(arr[left] - x) < Math.abs(arr[right] - x))
                     || (Math.abs(arr[left] - x) == Math.abs(arr[right] - x)))) {
                 rs.add(arr[left]);
                 left--;
                 count++;
+                continue;
             } else {
-                rs.add(arr[right]);
-                right++;
-                count++;
+                if (right < arr.length) {
+                    rs.add(arr[right]);
+                    right++;
+                    count++;
+                }
             }
 
-            if (left < 0) {
-                rs.add(arr[right]);
-                right++;
-                count++;
-            }
-
-            if (right > arr.length) {
-                rs.add(arr[left]);
-                left++;
-                count++;
-            }
         }
     }
 
-    private void getData2(int[] arr, int k, int x, List<Integer> rs, int mid) {
+    private void getData2(int[] arr, int c, int x, List<Integer> rs, int mid) {
         int left = mid;
         int right = mid + 1;
         int count = 0;
-        while (count < k - 1) {
+        while (count < c) {
+            if (left < 0) {
+                rs.add(arr[right]);
+                right++;
+                count++;
+                continue;
+            }
+
+            if (right >= arr.length && left >= 0) {
+                rs.add(arr[left]);
+                left++;
+                count++;
+                continue;
+            }
+
             if (left >= 0 && right < arr.length
                     && ((Math.abs(arr[left] - x) < Math.abs(arr[right] - x))
                     || (Math.abs(arr[left] - x) == Math.abs(arr[right] - x)))) {
                 rs.add(arr[left]);
                 left--;
                 count++;
+                continue;
             } else {
-                rs.add(arr[right]);
-                right++;
-                count++;
-            }
-
-            if (left < 0) {
-                rs.add(arr[right]);
-                right++;
-                count++;
-            }
-
-            if (right > arr.length) {
-                rs.add(arr[left]);
-                left++;
-                count++;
+                if (right < arr.length) {
+                    rs.add(arr[right]);
+                    right++;
+                    count++;
+                }
             }
         }
     }
@@ -139,7 +153,7 @@ public class FindKClosestElements {
                 return mid;
             } else if (arr[mid] < x) {
                 low = mid + 1;
-            } else if (arr[mid] < x) {
+            } else if (arr[mid] > x) {
                 high = mid - 1;
             }
         }
