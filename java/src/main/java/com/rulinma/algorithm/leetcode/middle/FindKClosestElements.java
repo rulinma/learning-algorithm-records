@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class FindKClosestElements {
 
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+    public List<Integer> findClosestElements1(int[] arr, int k, int x) {
         List<Integer> rs = new ArrayList<>();
 
         // 二叉查找x，找到返回该值，并指针指向其位置并从left和right进行比较添加k个数
@@ -149,6 +149,32 @@ public class FindKClosestElements {
         return mid;
     }
 
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        List<Integer> list = new ArrayList<>();
+        // 去掉 n-k
+        int left = 0;
+        int right = arr.length - 1;
+
+        int c = arr.length - k;
+
+        while (c > 0) {
+            if (x - arr[left] <= arr[right] - x) {
+                // 左边小于右边
+                c--;
+                right--;
+            } else {
+                c--;
+                left++;
+            }
+        }
+
+        for (int j = left; j <= right; j++) {
+            list.add(arr[j]);
+        }
+
+        return list;
+    }
+
     public static void main(String[] args) {
         FindKClosestElements findKClosestElements = new FindKClosestElements();
 
@@ -158,16 +184,16 @@ public class FindKClosestElements {
 
 // [1, 2, 3, 4]
         System.out.println(findKClosestElements.findClosestElements(arr, k, x));
-//[1, 2, 3, 4]
+////[1, 2, 3, 4]
         System.out.println(findKClosestElements.findClosestElements(new int[]{1, 2, 3, 4, 5}, 4, -1));
-//[-2, -1, 1, 2, 3, 4, 5]
-//        // arr 中不存在x的情况
+////[-2, -1, 1, 2, 3, 4, 5]
+////        // arr 中不存在x的情况
         System.out.println(findKClosestElements.findClosestElements(new int[]{-2, -1, 1, 2, 3, 4, 5}, 7, 3));
 //[1]
         System.out.println(findKClosestElements.findClosestElements(new int[]{1, 3}, 1, 2));
 //[3, 3, 4]
         System.out.println(findKClosestElements.findClosestElements(new int[]{0, 0, 1, 2, 3, 3, 4, 7, 7, 8}, 3, 5));
-
+//[25]
         System.out.println(findKClosestElements.findClosestElements(new int[]{1, 10, 15, 25, 35, 45, 50, 59}, 1, 30));
     }
 
