@@ -66,11 +66,15 @@ public class ConstructSmallestNumberFromDiString {
                 } else {
                     // 先添加deque size大小的内容，再添加i
                     int sz = deque.size();
+                    // 添加比当前值大的数
                     while (sz > 0) {
                         sb.append(cur + sz + 1);
                         sz--;
                     }
+                    // 添加当值数
                     sb.append(cur + 1);
+
+                    // 当前值已经指向的新值
                     cur = cur + deque.size() + 1;
                     deque.clear();
                 }
