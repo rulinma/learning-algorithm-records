@@ -924,10 +924,30 @@ public class Test {
         return count;
     }
 
+    public int maxProduct(int[] nums) {
+        int max = nums[0] > nums[1] ? nums[0] : nums[1];
+        int second = nums[0] < nums[1] ? nums[0] : nums[1];
+        // 一次遍历获取最大的2个值，计算结果即可
+
+        for (int i = 2; i < nums.length; i++) {
+            // max second nums[i] 比较设置max和second
+            if (nums[i] >= max) {
+                second = max;
+                max = nums[i];
+            } else if (nums[i] > second) {
+                second = nums[i];
+            } else {
+                // 不变化
+            }
+        }
+
+        return (max - 1) * (second - 1);
+    }
+
     /**
      * 1464. 数组中两元素的最大乘积
      */
-    public int maxProduct(int[] nums) {
+    public int maxProduct1(int[] nums) {
         Arrays.sort(nums);
         int len = nums.length;
         // 最边上的2个 -1 后都是正值
@@ -938,7 +958,6 @@ public class Test {
 
         ans = Math.max(ans, right);
         return ans;
-
     }
 
     public static void main(String[] args) {
