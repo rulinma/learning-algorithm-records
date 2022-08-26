@@ -702,7 +702,6 @@ public class Test {
         return left;
     }
 
-
     private void traverTree(TreeNode root, Map<TreeNode, TreeNode> parentMap) {
         // dfs
         if (root == null) {
@@ -981,6 +980,59 @@ public class Test {
         }
 
         return count;
+    }
+
+//    public int maximumGroups(int[] grades) {
+//        int len = grades.length;
+//        int count = 0;
+//        int sum = 0;
+//        for (int i = 0; i < len && sum <= len; i++) {
+//            sum += i;
+//            count++;
+//        }
+//        return count++;
+
+
+//    }
+
+    public int maximumGroups(int[] grades) {
+
+        int ans = 0;
+        int len = grades.length;
+        int curlen = 1;
+        int sum = 0;
+        while (sum + curlen <= len) {
+            sum += curlen++;
+            ans++;
+        }
+
+        return ans;
+
+//        int n = grades.length;
+//        int i = 1;
+//        int ans = 0;
+//        while (n >= i) {
+//            ans++;
+//            n -= i;
+//            i++;
+//        }
+//        return ans;
+    }
+
+    /**
+     * 2351. 第一个出现两次的字母
+     */
+    public char repeatedCharacter(String s) {
+        int[] cnt = new int[26];
+        char[] chars = s.toCharArray();
+        for (char ch : chars) {
+            if (cnt[ch - 'a'] == 1) {
+                return ch;
+            }
+            cnt[ch - 'a']++;
+        }
+
+        return ' ';
     }
 
     public static void main(String[] args) {
