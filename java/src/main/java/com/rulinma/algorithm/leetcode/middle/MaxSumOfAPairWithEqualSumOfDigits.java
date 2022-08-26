@@ -68,7 +68,6 @@ public class MaxSumOfAPairWithEqualSumOfDigits {
             }
         }
 
-
         return max;
     }
 
