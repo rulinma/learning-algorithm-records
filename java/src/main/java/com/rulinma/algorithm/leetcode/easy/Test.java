@@ -1035,6 +1035,30 @@ public class Test {
         return ' ';
     }
 
+    /**
+     * 2341. 数组能形成多少数对
+     */
+    public int[] numberOfPairs(int[] nums) {
+        int[] ans = new int[101];
+
+        int pairs = 0;
+        int remain = 0;
+        // 统计每个num出现的次数
+        // ans遍历，非0的进行/2 和%2， /2是对数的累加 %2是剩余个数的累加
+        for (int num : nums) {
+            ans[num]++;
+        }
+
+        for (int i : ans) {
+            if (i != 0) {
+                pairs += i / 2;
+                remain += i % 2;
+            }
+        }
+
+        return new int[]{pairs, remain};
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
