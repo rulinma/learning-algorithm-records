@@ -1059,6 +1059,50 @@ public class Test {
         return new int[]{pairs, remain};
     }
 
+
+    public int maximumSum(int[] nums) {
+        int max = -1;
+        int len = nums.length;
+        Arrays.sort(nums);
+        int[] ns = new int[len];
+        int[] nsc = new int[len];
+        // 逆序
+        int j = len;
+        for (int n : nums) {
+            ns[--j] = n;
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < len; i++) {
+            // 统计数位和
+            nsc[i] = calCount(ns[i]);
+            // 相同值的只需要计算最前面2个
+            int v = map.getOrDefault(nsc[i], -1);
+            if (v != -1 && !set.contains(v)) {
+                // 第2次遇到
+                int vv = ns[v] + ns[i];
+                max = Math.max(max, vv);
+                set.add(v);
+            } else {
+                map.put(nsc[i], i);
+            }
+        }
+
+
+        return max;
+    }
+
+    public int calCount(int num) {
+        int sum = 0;
+        while (num != 0) {
+            sum += num % 10;
+            num = num / 10;
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1165,6 +1209,7 @@ public class Test {
 //        int k = 2;
 //        System.out.println(test.longestIdealString(s, k));
 
+        System.out.println(test.maximumSum(new int[]{18, 43, 36, 13, 7}));
     }
 
 }
