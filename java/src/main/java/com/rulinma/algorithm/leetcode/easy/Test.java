@@ -966,6 +966,7 @@ public class Test {
     public int minimumOperations(int[] nums) {
         // 大于0的 不同元素个数
         int[] cnt = new int[101];
+
         for (int n : nums) {
             if (n != 0) {
                 cnt[n]++;
