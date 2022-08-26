@@ -924,6 +924,23 @@ public class Test {
         return count;
     }
 
+    /**
+     * 1464. 数组中两元素的最大乘积
+     */
+    public int maxProduct(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        // 最边上的2个 -1 后都是正值
+        // 最边上的2个 -1 后都是负值
+        // 最边上的2个 -1 后都是一个正一个负
+        int ans = (nums[0] - 1) * (nums[1] - 1);
+        int right = (nums[len - 1] - 1) * (nums[len - 2] - 1);
+
+        ans = Math.max(ans, right);
+        return ans;
+
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1026,9 +1043,9 @@ public class Test {
 //        int[] nums2 = new int[]{993335, 993336, 993337, 993338, 993339, 993340, 993341};
 //        System.out.println(test.validPartition(nums2));
 
-        String s = "acfgbd";
-        int k = 2;
-        System.out.println(test.longestIdealString(s, k));
+//        String s = "acfgbd";
+//        int k = 2;
+//        System.out.println(test.longestIdealString(s, k));
 
     }
 
