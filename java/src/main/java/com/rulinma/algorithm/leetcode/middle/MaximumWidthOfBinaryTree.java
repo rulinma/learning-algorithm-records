@@ -59,51 +59,47 @@ public class MaximumWidthOfBinaryTree {
         // BFS
         // 统计每一层的宽度，这一层到末尾非null节点的长度
         Deque<TreeNode> deque = new LinkedList<>();
+        Deque<Integer> indexDeque = new LinkedList<>();
         deque.add(root);
-        while (!deque.isEmpty() && !isAllNull(deque)) {
+        indexDeque.add(0);
+        while (!deque.isEmpty()) {
             // 迭代
             List<TreeNode> list = new LinkedList<>();
+            List<Integer> indexList = new LinkedList<>();
             int sz = deque.size();
 
             int leftIndex = index;
             int rightIndex = index;
-            boolean first = true;
+
             for (int i = 0; i < sz; i++) {
                 TreeNode t = deque.poll();
-                index++;
-                if (t != null) {
+                // 当前节点对应的pos
+                Integer pos = indexDeque.poll();
+                if (t.left != null) {
                     list.add(t.left);
+                    indexDeque.add(pos * 2 + 1);
+                }
+                if (t.right != null) {
                     list.add(t.right);
-                } else {
-                    list.add(null);
-                    list.add(null);
+                    indexDeque.add(pos * 2 + 2);
                 }
 
-                // 右边界
-                if (t != null && !first) {
-                    rightIndex = index;
+                if (i == 0) {
+                    leftIndex = pos;
                 }
-
-                // 第一个非空
-                if (t != null && first) {
-                    leftIndex = index;
-                    first = false;
+                if (i == sz - 1) {
+                    rightIndex = pos;
                 }
-                if (rightIndex < leftIndex) {
-                    rightIndex = leftIndex;
-                }
-                int len = rightIndex - leftIndex + 1;
-                if (rightIndex == leftIndex) {
-                    //
-                }
-                c = Math.max(c, len);
             }
 
-            // leftIndex rightIndex
+            int len = rightIndex - leftIndex + 1;
+            System.out.println(len);
+
+            c = Math.max(c, len);
 
             deque.addAll(list);
+            indexDeque.addAll(indexList);
         }
-
         return c;
     }
 
@@ -152,18 +148,29 @@ public class MaximumWidthOfBinaryTree {
 
     public static void main(String[] args) {
         MaximumWidthOfBinaryTree maximumWidthOfBinaryTree = new MaximumWidthOfBinaryTree();
-        TreeNode root = new TreeNode(1);
-        TreeNode root3 = new TreeNode(3);
-        TreeNode root2 = new TreeNode(2);
-        TreeNode root5 = new TreeNode(5);
+//        TreeNode root = new TreeNode(1);
+//        TreeNode root3 = new TreeNode(3);
+//        TreeNode root2 = new TreeNode(2);
+//        TreeNode root5 = new TreeNode(5);
+//
+//        root.left = root3;
+//        root.right = root2;
+//        root3.left = root5;
+//
+//        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(root));
+//
+//        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(new TreeNode(1)));
+
+
+        TreeNode root = new TreeNode(0);
+        TreeNode root3 = new TreeNode(0);
+        TreeNode root2 = new TreeNode(0);
+//        TreeNode root5 = new TreeNode(0);
 
         root.left = root3;
         root.right = root2;
-        root3.left = root5;
 
-//        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(root));
-
-        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(new TreeNode(1)));
+        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(root));
     }
 
 }
