@@ -48,6 +48,9 @@ import java.util.*;
  */
 public class MaximumWidthOfBinaryTree {
 
+    /**
+     * 暴力解法
+     */
     public int widthOfBinaryTree(TreeNode root) {
         int c = 0;
 
