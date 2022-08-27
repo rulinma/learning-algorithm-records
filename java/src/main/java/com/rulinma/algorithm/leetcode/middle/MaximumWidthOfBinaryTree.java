@@ -54,22 +54,23 @@ public class MaximumWidthOfBinaryTree {
     public int widthOfBinaryTree(TreeNode root) {
         int c = 0;
 
+        int index = 0;
+
         // BFS
         // 统计每一层的宽度，这一层到末尾非null节点的长度
         Deque<TreeNode> deque = new LinkedList<>();
         deque.add(root);
-
         while (!deque.isEmpty() && !isAllNull(deque)) {
             // 迭代
             List<TreeNode> list = new LinkedList<>();
             int sz = deque.size();
 
-            //
-            int len = getLen(deque);
-            c = Math.max(c, len);
-
+            int leftIndex = index;
+            int rightIndex = index;
+            boolean first = true;
             for (int i = 0; i < sz; i++) {
                 TreeNode t = deque.poll();
+                index++;
                 if (t != null) {
                     list.add(t.left);
                     list.add(t.right);
@@ -77,7 +78,29 @@ public class MaximumWidthOfBinaryTree {
                     list.add(null);
                     list.add(null);
                 }
+
+                // 右边界
+                if (t != null && !first) {
+                    rightIndex = index;
+                }
+
+                // 第一个非空
+                if (t != null && first) {
+                    leftIndex = index;
+                    first = false;
+                }
+                if (rightIndex < leftIndex) {
+                    rightIndex = leftIndex;
+                }
+                int len = rightIndex - leftIndex + 1;
+                if (rightIndex == leftIndex) {
+                    //
+                }
+                c = Math.max(c, len);
             }
+
+            // leftIndex rightIndex
+
             deque.addAll(list);
         }
 
@@ -138,7 +161,9 @@ public class MaximumWidthOfBinaryTree {
         root.right = root2;
         root3.left = root5;
 
-        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(root));
+//        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(root));
+
+        System.out.println(maximumWidthOfBinaryTree.widthOfBinaryTree(new TreeNode(1)));
     }
 
 }
