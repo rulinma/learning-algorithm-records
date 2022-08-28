@@ -1132,6 +1132,7 @@ public class Test {
         int n = nums.length;
         int m = queries.length;
         Arrays.sort(nums);
+        // 前缀和
         for (int i = 1; i < n; i++) {
             nums[i] += nums[i - 1];
         }
