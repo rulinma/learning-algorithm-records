@@ -1059,7 +1059,6 @@ public class Test {
         return new int[]{pairs, remain};
     }
 
-
     public int maximumSum(int[] nums) {
         int max = -1;
         int len = nums.length;
@@ -1101,6 +1100,53 @@ public class Test {
             num = num / 10;
         }
         return sum;
+    }
+
+    public int fillCups(int[] amount) {
+        int c = 0;
+        // 贪心
+        // 2 or 1
+        // 每次装值最大类型的2种水，直到所有数据为0，或不够2杯，装1次即可
+        int len = amount.length;
+        Arrays.sort(amount);
+        while (amount[len - 1] != 0) {
+            //
+            if (amount[len - 1] >= 1) {
+                amount[len - 1] -= 1;
+            }
+            if (amount[len - 2] >= 1) {
+                amount[len - 2] -= 1;
+            }
+            Arrays.sort(amount);
+            c++;
+        }
+
+        return c;
+    }
+
+    /**
+     * 6160. 和有限的最长子序列
+     */
+    public int[] answerQueries(int[] nums, int[] queries) {
+        // 排序 + 前缀后
+        int n = nums.length;
+        int m = queries.length;
+        Arrays.sort(nums);
+        for (int i = 1; i < n; i++) {
+            nums[i] += nums[i - 1];
+        }
+
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (nums[j] <= queries[i]) {
+                    ans[i] = j + 1;
+                }
+            }
+        }
+
+        return ans;
+
     }
 
     public static void main(String[] args) {
@@ -1209,7 +1255,9 @@ public class Test {
 //        int k = 2;
 //        System.out.println(test.longestIdealString(s, k));
 
-        System.out.println(test.maximumSum(new int[]{18, 43, 36, 13, 7}));
+//        System.out.println(test.maximumSum(new int[]{18, 43, 36, 13, 7}));
+
+        System.out.println(test.fillCups(new int[]{1, 4, 2}));
     }
 
 }
