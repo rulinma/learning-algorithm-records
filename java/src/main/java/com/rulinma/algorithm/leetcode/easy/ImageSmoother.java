@@ -50,9 +50,33 @@ package com.rulinma.algorithm.leetcode.easy;
  */
 public class ImageSmoother {
 
+    public int[][] imageSmoother(int[][] img) {
+        int m = img.length;
+        int n = img[0].length;
+
+        int[][] ret = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int num = 0, sum = 0;
+                for (int x = i - 1; x <= i + 1; x++) {
+                    for (int y = j - 1; y <= j + 1; y++) {
+                        if (x >= 0 && x < m && y >= 0 && y < n) {
+                            num++;
+                            sum += img[x][y];
+                        }
+                    }
+                }
+                ret[i][j] = sum / num;
+            }
+        }
+
+        return ret;
+    }
+
     private int invalidCount = 0;
 
-    public int[][] imageSmoother(int[][] img) {
+    public int[][] imageSmoother1(int[][] img) {
         int row = img.length;
         int cols = img[0].length;
         int[][] ans = new int[row][cols];
