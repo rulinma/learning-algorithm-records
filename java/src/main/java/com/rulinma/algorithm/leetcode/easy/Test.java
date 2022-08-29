@@ -1297,6 +1297,37 @@ public class Test {
         return rs;
     }
 
+    /**
+     * 997. 找到小镇的法官
+     */
+    public int findJudge(int n, int[][] trust) {
+        // 检查每个人
+        // n-1个人信任 他不信任任何人
+        int c = -1;
+        // int[] n个人trusted的统计
+        // Set<Integer> 信任人的数据集合
+        // trusted[i] = n-1 && set里没有，则此人就是法官
+
+        int[] trustedCount = new int[n + 1];
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < trust.length; i++) {
+            // 被相信的人
+            trustedCount[trust[i][1]]++;
+            // 相信人的人
+            set.add(trust[i][0]);
+        }
+
+        for (int i = 1; i < trustedCount.length; i++) {
+            if ((trustedCount[i] == n - 1) && !set.contains(i)) {
+                return i;
+            }
+        }
+
+        return c;
+    }
+
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1412,6 +1443,7 @@ public class Test {
 //        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
 //        System.out.println(test.equalPairs(grid));
 
+        System.out.println(test.findJudge(2, new int[][]{{1, 2}}));
     }
 
 }
