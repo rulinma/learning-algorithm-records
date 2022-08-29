@@ -1187,6 +1187,37 @@ public class Test {
         return ans;
     }
 
+    /**
+     * 2352. 相等行列对
+     */
+    public int equalPairs(int[][] grid) {
+        // 暴力
+        int c = 0;
+        int n = grid.length;
+
+        for (int i = 0; i < n; i++) {
+            // 行数据 grid[i];
+
+            // 对比列数据
+            for (int j = 0; j < n; j++) {
+                int len = 0;
+                for (int k = 0; k < n; k++) {
+                    if (grid[k][j] != grid[i][k]) {
+                        break;
+                    }
+                    len++;
+                }
+
+                if (len == n) {
+                    // 行列相等
+                    c++;
+                }
+            }
+        }
+
+        return c;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1297,7 +1328,11 @@ public class Test {
 
 //        System.out.println(test.fillCups(new int[]{1, 4, 2}));
 
-        System.out.println(test.shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3));
+//        System.out.println(test.shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3));
+
+        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
+        System.out.println(test.equalPairs(grid));
+
     }
 
 }
