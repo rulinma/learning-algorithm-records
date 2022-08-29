@@ -1412,7 +1412,6 @@ public class Test {
 //        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
 //        System.out.println(test.equalPairs(grid));
 
-
     }
 
 }
