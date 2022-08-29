@@ -1218,6 +1218,79 @@ public class Test {
         return c;
     }
 
+    public int garbageCollection(String[] garbage, int[] travel) {
+        int c = 0;
+
+        // 1. 寻找需要走的路线时长
+        // 2. 每个里面垃圾数量
+        // 'M','P',"G'
+        // 查询有X垃圾的房子，并累加到此房子的travel[i]的值
+        int len = garbage.length;
+
+        int car = 0;
+        int lastCarM = 0;
+        int lastCarP = 0;
+        int lastCarG = 0;
+
+        for (int i = 0; i < len; i++) {
+            if (i == 0) {
+                String gs = garbage[0];
+                char[] chs = gs.toCharArray();
+                c += chs.length;
+            } else if (i > 0) {
+                // 统计当前垃圾车走的距离
+                String gs = garbage[i];
+                char[] chs = gs.toCharArray();
+                // 垃圾回收时长
+                c += chs.length;
+                // 距离时长
+                // carM的总长度 - lastCarM的距离
+                car += travel[i - 1];
+                if (gs.contains("M")) {
+                    c += (car - lastCarM);
+                    lastCarM = car;
+                }
+
+                if (gs.contains("P")) {
+                    c += (car - lastCarP);
+                    lastCarP = car;
+                }
+
+                if (gs.contains("G")) {
+                    c += (car - lastCarG);
+                    lastCarG = car;
+                }
+            }
+
+        }
+
+
+        return c;
+    }
+
+    public int countGoodTriplets(int[] arr, int a, int b, int c) {
+        int rs = 0;
+        // 0 <= i < j < k < arr.length
+        for (int i = 0; i < arr.length - 2; i++) {
+            for (int j = i + 1; j < arr.length - 1; j++) {
+                if (Math.abs(arr[i] - arr[j]) > a) {
+                    continue;
+                }
+                for (int k = j + 1; k < arr.length; k++) {
+                    if (Math.abs(arr[i] - arr[j]) <= a &&
+                            Math.abs(arr[j] - arr[k]) <= b &&
+                            Math.abs(arr[i] - arr[k]) <= c
+                    ) {
+                        rs++;
+                    }
+                }
+
+            }
+        }
+
+        return rs;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1330,8 +1403,9 @@ public class Test {
 
 //        System.out.println(test.shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3));
 
-        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
-        System.out.println(test.equalPairs(grid));
+//        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
+//        System.out.println(test.equalPairs(grid));
+
 
     }
 
