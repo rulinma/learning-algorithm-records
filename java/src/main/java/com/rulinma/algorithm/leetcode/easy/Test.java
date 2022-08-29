@@ -1150,6 +1150,43 @@ public class Test {
 
     }
 
+    public String removeStars(String s) {
+        StringBuilder sb = new StringBuilder();
+        char[] chars = s.toCharArray();
+        Deque<Character> deque = new LinkedList<>();
+
+        for (char c : chars) {
+            if (c == '*') {
+                if (deque.size() != 0) {
+                    deque.pop();
+                }
+            } else {
+                deque.push(c);
+            }
+        }
+
+        while (deque.size() > 0) {
+            sb.append(deque.poll());
+        }
+
+        return sb.reverse().toString();
+    }
+
+    /**
+     * 1470. 重新排列数组
+     */
+    public int[] shuffle(int[] nums, int n) {
+        int[] ans = new int[nums.length];
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            ans[j] = nums[i];
+            ans[j + 1] = nums[n + i];
+            j = j + 2;
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1258,7 +1295,9 @@ public class Test {
 
 //        System.out.println(test.maximumSum(new int[]{18, 43, 36, 13, 7}));
 
-        System.out.println(test.fillCups(new int[]{1, 4, 2}));
+//        System.out.println(test.fillCups(new int[]{1, 4, 2}));
+
+        System.out.println(test.shuffle(new int[]{2, 5, 1, 3, 4, 7}, 3));
     }
 
 }
