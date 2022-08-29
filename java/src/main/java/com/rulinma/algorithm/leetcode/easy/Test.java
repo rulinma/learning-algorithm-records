@@ -1218,6 +1218,9 @@ public class Test {
         return c;
     }
 
+    /**
+     * 2391. 收集垃圾的最少总时间
+     */
     public int garbageCollection(String[] garbage, int[] travel) {
         int c = 0;
 
@@ -1268,6 +1271,9 @@ public class Test {
         return c;
     }
 
+    /**
+     * 1534 统计好三元组
+     */
     public int countGoodTriplets(int[] arr, int a, int b, int c) {
         int rs = 0;
         // 0 <= i < j < k < arr.length
