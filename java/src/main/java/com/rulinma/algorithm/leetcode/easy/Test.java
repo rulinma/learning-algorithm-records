@@ -1327,6 +1327,31 @@ public class Test {
         return c;
     }
 
+    public boolean isMonotonic(int[] nums) {
+        // 1. 一，二个肯定满足
+        // 2. 2-1如果是+的则后续都要为+,否则为-
+        if (nums.length == 1 || nums.length == 2) {
+            return true;
+        }
+
+        Boolean inc = null;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (inc == null) {
+                if (nums[i] - nums[i - 1] > 0) {
+                    inc = true;
+                } else if (nums[i] - nums[i - 1] < 0) {
+                    inc = false;
+                }
+            } else if (inc && nums[i] - nums[i - 1] < 0) {
+                return false;
+            } else if (!inc && nums[i] - nums[i - 1] > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -1442,8 +1467,11 @@ public class Test {
 
 //        int[][] grid = new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}};
 //        System.out.println(test.equalPairs(grid));
+//        System.out.println(test.findJudge(2, new int[][]{{1, 2}}));
 
-        System.out.println(test.findJudge(2, new int[][]{{1, 2}}));
+        int[] nums = new int[]{1, 2, 2, 3};
+        boolean rs = test.isMonotonic(nums);
+        System.out.println(rs);
     }
 
 }
