@@ -1560,9 +1560,9 @@ public class Test {
 //        List<List<Integer>> rs1 = test.largeGroupPositions(s);
 //        System.out.println(rs1);
 
-        int[][] edges = new int[][]{{1, 16}, {16, 2}, {3, 16}, {4, 16}, {16, 5}, {16, 6}, {7, 16}, {16, 8}, {9, 16}, {10, 16}, {16, 11}, {12, 16}, {16, 13}, {16, 14}, {15, 16}, {16, 17}};
-        int rs = test.findCenter(edges);
-        System.out.println(rs);
+//        int[][] edges = new int[][]{{1, 16}, {16, 2}, {3, 16}, {4, 16}, {16, 5}, {16, 6}, {7, 16}, {16, 8}, {9, 16}, {10, 16}, {16, 11}, {12, 16}, {16, 13}, {16, 14}, {15, 16}, {16, 17}};
+//        int rs = test.findCenter(edges);
+//        System.out.println(rs);
     }
 
 }
