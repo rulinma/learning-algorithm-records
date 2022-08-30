@@ -1414,6 +1414,27 @@ public class Test {
         return ans;
     }
 
+    /**
+     * 1791. 找出星型图的中心节点
+     */
+    public int findCenter(int[][] edges) {
+        int ans = -1;
+
+        int[] arr = new int[edges.length + 2];
+
+        for (int i = 0; i < edges.length; i++) {
+            arr[edges[i][0]]++;
+            arr[edges[i][1]]++;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == edges.length) {
+                return i;
+            }
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         Test test = new Test();
@@ -1535,10 +1556,13 @@ public class Test {
 //        boolean rs = test.isMonotonic(nums);
 //        System.out.println(rs);
 
-        String s = "abcdddeeeeaabbbcd";
-        List<List<Integer>> rs1 = test.largeGroupPositions(s);
-        System.out.println(rs1);
+//        String s = "abcdddeeeeaabbbcd";
+//        List<List<Integer>> rs1 = test.largeGroupPositions(s);
+//        System.out.println(rs1);
 
+        int[][] edges = new int[][]{{1, 16}, {16, 2}, {3, 16}, {4, 16}, {16, 5}, {16, 6}, {7, 16}, {16, 8}, {9, 16}, {10, 16}, {16, 11}, {12, 16}, {16, 13}, {16, 14}, {15, 16}, {16, 17}};
+        int rs = test.findCenter(edges);
+        System.out.println(rs);
     }
 
 }
