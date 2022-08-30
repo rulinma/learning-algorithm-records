@@ -1436,6 +1436,53 @@ public class Test {
         return ans;
     }
 
+    /**
+     * 1971. 寻找图中是否存在路径
+     */
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        // bfs
+        // visited
+        // node, adjacentNode
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            List c1 = map.getOrDefault(edges[i][0], new ArrayList<>());
+            c1.add(edges[i][1]);
+            map.put(edges[i][0], c1);
+
+            List c2 = map.getOrDefault(edges[i][1], new ArrayList<>());
+            c2.add(edges[i][0]);
+            map.put(edges[i][1], c2);
+        }
+
+        // 算法
+        Set<Integer> visited = new HashSet<>();
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int v = queue.poll();
+                if (destination == v) {
+                    return true;
+                }
+                visited.add(v);
+                // 获取v的连接点，
+                List<Integer> ls = map.get(v);
+                if (ls != null) {
+                    for (Integer x : ls) {
+                        if (!visited.contains(x)) {
+                            queue.add(x);
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1563,6 +1610,12 @@ public class Test {
 //        int[][] edges = new int[][]{{1, 16}, {16, 2}, {3, 16}, {4, 16}, {16, 5}, {16, 6}, {7, 16}, {16, 8}, {9, 16}, {10, 16}, {16, 11}, {12, 16}, {16, 13}, {16, 14}, {15, 16}, {16, 17}};
 //        int rs = test.findCenter(edges);
 //        System.out.println(rs);
+
+        int[][] edges = new int[][]{
+                {0, 1}, {1, 2}, {2, 0}
+        };
+        boolean rs = test.validPath(3, edges, 0, 2);
+        System.out.println(rs);
     }
 
 }
