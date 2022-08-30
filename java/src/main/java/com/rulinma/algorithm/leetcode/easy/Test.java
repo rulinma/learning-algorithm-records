@@ -1353,6 +1353,68 @@ public class Test {
         return true;
     }
 
+    public List<List<Integer>> largeGroupPositions(String s) {
+        List<List<Integer>> rs = new ArrayList<>();
+
+        char[] chars = s.toCharArray();
+        int left = 0;
+        int count = 1;
+
+        for (int i = 1; i < s.length(); i++) {
+            if (chars[i] == chars[i - 1]) {
+                count++;
+                // 末尾情况
+                if (i == s.length() - 1 && count >= 3) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(left);
+                    list.add(left + count - 1);
+                    rs.add(list);
+                }
+            } else {
+                if (count >= 3) {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(left);
+                    list.add(left + count - 1);
+                    rs.add(list);
+                }
+                // 重置
+                left = i;
+                count = 1;
+            }
+        }
+
+        return rs;
+    }
+
+    public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int[] values = new int[1001];
+
+        for (int i = 0; i < items1.length; i++) {
+            int v = items1[i][0];
+            int w = items1[i][1];
+            values[v] += w;
+        }
+
+        for (int i = 0; i < items2.length; i++) {
+            int v = items2[i][0];
+            int w = items2[i][1];
+            values[v] += w;
+        }
+
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] != 0) {
+                List<Integer> list = new ArrayList<>();
+                list.add(i);
+                list.add(values[i]);
+                ans.add(list);
+            }
+        }
+
+        return ans;
+    }
+
+
     public static void main(String[] args) {
         Test test = new Test();
 //        int rs = test.minimumRecolors("WBWBBBW", 2);
@@ -1469,9 +1531,14 @@ public class Test {
 //        System.out.println(test.equalPairs(grid));
 //        System.out.println(test.findJudge(2, new int[][]{{1, 2}}));
 
-        int[] nums = new int[]{1, 2, 2, 3};
-        boolean rs = test.isMonotonic(nums);
-        System.out.println(rs);
+//        int[] nums = new int[]{1, 2, 2, 3};
+//        boolean rs = test.isMonotonic(nums);
+//        System.out.println(rs);
+
+        String s = "abcdddeeeeaabbbcd";
+        List<List<Integer>> rs1 = test.largeGroupPositions(s);
+        System.out.println(rs1);
+
     }
 
 }
