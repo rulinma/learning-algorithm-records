@@ -61,37 +61,51 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
 public class MaximumBinaryTreeTwo {
 
     public TreeNode insertIntoMaxTree(TreeNode root, int val) {
-        TreeNode rs = null;
-        // 其中每个节点的值都大于其子树中的任何其他值。
-        // insert val
-        // 1. root == null 创建
-        // 2. > root, 创建新节点，并把旧的添加到左子树
-        // 3. < root, 向下寻找插入点
-            // 3.1 dfs(node) 有双子节点
-                // 3.1.1 小于left，则继续dfs(left)
-                // 3.1.2 大于left，小于right，则继续dfs(right)
-                // 3.1.3 大于right，插入新节点到right，然后right节点接入到新节点的左节点
-            // 3.2 dfs(node)单子节点
-                // 则可以直接添加到另外一个单节点上
-            // 3.3 dfs(node)为空
-                // 则可以直接添加到左子节点上
-            // 3.2和3.3可以合并为，如果左子节点不存在，则可以直接添加，有左子节点，则可以添加右子节点上
+        // 1个节点
+        if (root == null) {
+            return new TreeNode(val);
+        }
+        // 根节点值小于val，则添加val，并返回新节点
+        if (val > root.val) {
+            TreeNode rs = new TreeNode(val);
+            rs.left = root;
+            return rs;
+        }
+        // 否则肯定在右子树上
+        TreeNode parent = null;
+        TreeNode cur = root;
+        // 当前cur节点值<val时进行插入，把当前节点parent的right设置为val，新节点的left设置为cur的值
+        // 最终cur==null的时候，则直接插入right即可
+        while (cur != null) {
+            if (cur.val < val) {
+                // 插入
+                TreeNode rs = new TreeNode(val);
+                parent.right = rs;
+                rs.left = cur;
+                return root;
+            }
+            parent = cur;
+            cur = cur.right;
+        }
 
+        // 最终cur==null
+        TreeNode rs = new TreeNode(val);
+        parent.right = rs;
 
-        return rs;
+        return root;
     }
 
     public static void main(String[] args) {
         MaximumBinaryTreeTwo maximumBinaryTreeTwo = new MaximumBinaryTreeTwo();
         TreeNode root = new TreeNode(5);
         TreeNode node1 = new TreeNode(2);
-        TreeNode node2 = new TreeNode(4);
+        TreeNode node2 = new TreeNode(3);
         TreeNode node3 = new TreeNode(1);
         root.left = node1;
         root.right = node2;
         node1.right = node3;
 
-        TreeNode ans = maximumBinaryTreeTwo.insertIntoMaxTree(root, 3);
+        TreeNode ans = maximumBinaryTreeTwo.insertIntoMaxTree(root, 4);
 
         System.out.println(ans);
     }
