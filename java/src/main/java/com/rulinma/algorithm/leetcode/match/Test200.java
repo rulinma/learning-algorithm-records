@@ -6,6 +6,9 @@ package com.rulinma.algorithm.leetcode.match;
  */
 public class Test200 {
 
+    /**
+     * 1534. 统计好三元组
+     */
     public int countGoodTriplets(int[] arr, int a, int b, int c) {
         int rs = 0;
         // 0 <= i < j < k < arr.length
