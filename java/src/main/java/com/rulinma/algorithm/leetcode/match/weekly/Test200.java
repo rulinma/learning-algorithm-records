@@ -39,7 +39,6 @@ public class Test200 {
                     // get it
                     return arr[i];
                 }
-
                 int j = 1;
                 while (i + j < arr.length && arr[i + j] < arr[i]) {
                     c++;
