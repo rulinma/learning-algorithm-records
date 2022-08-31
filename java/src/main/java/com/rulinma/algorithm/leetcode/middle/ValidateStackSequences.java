@@ -1,5 +1,6 @@
 package com.rulinma.algorithm.leetcode.middle;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -42,6 +43,26 @@ import java.util.Queue;
 public class ValidateStackSequences {
 
     public boolean validateStackSequences(int[] pushed, int[] popped) {
+        // 算法
+//        Deque<Integer> stack = new LinkedList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0, j = 0; i < pushed.length; i++) {
+            // 1. 插入pushed
+            // 2. 比较popped
+            stack.push(pushed[i]);
+
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+
+        }
+
+        return stack.isEmpty();
+    }
+
+
+    public boolean validateStackSequences1(int[] pushed, int[] popped) {
         // 算法
         Deque<Integer> stack = new LinkedList<>();
         Queue<Integer> queue = new LinkedList<>();
