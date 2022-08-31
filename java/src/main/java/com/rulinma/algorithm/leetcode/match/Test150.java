@@ -17,9 +17,7 @@ public class Test150 {
      */
     public int countCharacters(String[] words, String chars) {
         int rs = 0;
-
         Map<Character, Integer> map = CharCount(chars);
-
         // 检查每个word能否用chars表示出来
         for (String word : words) {
             if (word.length() > chars.length()) {
