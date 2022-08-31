@@ -1,10 +1,17 @@
-package com.rulinma.algorithm.leetcode.match;
+package com.rulinma.algorithm.leetcode.match.weekly;
 
 /**
  * @author 马如林
  * @Data 2022/8/31 11:14
  */
 public class Test200 {
+
+    public int getWinner(int[] arr, int k) {
+        int rs = 0;
+
+
+        return rs;
+    }
 
     /**
      * 1534. 统计好三元组
@@ -32,7 +39,10 @@ public class Test200 {
     }
 
     public static void main(String[] args) {
-
+        int[] arr = new int[]{2, 1, 3, 5, 4, 6, 7};
+        int k = 2;
+        int rs = new Test200().getWinner(arr, k);
+        System.out.println(rs);
     }
 
 }

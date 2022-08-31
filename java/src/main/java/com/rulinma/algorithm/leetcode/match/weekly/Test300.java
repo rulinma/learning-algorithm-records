@@ -1,4 +1,4 @@
-package com.rulinma.algorithm.leetcode.match;
+package com.rulinma.algorithm.leetcode.match.weekly;
 
 import com.rulinma.algorithm.leetcode.common.ListNode;
 import javafx.util.Pair;

@@ -1,4 +1,4 @@
-package com.rulinma.algorithm.leetcode.match;
+package com.rulinma.algorithm.leetcode.match.weekly;
 
 import java.util.ArrayList;
 import java.util.List;

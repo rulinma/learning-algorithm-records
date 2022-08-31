@@ -1,6 +1,4 @@
-package com.rulinma.algorithm.leetcode.match;
-
-import org.jetbrains.annotations.NotNull;
+package com.rulinma.algorithm.leetcode.match.weekly;
 
 import java.util.HashMap;
 import java.util.Iterator;
