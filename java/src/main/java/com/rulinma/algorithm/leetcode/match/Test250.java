@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class Test250 {
 
+    /**
+     * 1935. 可以输入的最大单词数
+     */
     public int canBeTypedWords(String text, String brokenLetters) {
         int rs = 0;
 
