@@ -50,7 +50,7 @@ public class ValidateStackSequences {
             // 1. 插入pushed
             // 2. 比较popped
             stack.push(pushed[i]);
-
+            // 模拟出栈
             while (!stack.isEmpty() && stack.peek() == popped[j]) {
                 stack.pop();
                 j++;
@@ -60,7 +60,6 @@ public class ValidateStackSequences {
 
         return stack.isEmpty();
     }
-
 
     public boolean validateStackSequences1(int[] pushed, int[] popped) {
         // 算法
