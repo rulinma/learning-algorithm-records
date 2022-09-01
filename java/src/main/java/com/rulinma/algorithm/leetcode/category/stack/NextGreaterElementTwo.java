@@ -48,6 +48,8 @@ public class NextGreaterElementTwo {
         }
 
         // 统计单调栈
+        // 可以遍历一次数组，如果元素是单调递减的（则他们的「下一个更大元素」相同），我们就把这些元素保存，直到找到一个较大的元素；
+        // 把该较大元素逐一跟保存了的元素比较，如果该元素更大，那么它就是前面元素的「下一个更大元素」。
         Deque<Integer> deque = new LinkedList<>();
         // 1. arr的单调栈获取每个位置的下一个更大值，不存在设置为-1
         for (int i = 0; i < arr.length; i++) {
