@@ -6,6 +6,9 @@ package com.rulinma.algorithm.leetcode.match.weekly;
  */
 public class Test274 {
 
+    /**
+     * 2124. 检查是否所有 A 都在 B 之前
+     */
     public boolean checkString(String s) {
         // 算法
         // a出现 b出现
