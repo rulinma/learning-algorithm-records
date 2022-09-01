@@ -37,6 +37,26 @@ import java.util.*;
 public class NextGreaterElementTwo {
 
     public int[] nextGreaterElements(int[] nums) {
+        int len = nums.length;
+        int[] arr = new int[len];
+        Arrays.fill(arr, -1);
+        // 统计单调栈
+        // 可以遍历一次数组，如果元素是单调递减的（则他们的「下一个更大元素」相同），我们就把这些元素保存，直到找到一个较大的元素；
+        // 把该较大元素逐一跟保存了的元素比较，如果该元素更大，那么它就是前面元素的「下一个更大元素」。
+        Deque<Integer> deque = new LinkedList<>();
+        // 1. arr的单调栈获取每个位置的下一个更大值，不存在设置为-1
+        for (int i = 0; i < len * 2; i++) {
+            while (!deque.isEmpty() && nums[deque.peek()] < nums[i % len]) {
+                // 当前位置的下一个最大值是arr[i]
+                arr[deque.pop()] = nums[i % len];
+            }
+            deque.push(i % len);
+        }
+
+        return arr;
+    }
+
+    public int[] nextGreaterElements1(int[] nums) {
         int[] rs = new int[nums.length * 2];
 
         // 数组扩张1倍计算
