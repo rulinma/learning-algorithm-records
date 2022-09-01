@@ -11,7 +11,6 @@ import java.util.Deque;
 public class Test {
 
     public int[] finalPrices(int[] prices) {
-        int[] rs = new int[prices.length];
         int[] arr = new int[prices.length];
         // 每个位置寻找下一个比他值小的数
         // 使用单调栈获取每个位置的下一个小值的数
@@ -32,10 +31,10 @@ public class Test {
         }
 
         for (int i = 0; i < prices.length; i++) {
-            rs[i] = prices[i] - arr[i];
+            arr[i] = prices[i] - arr[i];
         }
 
-        return rs;
+        return arr;
     }
 
     public static void main(String[] args) {
