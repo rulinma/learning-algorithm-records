@@ -1,10 +1,28 @@
 package com.rulinma.algorithm.leetcode.match.weekly;
 
+import java.util.Arrays;
+
 /**
  * @author 马如林
  * @Data 2022/9/1 16:59
  */
 public class Test274 {
+
+    public boolean asteroidsDestroyed(int mass, int[] asteroids) {
+        // 排序后累加和是否合理，不合理则返回false
+        Arrays.sort(asteroids);
+
+        long sum = mass;
+
+        for (int i = 0; i < asteroids.length; i++) {
+            if (asteroids[i] > sum) {
+                return false;
+            }
+            sum += asteroids[i];
+        }
+
+        return true;
+    }
 
     /**
      * 2124. 检查是否所有 A 都在 B 之前
@@ -36,7 +54,7 @@ public class Test274 {
 
             if (!a) {
 
-                if(b && ch=='a') {
+                if (b && ch == 'a') {
                     return false;
                 }
 
