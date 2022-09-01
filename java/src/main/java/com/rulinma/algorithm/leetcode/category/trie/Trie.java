@@ -1,6 +1,8 @@
 package com.rulinma.algorithm.leetcode.category.trie;
 
 /**
+ * 前缀树
+ *
  * @author 马如林
  * @Data 2022/8/31 22:19
  */
@@ -56,6 +58,12 @@ class Trie {
     }
 
     public static void main(String[] args) {
-
+        Trie trie = new Trie();
+        trie.insert("apple");
+        trie.search("apple");   // 返回 True
+        trie.search("app");     // 返回 False
+        trie.startsWith("app"); // 返回 True
+        trie.insert("app");
+        trie.search("app");     // 返回 True
     }
 }
