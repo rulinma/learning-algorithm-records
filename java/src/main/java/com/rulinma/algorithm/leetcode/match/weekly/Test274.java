@@ -8,6 +8,9 @@ import java.util.Arrays;
  */
 public class Test274 {
 
+    /**
+     * 2126. 摧毁小行星
+     */
     public boolean asteroidsDestroyed(int mass, int[] asteroids) {
         // 排序后累加和是否合理，不合理则返回false
         Arrays.sort(asteroids);
