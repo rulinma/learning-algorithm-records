@@ -20,7 +20,22 @@ public class Test85 {
         int x4 = rec2[2];
         int y4 = rec2[3];
 
-        return !(x4 < x1 || y3 > y2 || x3 > x2 || y4 < y1);
+//        return !(x4 <= x1 || y3 >= y2 || x3 >= x2 || y4 <= y1);
+
+        if (x4 <= x1) {
+            return false;
+        }
+        if (y3 >= y2) {
+            return false;
+        }
+        if (x3 >= x2) {
+            return false;
+        }
+        if (y4 <= y1) {
+            return false;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
