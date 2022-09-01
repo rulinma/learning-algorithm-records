@@ -10,6 +10,9 @@ import java.util.Deque;
  */
 public class Test {
 
+    /**
+     * 1475. 商品折扣后的最终价格
+     */
     public int[] finalPrices(int[] prices) {
         int[] arr = new int[prices.length];
         // 每个位置寻找下一个比他值小的数
