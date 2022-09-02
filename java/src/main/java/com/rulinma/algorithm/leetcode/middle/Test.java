@@ -43,6 +43,9 @@ public class Test {
     }
 
 
+    /**
+     * 2133. 检查是否每一行每一列都包含全部整数
+     */
     public boolean checkValid(int[][] matrix) {
         // 1. 获取每一行
         // 2. 遍历每一行，如果其值出现，则对应的数组位置设置为1，如果有非1的则该行数据不正确
