@@ -43,6 +43,42 @@ public class Test {
     }
 
 
+    public boolean checkValid(int[][] matrix) {
+        // 1. 获取每一行
+        // 2. 遍历每一行，如果其值出现，则对应的数组位置设置为1，如果有非1的则该行数据不正确
+        for (int[] x : matrix) {
+            int[] arr = new int[matrix.length];
+            for (int a : x) {
+                arr[a - 1] = 1;
+            }
+            // check
+            for (int i = 0; i < matrix.length; i++) {
+                // 有一个没有被覆盖，就是错误
+                if (arr[i] != 1) {
+                    return false;
+                }
+            }
+        }
+
+        // 3. 遍历每一列
+        for (int col = 0; col < matrix.length; col++) {
+            int[] arr = new int[matrix.length];
+            // 遍历每一行
+            for (int row = 0; row < matrix.length; row++) {
+                arr[matrix[row][col] - 1] = 1;
+            }
+            // check
+            for (int i = 0; i < matrix.length; i++) {
+                if (arr[i] != 1) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
 
     }
