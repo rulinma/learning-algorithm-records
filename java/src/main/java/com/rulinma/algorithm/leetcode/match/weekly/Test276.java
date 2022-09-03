@@ -1,12 +1,16 @@
 package com.rulinma.algorithm.leetcode.match.weekly;
 
-import java.util.Arrays;
-
 /**
  * @author 马如林
  * @Data 2022/9/3 10:26
  */
 public class Test276 {
+
+    public int minSwaps(int[] nums) {
+        int ans = 0;
+
+        return ans;
+    }
 
     /**
      * 2138. 将字符串拆分为若干长度为 k 的组
@@ -45,19 +49,20 @@ public class Test276 {
     }
 
     public static void main(String[] args) {
+        Test276 test276 = new Test276();
 
 //        String s = "abcdefghi";
 //        int k = 3;
 //        char fill = 'x';
 
-        String s = "abcdefghij";
-        int k = 3;
-        char fill = 'x';
+//        String s = "abcdefghij";
+//        int k = 3;
+//        char fill = 'x';
+//
+//        String[] rs = test276.divideString(s, k, fill);
+//
+//        System.out.println(Arrays.toString(rs));
 
-        Test276 test276 = new Test276();
 
-        String[] rs = test276.divideString(s, k, fill);
-
-        System.out.println(Arrays.toString(rs));
     }
 }
