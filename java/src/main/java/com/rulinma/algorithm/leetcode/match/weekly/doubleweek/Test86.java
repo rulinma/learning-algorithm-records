@@ -6,6 +6,34 @@ package com.rulinma.algorithm.leetcode.match.weekly.doubleweek;
  */
 public class Test86 {
 
+    public boolean isStrictlyPalindromic(int n) {
+        if (n == 2) return false;
+        if (n == 3) return false;
+        for (int i = 2; i <= n - 2; i++) {
+            StringBuilder sb = new StringBuilder();
+
+            int x = n;
+            while (x != 0) {
+                Integer v1 = x % i;
+                x = x / i;
+                sb.append(v1);
+            }
+
+            if (!isPalind(sb)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    private boolean isPalind(StringBuilder s) {
+        String org = new String(s);
+        boolean rs = s.reverse().toString().equals(org);
+        return rs;
+    }
+
     /**
      * 和相等的子数组
      */
@@ -29,14 +57,17 @@ public class Test86 {
 
     public static void main(String[] args) {
         Test86 test86 = new Test86();
-        int[] nums = new int[]{4, 2, 4};
-        System.out.println(test86.findSubarrays(nums));
+//        int[] nums = new int[]{4, 2, 4};
+//        System.out.println(test86.findSubarrays(nums));
+//
+//        int[] nums1 = new int[]{1, 2, 3, 4, 5};
+//        System.out.println(test86.findSubarrays(nums1));
+//
+//        int[] nums2 = new int[]{0, 0, 0};
+//        System.out.println(test86.findSubarrays(nums2));
 
-        int[] nums1 = new int[]{1, 2, 3, 4, 5};
-        System.out.println(test86.findSubarrays(nums1));
+        System.out.println(test86.isStrictlyPalindromic(4));
 
-        int[] nums2 = new int[]{0, 0, 0};
-        System.out.println(test86.findSubarrays(nums2));
     }
 
 }
