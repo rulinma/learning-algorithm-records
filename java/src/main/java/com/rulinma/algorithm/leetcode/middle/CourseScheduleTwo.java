@@ -62,14 +62,21 @@ public class CourseScheduleTwo {
         // inDegree[i] = num; 记录当前节点入度个数
         int[] inDegree = new int[numCourses];
         Map<Integer, List<Integer>> map = new HashMap<>();
+        if (prerequisites.length == 0 || prerequisites[0].length == 0) {
+            for (int i = 0; i < numCourses; i++) {
+                ans[i] = i;
+            }
+            return ans;
+        }
+
         for (int i = 0; i < prerequisites.length; i++) {
             int[] v = prerequisites[i];
             // 有向图
-            inDegree[v[1]] += 1;
+            inDegree[v[0]] += 1;
             // 添加邻接点
-            List<Integer> list = map.getOrDefault(v[0], new ArrayList<>());
-            list.add(v[1]);
-            map.put(v[0], list);
+            List<Integer> list = map.getOrDefault(v[1], new ArrayList<>());
+            list.add(v[0]);
+            map.put(v[1], list);
         }
 
         // 寻找入度为0的
@@ -101,7 +108,7 @@ public class CourseScheduleTwo {
                 for (Integer x : adjacent) {
                     // 有环
                     if (visited[x] == true) {
-                        return new int[]{0};
+                        return new int[]{};
                     }
                     inDegree[x]--;
                     if (inDegree[x] == 0) {
@@ -114,7 +121,7 @@ public class CourseScheduleTwo {
         }
 
         if (count < numCourses) {
-            return new int[]{0};
+            return new int[]{};
         }
 
         return ans;
@@ -122,15 +129,20 @@ public class CourseScheduleTwo {
 
     public static void main(String[] args) {
         CourseScheduleTwo courseScheduleTwo = new CourseScheduleTwo();
-        int numCourses = 4;
-        int[][] prerequisites = new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}};
-        int[] rs = courseScheduleTwo.findOrder(numCourses, prerequisites);
-        System.out.println(Arrays.toString(rs));
+//        int numCourses = 4;
+//        int[][] prerequisites = new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}};
+//        int[] rs = courseScheduleTwo.findOrder(numCourses, prerequisites);
+//        System.out.println(Arrays.toString(rs));
 
 //        int numCourses = 2;
 //        int[][] prerequisites = new int[][]{{1, 0}};
 //        int[] rs = courseScheduleTwo.findOrder(numCourses, prerequisites);
-//        System.out.println(rs);
+//        System.out.println(Arrays.toString(rs));
+
+        int numCourses = 2;
+        int[][] prerequisites = new int[][]{};
+        int[] rs = courseScheduleTwo.findOrder(numCourses, prerequisites);
+        System.out.println(Arrays.toString(rs));
     }
 
 }
