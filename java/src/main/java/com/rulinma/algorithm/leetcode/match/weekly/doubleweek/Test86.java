@@ -10,8 +10,12 @@ public class Test86 {
      * 6172. 严格回文的数字
      */
     public boolean isStrictlyPalindromic(int n) {
-        if (n == 2) return false;
-        if (n == 3) return false;
+        if (n == 2) {
+            return false;
+        }
+        if (n == 3) {
+            return false;
+        }
         for (int i = 2; i <= n - 2; i++) {
             StringBuilder sb = new StringBuilder();
 
