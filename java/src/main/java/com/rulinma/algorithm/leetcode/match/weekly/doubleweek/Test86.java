@@ -6,6 +6,9 @@ package com.rulinma.algorithm.leetcode.match.weekly.doubleweek;
  */
 public class Test86 {
 
+    /**
+     * 6172. 严格回文的数字
+     */
     public boolean isStrictlyPalindromic(int n) {
         if (n == 2) return false;
         if (n == 3) return false;
