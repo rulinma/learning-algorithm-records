@@ -8,6 +8,9 @@ import java.util.Arrays;
  */
 public class Test309 {
 
+    /**
+     * 6169. 最长优雅子数组
+     */
     public int longestNiceSubarray(int[] nums) {
         int max = 1;
         int[] dp = new int[nums.length];
