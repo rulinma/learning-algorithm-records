@@ -8,6 +8,30 @@ import java.util.Arrays;
  */
 public class Test309 {
 
+    public int longestNiceSubarray(int[] nums) {
+        int max = 1;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+
+        // 滑动区间
+        // dp[i] 表示以i为结尾的最长优雅子数组的长度
+        for (int i = 1; i < nums.length; i++) {
+            // dp[i] 和 dp[i-1]取最大值，放到dp[i]中
+            dp[i] = dp[i - 1] + 1;
+            for (int j = i - 1; j >= i - dp[i - 1]; j--) {
+                // 检查其后续的最长优雅子数组
+                if ((nums[i] & nums[j]) != 0) {
+                    dp[i] = i - j;
+                    break;
+                }
+            }
+
+            max = Math.max(dp[i], max);
+        }
+
+        return max;
+    }
+
     /**
      * 6167. 检查相同字母间的距离
      */
@@ -43,6 +67,10 @@ public class Test309 {
 
 
     public static void main(String[] args) {
+        int[] nums = new int[]{1, 3, 8, 48, 10};
 
+        Test309 test309 = new Test309();
+        int rs = test309.longestNiceSubarray(nums);
+        System.out.println(rs);
     }
 }
