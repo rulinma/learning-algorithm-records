@@ -2,6 +2,8 @@ package com.rulinma.algorithm.leetcode.easy;
 
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
+import java.util.*;
+
 /**
  * 235. 二叉搜索树的最近公共祖先
  * <p>
@@ -27,13 +29,98 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
  * @Data 2022/7/5 11:42
  */
 public class LowestCommonAncestorOfABinarySearchTree {
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // 2个节点的父节点相同，或者其中1个是父节点
+        // p节点的父节点列表 q节点的父节点列表 查看最后交叉的地方就是最近公共祖先（反转后第一个交叉的地方）
+        Map<Integer, Integer> map = new HashMap<>();
+
+        dfs(root, map, null);
+
+        int anc = -1;
+        // 获取parent列表
+        List<Integer> p1 = getParent(p, map);
+        List<Integer> p2 = getParent(q, map);
+
+        Set<Integer> set = new HashSet<>();
+        for (Integer x : p1) {
+            set.add(x);
+            //System.out.println("x1: " + x);
+        }
+
+        // for (Integer x : p2) {
+        //     //System.out.println("x2: " + x);
+        // }
+        for (int i = 0; i < p2.size(); i++) {
+            //System.out.println("x3: " + p2.get(i));
+            if (set.contains(p2.get(i))) {
+                // 最近公共祖先
+                anc = p2.get(i);
+                break;
+            }
+        }
+
+        // 根据val查找到TreeNode
+        // System.out.println("anc: " + anc);
+        TreeNode rs = dfs(root, anc);
+
+        return rs;
+    }
+
+    private TreeNode dfs(TreeNode root, int v) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode t = queue.poll();
+                // System.out.println("t: " + t.val);
+                if (t.val == v) {
+                    return t;
+                }
+                if (t.left != null) {
+                    queue.add(t.left);
+                }
+                if (t.right != null) {
+                    queue.add(t.right);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private List<Integer> getParent(TreeNode p, Map<Integer, Integer> map) {
+        List<Integer> list = new ArrayList<>();
+        Integer v = p.val;
+
+        while (v != null) {
+            list.add(v);
+            v = map.get(v);
+        }
+
+        return list;
+    }
+
+    private void dfs(TreeNode root, Map<Integer, Integer> map, TreeNode parent) {
+        if (root == null) {
+            return;
+        }
+        if (parent != null) {
+            map.put(root.val, parent.val);
+        }
+        dfs(root.left, map, root);
+        dfs(root.right, map, root);
+    }
+
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
         // 如果小于0，说明p和q位于root的两侧，直接返回即可
         // 等于0，则当前root就是公共祖先
         if ((root.val - p.val) * (root.val - q.val) <= 0) {
             return root;
         }
         // 否则，p和q位于root的同一侧，就继续往下找
-        return lowestCommonAncestor(p.val < root.val ? root.left : root.right, p, q);
+        return lowestCommonAncestor1(p.val < root.val ? root.left : root.right, p, q);
     }
 }

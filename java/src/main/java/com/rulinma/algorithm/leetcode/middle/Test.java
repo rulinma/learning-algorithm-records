@@ -2,16 +2,109 @@ package com.rulinma.algorithm.leetcode.middle;
 
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 马如林
  * @Data 2022/9/2 11:02
  */
 public class Test {
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // 2个节点的父节点相同，或者其中1个是父节点
+        // p节点的父节点列表 q节点的父节点列表 查看最后交叉的地方就是最近公共祖先（反转后第一个交叉的地方）
+        Map<Integer, Integer> map = new HashMap<>();
+
+        dfs(root, map, null);
+
+        int anc = -1;
+        // 获取parent列表
+        List<Integer> p1 = getParent(p, map);
+        List<Integer> p2 = getParent(q, map);
+
+        Set<Integer> set = new HashSet<>();
+        for (Integer x : p1) {
+            set.add(x);
+        }
+
+        for (int i = 0; i < p2.size(); i++) {
+            if (set.contains(p2.get(i))) {
+                // 最近公共祖先
+                anc = p2.get(i);
+                break;
+            }
+        }
+
+        // 根据val查找到TreeNode
+        TreeNode rs = dfs(root, anc);
+
+        return rs;
+    }
+
+    private TreeNode dfs(TreeNode root, int v) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode t = queue.poll();
+                if (t.val == v) {
+                    return t;
+                }
+                if (t.left != null) {
+                    queue.add(t.left);
+                }
+                if (t.right != null) {
+                    queue.add(t.right);
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+    private TreeNode dfs1(TreeNode root, int v) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == v) {
+            return root;
+        }
+
+        TreeNode left = dfs1(root.left, v);
+        TreeNode right = dfs1(root.right, v);
+        if (left != null) {
+            return left;
+        }
+
+        return right;
+    }
+
+
+    private List<Integer> getParent(TreeNode p, Map<Integer, Integer> map) {
+        List<Integer> list = new ArrayList<>();
+        Integer v = p.val;
+
+        while (v != null) {
+            list.add(v);
+            v = map.get(v);
+        }
+
+        return list;
+    }
+
+    private void dfs(TreeNode root, Map<Integer, Integer> map, TreeNode parent) {
+        if (root == null) {
+            return;
+        }
+        if (parent != null) {
+            map.put(root.val, parent.val);
+        }
+        dfs(root.left, map, root);
+        dfs(root.right, map, root);
+    }
+
 
     public int numIslands(char[][] grid) {
         int c = 0;
@@ -153,15 +246,46 @@ public class Test {
 
 
     public static void main(String[] args) {
-        char[][] grid = new char[][]{
-                {'1', '1', '0', '0', '0'},
-                {'1', '1', '0', '0', '0'},
-                {'0', '0', '1', '0', '0'},
-                {'0', '0', '0', '1', '1'}
-        };
-
         Test test = new Test();
-        System.out.println(test.numIslands(grid));
+
+        TreeNode root = new TreeNode(3);
+
+        TreeNode left = new TreeNode(5);
+        TreeNode right = new TreeNode(1);
+        root.left = left;
+        root.right = right;
+
+        TreeNode left_l = new TreeNode(6);
+        TreeNode left_r = new TreeNode(2);
+        left.left = left_l;
+        left.right = left_r;
+
+        TreeNode right_l = new TreeNode(0);
+        TreeNode right_r = new TreeNode(8);
+        right.left = right_l;
+        right.right = right_r;
+
+        TreeNode left_r_l = new TreeNode(7);
+        TreeNode left_r_r = new TreeNode(4);
+
+        left_r.left = left_r_l;
+        left_r.right = left_r_r;
+
+//        char[][] grid = new char[][]{
+//                {'1', '1', '0', '0', '0'},
+//                {'1', '1', '0', '0', '0'},
+//                {'0', '0', '1', '0', '0'},
+//                {'0', '0', '0', '1', '1'}
+//        };
+//
+//        Test test = new Test();
+//        System.out.println(test.numIslands(grid));
+
+//        TreeNode treeNode = test.lowestCommonAncestor(root, left, right);
+//        System.out.println(treeNode);
+
+        TreeNode treeNode = test.dfs1(root, 7);
+        System.out.println(treeNode);
     }
 
 }
