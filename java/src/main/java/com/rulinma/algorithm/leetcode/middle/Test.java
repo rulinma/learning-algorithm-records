@@ -63,7 +63,6 @@ public class Test {
         return null;
     }
 
-
     private TreeNode dfs1(TreeNode root, int v) {
         if (root == null) {
             return null;
@@ -80,7 +79,6 @@ public class Test {
 
         return right;
     }
-
 
     private List<Integer> getParent(TreeNode p, Map<Integer, Integer> map) {
         List<Integer> list = new ArrayList<>();
@@ -104,7 +102,6 @@ public class Test {
         dfs(root.left, map, root);
         dfs(root.right, map, root);
     }
-
 
     public int numIslands(char[][] grid) {
         int c = 0;
@@ -143,8 +140,6 @@ public class Test {
             dfs(grid, i, j + 1, visited);
         }
     }
-
-
     int max = 0;
 
     Map<String, Integer> map = new HashMap<>();
