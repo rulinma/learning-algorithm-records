@@ -40,11 +40,39 @@ public class Test {
         return arr;
     }
 
+    public int maxProfit(int[] prices) {
+        int max = 0;
+        int len = prices.length;
+        int[] suffixMax = new int[len];
+
+        int backMax = prices[len - 1];
+        for (int i = len - 2; i >= 0; i--) {
+            // 当前位置往后的最大值
+            suffixMax[i] = backMax;
+            if (prices[i] > backMax) {
+                backMax = prices[i];
+            }
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (suffixMax[i] - prices[i] > max) {
+                max = suffixMax[i] - prices[i];
+            }
+        }
+
+        return max;
+    }
+
+
     public static void main(String[] args) {
 
-        int[] prices = new int[]{8, 4, 6, 2, 3};
+//        int[] prices = new int[]{7,1,5,3,6,4};
+//
+//        System.out.println(Arrays.toString(new Test().finalPrices(prices)));
 
-        System.out.println(Arrays.toString(new Test().finalPrices(prices)));
+        int[] prices = new int[]{7, 1, 5, 3, 6, 4};
+
+        System.out.println(new Test().maxProfit(prices));
 
     }
 }
