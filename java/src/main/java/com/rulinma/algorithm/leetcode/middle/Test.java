@@ -19,6 +19,7 @@ public class Test {
     }
 
     public boolean sym(TreeNode left, TreeNode right) {
+        // 取一个节点进行处理
         if (left == null && right == null) {
             return true;
         }
