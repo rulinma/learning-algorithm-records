@@ -9,6 +9,41 @@ import java.util.*;
  * @Data 2022/9/2 11:02
  */
 public class Test {
+    int ans1 = 0;
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        // 当前节点的 左子树 + 右子树的深度 + 1
+        dfsLong(root);
+        return ans1;
+    }
+
+    private void dfsLong(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        int v = getLong(root);
+        if (v > ans1) {
+            ans1 = v;
+        }
+
+        dfsLong(root.left);
+        dfsLong(root.right);
+    }
+
+    private int getLong(TreeNode root) {
+        int left = getHeightLong(root.left);
+        int right = getHeightLong(root.right);
+        return left + right;
+    }
+
+    public int getHeightLong(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return Math.max(getHeightLong(node.left), getHeightLong(node.right)) + 1;
+    }
 
     /**
      * 101. 对称二叉树
