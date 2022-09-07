@@ -2,6 +2,9 @@ package com.rulinma.algorithm.leetcode.easy;
 
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 112. 路径总和
  * <p>
@@ -15,6 +18,59 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
  * @Data 2022/7/5 09:08
  */
 public class PathSum {
+
+    public boolean hasPathSum1(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+
+        // 1. 遍历所有到叶子节点路径，目标和想等则返回true
+        List<List<TreeNode>> list = new ArrayList<>();
+        List<TreeNode> path = new ArrayList<>();
+        dfs(root, list, path);
+
+        for (List<TreeNode> ls : list) {
+            int sum = 0;
+            for (TreeNode t : ls) {
+                sum += t.val;
+            }
+            if (sum == targetSum) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void dfs(TreeNode treeNode, List<List<TreeNode>> list, List<TreeNode> path) {
+        // 叶子节点
+        if (treeNode.left == null && treeNode.right == null) {
+            List<TreeNode> old = new ArrayList<>();
+            for (TreeNode t : path) {
+                old.add(t);
+            }
+            old.add(treeNode);
+            list.add(old);
+            return;
+        }
+
+        path.add(treeNode);
+        List<TreeNode> old1 = new ArrayList<>();
+        for (TreeNode t : path) {
+            old1.add(t);
+        }
+
+        List<TreeNode> old2 = new ArrayList<>();
+        for (TreeNode t : path) {
+            old2.add(t);
+        }
+        if (treeNode.left != null) {
+            dfs(treeNode.left, list, old1);
+        }
+        if (treeNode.right != null) {
+            dfs(treeNode.right, list, old2);
+        }
+    }
 
     public boolean hasPathSum1(TreeNode root, int targetSum) {
         if (root == null) {

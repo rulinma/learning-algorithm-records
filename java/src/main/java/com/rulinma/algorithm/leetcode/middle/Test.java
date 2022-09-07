@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class Test {
 
+
+
     boolean rs = true;
 
     /**
@@ -287,28 +289,28 @@ public class Test {
     public static void main(String[] args) {
         Test test = new Test();
 
-        TreeNode root = new TreeNode(3);
-
-        TreeNode left = new TreeNode(5);
-        TreeNode right = new TreeNode(1);
-        root.left = left;
-        root.right = right;
-
-        TreeNode left_l = new TreeNode(6);
-        TreeNode left_r = new TreeNode(2);
-        left.left = left_l;
-        left.right = left_r;
-
-        TreeNode right_l = new TreeNode(0);
-        TreeNode right_r = new TreeNode(8);
-        right.left = right_l;
-        right.right = right_r;
-
-        TreeNode left_r_l = new TreeNode(7);
-        TreeNode left_r_r = new TreeNode(4);
-
-        left_r.left = left_r_l;
-        left_r.right = left_r_r;
+//        TreeNode root = new TreeNode(3);
+//
+//        TreeNode left = new TreeNode(5);
+//        TreeNode right = new TreeNode(1);
+//        root.left = left;
+//        root.right = right;
+//
+//        TreeNode left_l = new TreeNode(6);
+//        TreeNode left_r = new TreeNode(2);
+//        left.left = left_l;
+//        left.right = left_r;
+//
+//        TreeNode right_l = new TreeNode(0);
+//        TreeNode right_r = new TreeNode(8);
+//        right.left = right_l;
+//        right.right = right_r;
+//
+//        TreeNode left_r_l = new TreeNode(7);
+//        TreeNode left_r_r = new TreeNode(4);
+//
+//        left_r.left = left_r_l;
+//        left_r.right = left_r_r;
 
 //        char[][] grid = new char[][]{
 //                {'1', '1', '0', '0', '0'},
@@ -323,8 +325,20 @@ public class Test {
 //        TreeNode treeNode = test.lowestCommonAncestor(root, left, right);
 //        System.out.println(treeNode);
 
-        TreeNode treeNode = test.dfs1(root, 7);
-        System.out.println(treeNode);
+//        TreeNode treeNode = test.dfs1(root, 7);
+//        System.out.println(treeNode);
+
+
+        TreeNode root = new TreeNode(1);
+
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(3);
+
+        root.left = left;
+        root.right = right;
+
+        boolean rs = test.hasPathSum(root, 4);
+        System.out.println(rs);
     }
 
 }
