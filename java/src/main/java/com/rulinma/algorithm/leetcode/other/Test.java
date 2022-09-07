@@ -8,6 +8,31 @@ import java.util.*;
  */
 public class Test {
 
+    public int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        int left = 1;
+        int right = x;
+        int rs = 1;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if ((long) mid * mid == x) {
+                return mid;
+            } else if ((long) mid * mid < x) {
+                left = mid + 1;
+                rs = mid;
+            } else if ((long) mid * mid > x) {
+                right = mid - 1;
+            }
+        }
+
+        // 最终
+
+        return rs;
+    }
+
     /**
      * 1475. 商品折扣后的最终价格
      */
@@ -122,8 +147,10 @@ public class Test {
 //
 //        System.out.println(new Test().maxProfit(prices));
 
-        String text = "  this   is  a sentence ";
-        System.out.println(new Test().reorderSpaces(text));
+//        String text = "  this   is  a sentence ";
+//        System.out.println(new Test().reorderSpaces(text));
 
+//        System.out.println(new Test().mySqrt(4));
+        System.out.println(new Test().mySqrt(8));
     }
 }
