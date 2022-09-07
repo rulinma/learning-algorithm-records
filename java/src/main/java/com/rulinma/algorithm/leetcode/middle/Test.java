@@ -11,6 +11,29 @@ import java.util.*;
 public class Test {
 
     /**
+     * 101. 对称二叉树
+     */
+    public boolean isSymmetric(TreeNode root) {
+        // 左孩子对称右孩子
+        return sym(root.left, root.right);
+    }
+
+    public boolean sym(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+
+        if (left.val != right.val) {
+            return false;
+        }
+
+        return sym(left.left, right.right) && sym(left.right, right.left);
+    }
+
+    /**
      * 572. 另一棵树的子树
      */
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
