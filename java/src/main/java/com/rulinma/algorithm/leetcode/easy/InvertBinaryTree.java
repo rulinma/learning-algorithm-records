@@ -81,4 +81,32 @@ public class InvertBinaryTree {
         return root;
     }
 
+    /**
+     * 226. 翻转二叉树
+     */
+    public TreeNode invertTree3(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.left == null && root.right == null) {
+            return root;
+        }
+
+        invertTreeChild(root);
+
+        return root;
+    }
+
+    public void invertTreeChild(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeNode l = root.left;
+        TreeNode r = root.right;
+        root.left = r;
+        root.right = l;
+        invertTreeChild(root.left);
+        invertTreeChild(root.right);
+    }
+
 }
