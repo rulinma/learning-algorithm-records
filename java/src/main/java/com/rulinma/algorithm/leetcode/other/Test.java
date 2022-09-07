@@ -1,8 +1,6 @@
 package com.rulinma.algorithm.leetcode.other;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
 
 /**
  * @author 马如林
@@ -63,6 +61,56 @@ public class Test {
         return max;
     }
 
+    /**
+     * 1592. 重新排列单词间的空格
+     */
+    public String reorderSpaces(String text) {
+        StringBuilder sb = new StringBuilder();
+        // 1. 统计单词个数
+        // 2. 统计空格个数
+        // 3. sc/(wc-1) = n? sc%(wc-1)= m?
+
+        char[] chars = text.toCharArray();
+        int sc = 0;
+        for (char ch : chars) {
+            if (ch == ' ') {
+                sc++;
+            }
+        }
+
+        String[] sa = text.split(" ");
+        List<String> list = new ArrayList<>();
+        for (String s : sa) {
+            if (!"".equals(s)) {
+                list.add(s);
+            }
+        }
+
+        if (list.size() == 1) {
+            sb.append(list.get(0).trim());
+            for (int i = 0; i < sc; i++) {
+                sb.append(' ');
+            }
+        } else {
+            int esc = sc / (list.size() - 1);
+            int remain = sc % (list.size() - 1);
+
+            for (int i = 0; i < list.size(); i++) {
+                sb.append(list.get(i).trim());
+                if (i != list.size() - 1) {
+                    for (int j = 0; j < esc; j++) {
+                        sb.append(' ');
+                    }
+                } else {
+                    for (int j = 0; j < remain; j++) {
+                        sb.append(' ');
+                    }
+                }
+            }
+        }
+
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
 
@@ -70,9 +118,12 @@ public class Test {
 //
 //        System.out.println(Arrays.toString(new Test().finalPrices(prices)));
 
-        int[] prices = new int[]{7, 1, 5, 3, 6, 4};
+//        int[] prices = new int[]{7, 1, 5, 3, 6, 4};
+//
+//        System.out.println(new Test().maxProfit(prices));
 
-        System.out.println(new Test().maxProfit(prices));
+        String text = "  this   is  a sentence ";
+        System.out.println(new Test().reorderSpaces(text));
 
     }
 }
