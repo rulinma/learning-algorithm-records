@@ -8,6 +8,33 @@ import java.util.*;
  */
 public class Test {
 
+    /**
+     * 3. 无重复字符的最长子串
+     */
+    public int lengthOfLongestSubstring(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        int max = 0;
+
+        List<Character> list = new ArrayList<>();
+        // window
+        while (i < s.length()) {
+            if (!list.contains(chars[i])) {
+                list.add(chars[i]);
+                max = Math.max(max, list.size());
+            } else {
+                // contain
+                int index = list.indexOf(chars[i]);
+                list = list.subList(index + 1, list.size());
+                list.add(chars[i]);
+            }
+            i++;
+        }
+
+        return max;
+    }
+
+
     public int mySqrt(int x) {
         if (x == 0) {
             return 0;
@@ -151,6 +178,10 @@ public class Test {
 //        System.out.println(new Test().reorderSpaces(text));
 
 //        System.out.println(new Test().mySqrt(4));
-        System.out.println(new Test().mySqrt(8));
+//        System.out.println(new Test().mySqrt(8));
+
+        System.out.println(new Test().lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(new Test().lengthOfLongestSubstring("bbbbb"));
+        System.out.println(new Test().lengthOfLongestSubstring("pwwkew"));
     }
 }
