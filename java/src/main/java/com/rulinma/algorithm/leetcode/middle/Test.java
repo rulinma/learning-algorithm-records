@@ -329,16 +329,7 @@ public class Test {
 //        System.out.println(treeNode);
 
 
-        TreeNode root = new TreeNode(1);
 
-        TreeNode left = new TreeNode(2);
-        TreeNode right = new TreeNode(3);
-
-        root.left = left;
-        root.right = right;
-
-        boolean rs = test.hasPathSum(root, 4);
-        System.out.println(rs);
     }
 
 }
