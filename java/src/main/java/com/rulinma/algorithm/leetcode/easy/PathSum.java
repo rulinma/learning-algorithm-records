@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class PathSum {
 
-    public boolean hasPathSum1(TreeNode root, int targetSum) {
+    public boolean hasPathSum2(TreeNode root, int targetSum) {
         if (root == null) {
             return false;
         }
