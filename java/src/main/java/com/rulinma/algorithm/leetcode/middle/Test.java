@@ -10,6 +10,49 @@ import java.util.*;
  */
 public class Test {
 
+    boolean rs = true;
+
+    /**
+     * 110. 平衡二叉树
+     */
+    public boolean isBalanced(TreeNode root) {
+        //
+        if (root == null) {
+            return true;
+        }
+
+        // 左右孩子节点高度差为1
+        // 检查所有的节点
+        // 每个节点检查高度差是否为1
+
+        dfsBalance(root);
+
+        return rs;
+    }
+
+    public void dfsBalance(TreeNode node) {
+        if (!rs) {
+            return;
+        }
+        if (node == null) {
+            return;
+        }
+        if (Math.abs(getHeight(node.left) - getHeight(node.right)) > 1) {
+            rs = false;
+            return;
+        }
+        dfsBalance(node.left);
+        dfsBalance(node.right);
+    }
+
+    public int getHeight(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
+    }
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // 2个节点的父节点相同，或者其中1个是父节点
         // p节点的父节点列表 q节点的父节点列表 查看最后交叉的地方就是最近公共祖先（反转后第一个交叉的地方）
@@ -140,6 +183,7 @@ public class Test {
             dfs(grid, i, j + 1, visited);
         }
     }
+
     int max = 0;
 
     Map<String, Integer> map = new HashMap<>();
