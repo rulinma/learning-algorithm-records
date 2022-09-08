@@ -34,16 +34,27 @@ public class Test {
         return ans;
     }
 
+    int max = Integer.MIN_VALUE;
 
     public int maxPathSum(TreeNode root) {
         // 自底向上
-        int max = 0;
-
+        maxGain(root);
         return max;
     }
 
-    public int gain(TreeNode root) {
-        return 0;
+    public int maxGain(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftGain = maxGain(root.left);
+        int rightGain = maxGain(root.right);
+
+        int priceNewPath = root.val + leftGain + rightGain;
+
+        max = Math.max(priceNewPath, max);
+
+        return root.val + Math.max(leftGain, rightGain);
     }
 
     /**
