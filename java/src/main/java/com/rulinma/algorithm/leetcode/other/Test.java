@@ -1,5 +1,7 @@
 package com.rulinma.algorithm.leetcode.other;
 
+import com.rulinma.algorithm.leetcode.common.TreeNode;
+
 import java.util.*;
 
 /**
@@ -7,6 +9,42 @@ import java.util.*;
  * @Data 2022/9/1 07:54
  */
 public class Test {
+
+    public int divisorSubstrings(int num, int k) {
+        int ans = 0;
+
+        String s = String.valueOf(num);
+        char[] chars = s.toCharArray();
+
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i <= chars.length - k; i++) {
+            left = i;
+            right = i + k;
+            StringBuilder sb = new StringBuilder();
+            for (int j = left; j < right; j++) {
+                sb.append(chars[j]);
+            }
+            int v = Integer.parseInt(sb.toString());
+            if (v != 0 && num % v == 0) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
+
+    public int maxPathSum(TreeNode root) {
+        // 自底向上
+        int max = 0;
+
+        return max;
+    }
+
+    public int gain(TreeNode root) {
+        return 0;
+    }
 
     /**
      * 3. 无重复字符的最长子串
@@ -180,8 +218,11 @@ public class Test {
 //        System.out.println(new Test().mySqrt(4));
 //        System.out.println(new Test().mySqrt(8));
 
-        System.out.println(new Test().lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(new Test().lengthOfLongestSubstring("bbbbb"));
-        System.out.println(new Test().lengthOfLongestSubstring("pwwkew"));
+//        System.out.println(new Test().lengthOfLongestSubstring("abcabcbb"));
+//        System.out.println(new Test().lengthOfLongestSubstring("bbbbb"));
+//        System.out.println(new Test().lengthOfLongestSubstring("pwwkew"));
+
+//        System.out.println(new Test().divisorSubstrings(240, 2));
+        System.out.println(new Test().divisorSubstrings(430043, 2));
     }
 }
