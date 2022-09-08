@@ -1,7 +1,5 @@
 package com.rulinma.algorithm.leetcode.middle;
 
-import java.util.Arrays;
-
 /**
  * @author 马如林
  * @Data 2022/9/8 08:40
@@ -24,7 +22,9 @@ public class BeautifulArrangement {
         for (int num = 1; num <= n; num++) {
             if (!visited[num] && (num % i == 0 || i % num == 0)) {
                 visited[num] = true;
+                System.out.println("num: " + num);
                 ans += dfs(n, i + 1, visited);
+                System.out.println("ans: " + ans);
                 visited[num] = false;
             }
         }
@@ -36,7 +36,7 @@ public class BeautifulArrangement {
     public static void main(String[] args) {
         BeautifulArrangement beautifulArrangementTwo = new BeautifulArrangement();
 
-        int rs = beautifulArrangementTwo.countArrangement(2);
+        int rs = beautifulArrangementTwo.countArrangement(3);
 
         System.out.println(rs);
     }
