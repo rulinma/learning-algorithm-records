@@ -47,8 +47,26 @@ public class Test {
             return 0;
         }
 
+        int left = Math.max(maxGain(root.left), 0);
+        int right = Math.max(maxGain(root.right), 0);
+
+        int v = root.val + left + right;
+
+        max = Math.max(v, max);
+
+        return root.val + Math.max(left, right);
+    }
+
+    public int maxGain1(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
         int leftGain = maxGain(root.left);
         int rightGain = maxGain(root.right);
+
+        leftGain = leftGain > 0 ? leftGain : 0;
+        rightGain = rightGain > 0 ? rightGain : 0;
 
         int priceNewPath = root.val + leftGain + rightGain;
 
