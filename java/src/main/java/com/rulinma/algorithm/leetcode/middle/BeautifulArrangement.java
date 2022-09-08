@@ -8,6 +8,9 @@ import java.util.Arrays;
  */
 public class BeautifulArrangement {
 
+    /**
+     * 526. 优美的排列
+     */
     public int countArrangement(int n) {
         return dfs(n, 1, new boolean[n + 1]);
     }
