@@ -45,7 +45,6 @@ public class LongestSubarrayOf1sAfterDeletingOneElement {
 
     public int longestSubarray(int[] nums) {
         int max = 0;
-        int left = 0;
         int right = 0;
         int countNotOne = 0;
         Deque<Integer> list = new LinkedList<>();
@@ -64,7 +63,6 @@ public class LongestSubarrayOf1sAfterDeletingOneElement {
                     countNotOne--;
                 }
                 rmFlag = true;
-                left++;
             }
 
             if (countNotOne == 1) {
