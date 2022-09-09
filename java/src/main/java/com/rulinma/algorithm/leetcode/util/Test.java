@@ -1,5 +1,7 @@
 package com.rulinma.algorithm.leetcode.util;
 
+import com.rulinma.algorithm.leetcode.common.TreeNode;
+
 import java.util.Arrays;
 
 /**
@@ -7,6 +9,33 @@ import java.util.Arrays;
  * @Data 2022/9/9 21:25
  */
 public class Test {
+
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        // dfs
+        TreeNode root = mergeNode(root1, root2);
+        return root;
+    }
+
+    private TreeNode mergeNode(TreeNode root1, TreeNode root2) {
+        TreeNode root = null;
+        if (root1 == null && root2 == null) {
+            return null;
+        } else if (root1 != null && root2 == null) {
+            root = new TreeNode(root1.val);
+            root.left = mergeNode(root1.left, null);
+            root.right = mergeNode(root1.right, null);
+        } else if (root1 == null && root2 != null) {
+            root = new TreeNode(root2.val);
+            root.left = mergeNode(null, root2.left);
+            root.right = mergeNode(null, root2.right);
+        } else {
+            root = new TreeNode(root1.val + root2.val);
+            root.left = mergeNode(root1.left, root2.left);
+            root.right = mergeNode(root1.right, root2.right);
+        }
+
+        return root;
+    }
 
     /**
      * 283. 移动零
