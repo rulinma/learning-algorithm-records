@@ -15,20 +15,27 @@ public class LongestSubarrayOf1sAfterDeletingOneElement {
         int max = 0;
         int left = 0;
         int right = 0;
+        int countNotOne = 0;
         Deque<Integer> list = new LinkedList<>();
         boolean rmFlag = false;
         while (right < nums.length) {
+            if (nums[right] != 1) {
+                countNotOne++;
+            }
             list.add(nums[right]);
             right++;
 
             // 统计其中1的个数，如果>=1，则缩减窗口到1个
-            while (countNotOne(list) > 1) {
-                list.removeFirst();
+            while (countNotOne > 1) {
+                Integer x = list.removeFirst();
+                if (x != 1) {
+                    countNotOne--;
+                }
                 rmFlag = true;
                 left++;
             }
 
-            if (countNotOne(list) == 1) {
+            if (countNotOne == 1) {
                 rmFlag = true;
                 max = Math.max(max, list.size() - 1);
             } else {
