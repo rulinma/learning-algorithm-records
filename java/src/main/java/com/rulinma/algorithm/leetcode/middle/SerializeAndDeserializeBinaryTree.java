@@ -4,6 +4,7 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 297. 二叉树的序列化与反序列化
@@ -48,28 +49,88 @@ import java.util.Arrays;
 public class SerializeAndDeserializeBinaryTree {
 
     public String serialize(TreeNode root) {
+        // 先根处理
         if (root == null) {
             return "null";
         }
+
         return root.val + "," + serialize(root.left) + "," + serialize(root.right);
     }
 
     public TreeNode deserialize(String data) {
-        String[] req = data.split(",");
-        ArrayList<String> r = new ArrayList<>(Arrays.asList(req));
-        return dfsdeserialize(r);
+        // 反序列化
+        // 获取有所节点，查看每个头结点
+        String[] sa = data.split(",");
+        List<String> list = new ArrayList<>(Arrays.asList(sa));
+
+        TreeNode treeNode = d(list);
+
+        return treeNode;
     }
 
-    public TreeNode dfsdeserialize(ArrayList<String> r) {
+    // 1,2,null,null,3,4,null,null,5,null,null
+    public TreeNode d(List<String> list) {
+        if (list.get(0).equals("null")) {
+            list.remove(0);
+            return null;
+        }
+        TreeNode treeNode = new TreeNode(Integer.parseInt(list.get(0)));
+        list.remove(0);
+        if (list.size() > 0) {
+            treeNode.left = d(list);
+        }
+        if (list.size() > 0) {
+            treeNode.right = d(list);
+        }
+        return treeNode;
+    }
+
+
+    public String serialize1(TreeNode root) {
+        if (root == null) {
+            return "null";
+        }
+        return root.val + "," + serialize1(root.left) + "," + serialize1(root.right);
+    }
+
+    public TreeNode deserialize2(String data) {
+        String[] req = data.split(",");
+        ArrayList<String> r = new ArrayList<>(Arrays.asList(req));
+        return dfsdeserialize1(r);
+    }
+
+    public TreeNode dfsdeserialize1(ArrayList<String> r) {
         if ("null".equals(r.get(0))) {
             r.remove(0);
             return null;
         }
         TreeNode node = new TreeNode(Integer.valueOf(r.get(0)));
         r.remove(0);
-        node.left = dfsdeserialize(r);
-        node.right = dfsdeserialize(r);
+        node.left = dfsdeserialize1(r);
+        node.right = dfsdeserialize1(r);
         return node;
     }
 
+
+    public static void main(String[] args) {
+        TreeNode t1 = new TreeNode(1);
+        TreeNode t2 = new TreeNode(2);
+        TreeNode t3 = new TreeNode(3);
+        TreeNode t4 = new TreeNode(4);
+        TreeNode t5 = new TreeNode(5);
+
+        t1.left = t2;
+        t1.right = t3;
+
+        t3.left = t4;
+        t3.right = t5;
+
+        SerializeAndDeserializeBinaryTree serializeAndDeserializeBinaryTree = new SerializeAndDeserializeBinaryTree();
+        String s1 = serializeAndDeserializeBinaryTree.serialize(t1);
+        System.out.println(s1);
+
+        TreeNode t = serializeAndDeserializeBinaryTree.deserialize(s1);
+
+        System.out.println(t);
+    }
 }
