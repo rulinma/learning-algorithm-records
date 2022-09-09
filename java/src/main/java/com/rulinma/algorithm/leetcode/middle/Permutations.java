@@ -1,6 +1,7 @@
 package com.rulinma.algorithm.leetcode.middle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,12 +27,33 @@ import java.util.List;
  * https://leetcode.cn/problems/permutations
  *
  * @author 马如林
- *
  * @Data 2022/7/8 16:44
  */
 public class Permutations {
 
     public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        dfs(nums, path, ans);
+        return ans;
+    }
+
+    public void dfs(int[] nums, List<Integer> path, List<List<Integer>> ans) {
+        if (path.size() == nums.length) {
+            ans.add(new ArrayList<Integer>(path));
+            return;
+        }
+
+        for (int n : nums) {
+            if (!path.contains(n)) {
+                path.add(n);
+                dfs(nums, path, ans);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+    public List<List<Integer>> permute2(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         // nums = [1,2,3]
         // [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
