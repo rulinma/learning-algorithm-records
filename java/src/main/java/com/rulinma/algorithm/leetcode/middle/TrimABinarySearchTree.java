@@ -40,10 +40,20 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
 public class TrimABinarySearchTree {
 
     public TreeNode trimBST(TreeNode root, int low, int high) {
-
-        TreeNode treeNode = trim(root, low, high);
-
-        return treeNode;
+        if (root == null) {
+            return null;
+        }
+        if (root.val < low) {
+            return trimBST(root.right, low, high);
+        } else if (root.val > high) {
+            return trimBST(root.left, low, high);
+        } else {
+            TreeNode left = trimBST(root.left, low, high);
+            TreeNode right = trimBST(root.right, low, high);
+            root.left = left;
+            root.right = right;
+            return root;
+        }
     }
 
     private TreeNode trim(TreeNode root, int low, int high) {
