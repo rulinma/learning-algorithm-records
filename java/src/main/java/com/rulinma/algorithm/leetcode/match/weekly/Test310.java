@@ -55,13 +55,11 @@ public class Test310 {
             if (start <= min) {
                 // insert new one
                 count++;
-                priorityQueue.add(intervals[i][1]);
             } else {
                 // 加入已有组的话，删除最小值，添加当前
                 priorityQueue.poll();
-                priorityQueue.add(intervals[i][1]);
             }
-
+            priorityQueue.add(intervals[i][1]);
             min = priorityQueue.peek();
         }
 
