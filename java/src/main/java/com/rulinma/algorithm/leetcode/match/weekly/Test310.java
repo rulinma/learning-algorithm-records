@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class Test310 {
 
-
     public int minGroups(int[][] intervals) {
         int min = 1;
         // sort intervals
@@ -29,7 +28,55 @@ public class Test310 {
         List<List<int[]>> list = new ArrayList<>();
         for (int[] i : intervals) {
             int start = i[0];
-            int end = i[1];
+            // 第一个
+            if (list.size() == 0) {
+                List<int[]> group = new ArrayList<>();
+                group.add(i);
+                list.add(group);
+            } else {
+                boolean insert = false;
+                for (List<int[]> x : list) {
+                    // every group
+                    // 检查每个group的最后一个值，如果新的start>该值，则添加，否则继续遍历，最后没有添加则需要新建一个group
+                    int max = x.get(x.size() - 1)[1];
+                    if (start > max) {
+                        x.add(i);
+                        insert = true;
+                        break;
+                    }
+                }
+
+                if (!insert) {
+                    List<int[]> group = new ArrayList<>();
+                    group.add(i);
+                    list.add(group);
+                }
+            }
+        }
+
+        min = list.size();
+
+        return min;
+    }
+
+
+    public int minGroups1(int[][] intervals) {
+        int min = 1;
+        // sort intervals
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[0] == o2[0]) {
+                    return o1[1] - o2[1];
+                }
+                return o1[0] - o2[0];
+            }
+        });
+        // System.out.println(intervals);
+
+        List<List<int[]>> list = new ArrayList<>();
+        for (int[] i : intervals) {
+            int start = i[0];
             // 第一个
             if (list.size() == 0) {
                 List<int[]> group = new ArrayList<>();
