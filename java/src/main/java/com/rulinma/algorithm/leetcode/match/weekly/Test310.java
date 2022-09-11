@@ -32,7 +32,6 @@ public class Test310 {
         return count;
     }
 
-
     public int minGroups(int[][] intervals) {
         // sort intervals
         Arrays.sort(intervals, new Comparator<int[]>() {
