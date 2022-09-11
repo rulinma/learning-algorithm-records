@@ -9,6 +9,34 @@ import java.util.*;
 public class Test310 {
 
     /**
+     * 6206. 最长递增子序列 II
+     */
+    public int lengthOfLIS(int[] nums, int k) {
+
+        // 下一个比自己大的数，并且差值小于3
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+
+        // dp[i] 表示i处，最长子序列的长度
+        // 遍历所有0-i-1: 如果 有满足的nums[i] > nums[x] && nums[i] -nums[x] < k则 dp[i-1] + 1，否则为dp[i-1]
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j] && nums[i] - nums[j] <= k) {
+                    int v = dp[j] + 1;
+                    dp[i] = Math.max(v, dp[i]);
+                }
+            }
+        }
+
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+    }
+
+    /**
      * 贪心就行
      */
     public int partitionString(String s) {
@@ -195,24 +223,24 @@ public class Test310 {
 //
 //        int[] nums3 = new int[]{0, 0, 0, 0};
 //        System.out.println(new Test310().mostFrequentEven(nums3));
-        int[][] intervals = new int[][]{
-                {5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}
-        };
-        int rs = new Test310().minGroups(intervals);
-        System.out.println(rs);
-
-        int[][] intervals2 = new int[][]{
-                {1, 3}, {5, 6}, {8, 10}, {11, 13}
-        };
-        int rs2 = new Test310().minGroups(intervals2);
-        System.out.println(rs2);
-
-        int[][] intervals3 = new int[][]{
-                {441459, 446342}, {801308, 840640}, {871890, 963447}, {228525, 336985},
-                {807945, 946787}, {479815, 507766}, {693292, 944029}, {751962, 821744}
-        };
-        int rs3 = new Test310().minGroups(intervals3);
-        System.out.println(rs3);
+//        int[][] intervals = new int[][]{
+//                {5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}
+//        };
+//        int rs = new Test310().minGroups(intervals);
+//        System.out.println(rs);
+//
+//        int[][] intervals2 = new int[][]{
+//                {1, 3}, {5, 6}, {8, 10}, {11, 13}
+//        };
+//        int rs2 = new Test310().minGroups(intervals2);
+//        System.out.println(rs2);
+//
+//        int[][] intervals3 = new int[][]{
+//                {441459, 446342}, {801308, 840640}, {871890, 963447}, {228525, 336985},
+//                {807945, 946787}, {479815, 507766}, {693292, 944029}, {751962, 821744}
+//        };
+//        int rs3 = new Test310().minGroups(intervals3);
+//        System.out.println(rs3);
 
 //        String s = "abacaba";
 //        System.out.println(new Test310().partitionString(s));
@@ -220,5 +248,13 @@ public class Test310 {
 //        String s1 = "ssssss";
 //        System.out.println(new Test310().partitionString(s1));
 
+        int[] nums = new int[]{4, 2, 1, 4, 3, 4, 5, 8, 15};
+        System.out.println(new Test310().lengthOfLIS(nums, 3));
+
+        int[] nums1 = new int[]{7, 4, 5, 1, 8, 12, 4, 7};
+        System.out.println(new Test310().lengthOfLIS(nums1, 5));
+
+        int[] nums2 = new int[]{1, 5};
+        System.out.println(new Test310().lengthOfLIS(nums2, 1));
     }
 }
