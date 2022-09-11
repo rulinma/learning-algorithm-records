@@ -48,20 +48,21 @@ public class Test310 {
         int min = intervals[0][1];
 
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(min);
 
         for (int i = 1; i < intervals.length; i++) {
             int start = intervals[i][0];
-            // System.out.println("min: " + min + " start " + start);
             if (start <= min) {
                 // insert new one
                 count++;
-                min = Math.min(min, intervals[i][1]);
+                priorityQueue.add(intervals[i][1]);
             } else {
-                // 加入已有组的话，并且刚好是min所在组，需要修改min
+                // 加入已有组的话，删除最小值，添加当前
+                priorityQueue.poll();
+                priorityQueue.add(intervals[i][1]);
             }
-            priorityQueue.add(intervals[i][1]);
 
-
+            min = priorityQueue.peek();
         }
 
         return count;
@@ -196,31 +197,30 @@ public class Test310 {
 //
 //        int[] nums3 = new int[]{0, 0, 0, 0};
 //        System.out.println(new Test310().mostFrequentEven(nums3));
-//        int[][] intervals = new int[][]{
-//                {5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}
-//        };
-//        int rs = new Test310().minGroups(intervals);
-//        System.out.println(rs);
+        int[][] intervals = new int[][]{
+                {5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}
+        };
+        int rs = new Test310().minGroups(intervals);
+        System.out.println(rs);
+
+        int[][] intervals2 = new int[][]{
+                {1, 3}, {5, 6}, {8, 10}, {11, 13}
+        };
+        int rs2 = new Test310().minGroups(intervals2);
+        System.out.println(rs2);
+
+        int[][] intervals3 = new int[][]{
+                {441459, 446342}, {801308, 840640}, {871890, 963447}, {228525, 336985},
+                {807945, 946787}, {479815, 507766}, {693292, 944029}, {751962, 821744}
+        };
+        int rs3 = new Test310().minGroups(intervals3);
+        System.out.println(rs3);
+
+//        String s = "abacaba";
+//        System.out.println(new Test310().partitionString(s));
 //
-//
-//        int[][] intervals2 = new int[][]{
-//                {1, 3}, {5, 6}, {8, 10}, {11, 13}
-//        };
-//        int rs2 = new Test310().minGroups(intervals2);
-//        System.out.println(rs2);
-
-//        int[][] intervals3 = new int[][]{
-//                {441459, 446342}, {801308, 840640}, {871890, 963447}, {228525, 336985},
-//                {807945, 946787}, {479815, 507766}, {693292, 944029}, {751962, 821744}
-//        };
-//        int rs3 = new Test310().minGroups(intervals3);
-//        System.out.println(rs3);
-
-        String s = "abacaba";
-        System.out.println(new Test310().partitionString(s));
-
-        String s1 = "ssssss";
-        System.out.println(new Test310().partitionString(s1));
+//        String s1 = "ssssss";
+//        System.out.println(new Test310().partitionString(s1));
 
     }
 }
