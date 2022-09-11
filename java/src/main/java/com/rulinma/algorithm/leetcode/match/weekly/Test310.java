@@ -25,31 +25,28 @@ public class Test310 {
         });
         // System.out.println(intervals);
 
-        List<List<int[]>> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         for (int[] i : intervals) {
             int start = i[0];
             // 第一个
             if (list.size() == 0) {
-                List<int[]> group = new ArrayList<>();
-                group.add(i);
-                list.add(group);
+                // 设置第一个的最大值
+                list.add(i[1]);
             } else {
                 boolean insert = false;
-                for (List<int[]> x : list) {
+                for (int j = 0; j < list.size(); j++) {
                     // every group
                     // 检查每个group的最后一个值，如果新的start>该值，则添加，否则继续遍历，最后没有添加则需要新建一个group
-                    int max = x.get(x.size() - 1)[1];
-                    if (start > max) {
-                        x.add(i);
+                    if (start > list.get(j)) {
+                        list.set(j, i[1]);
                         insert = true;
                         break;
                     }
                 }
 
                 if (!insert) {
-                    List<int[]> group = new ArrayList<>();
-                    group.add(i);
-                    list.add(group);
+                    // 末尾添加新组
+                    list.add(i[1]);
                 }
             }
         }
