@@ -60,20 +60,36 @@ public class TrimABinarySearchTree {
         }
 
         // 迭代左子树
-        TreeNode parent = root;
-        TreeNode left = parent.left;
-        while (left != null) {
-            // 寻找下一个迭代
-            if (left.val < low) {
-                parent.left = parent.left.right;
+//        TreeNode parent = root;
+//        TreeNode left = parent.left;
+//        while (left != null) {
+//            // 寻找下一个迭代
+//            if (left.val < low) {
+//                parent.left = parent.left.right;
+//            } else {
+//                parent = parent.left;
+//            }
+//            left = parent.left;
+//        }
+
+//        for (TreeNode node = root; node.left != null; ) {
+//            if (node.left.val < low) {
+//                node.left = node.left.right;
+//            } else {
+//                node = node.left;
+//            }
+//        }
+
+        TreeNode node = root;
+        while (node.left != null) {
+            if (node.left.val < low) {
+                node.left = node.left.right;
             } else {
-                parent = parent.left;
+                node = node.left;
             }
-            left = parent.left;
         }
 
         // 迭代右子树
-
         TreeNode parent2 = root;
         TreeNode right = root.right;
         while (right != null) {
