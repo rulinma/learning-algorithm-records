@@ -40,16 +40,66 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
 public class TrimABinarySearchTree {
 
     public TreeNode trimBST(TreeNode root, int low, int high) {
+        // 1. 选择节点符合范围作为root
+        // 2. 没有返回root
+        // 3. 迭代左子树
+        // 4. 迭代右子树
+        while (root != null && !(root.val >= low && root.val <= high)) {
+            if (root.val > high) {
+                // 丢弃右子树，因为按照该树性质，右边的都比根节点值大，根已经大于high了，那其他的更大了。
+                root = root.left;
+            } else if (root.val < low) {
+                // 丢弃左子树，都比根小，而根又比low小，所以丢弃。
+                root = root.right;
+            }
+        }
+
+        // 没有找到节点，或者此时root已经符合要求
+        if (root == null) {
+            return null;
+        }
+
+        // 迭代左子树
+        TreeNode parent = root;
+        TreeNode left = parent.left;
+        while (left != null) {
+            // 寻找下一个迭代
+            if (left.val < low) {
+                parent.left = parent.left.right;
+            } else {
+                parent = parent.left;
+            }
+            left = parent.left;
+        }
+
+        // 迭代右子树
+
+        TreeNode parent2 = root;
+        TreeNode right = root.right;
+        while (right != null) {
+            // 寻找下一个迭代
+            if (right.val > high) {
+                parent2.right = parent2.right.left;
+            } else {
+                parent2 = parent2.right;
+            }
+            right = parent2.right;
+        }
+
+        return root;
+    }
+
+    public TreeNode trimBST2(TreeNode root, int low, int high) {
         if (root == null) {
             return null;
         }
         if (root.val < low) {
-            return trimBST(root.right, low, high);
+            return trimBST2(root.right, low, high);
         } else if (root.val > high) {
-            return trimBST(root.left, low, high);
+            return trimBST2(root.left, low, high);
         } else {
-            TreeNode left = trimBST(root.left, low, high);
-            TreeNode right = trimBST(root.right, low, high);
+            TreeNode left = trimBST2(root.left, low, high);
+            TreeNode right = trimBST2(root.right, low, high);
             root.left = left;
             root.right = right;
             return root;
