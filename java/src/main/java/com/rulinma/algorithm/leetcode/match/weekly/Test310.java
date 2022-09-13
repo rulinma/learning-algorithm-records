@@ -17,6 +17,7 @@ public class Test310 {
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
 
+        int max = 0;
         // dp[i] 表示i处，最长子序列的长度
         // 遍历所有0-i-1: 如果 有满足的nums[i] > nums[x] && nums[i] -nums[x] < k则 dp[i-1] + 1，否则为dp[i-1]
         for (int i = 1; i < nums.length; i++) {
@@ -28,10 +29,6 @@ public class Test310 {
             }
         }
 
-        int max = 0;
-        for (int i = 0; i < nums.length; i++) {
-            max = Math.max(max, dp[i]);
-        }
 
         return max;
     }

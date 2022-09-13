@@ -10,6 +10,33 @@ import java.util.Arrays;
  */
 public class Test {
 
+    public int specialArray(int[] nums) {
+        int rs = -1;
+        Arrays.sort(nums);
+
+        // x 并且刚好 刚好有x个元素 >=x
+        for (int i = 1; i <= 1000; i++) {
+            int c = 0;
+            for (int n : nums) {
+                if (n >= i) {
+                    break;
+                } else {
+                    c++;
+                }
+            }
+
+            int g = nums.length - c;
+            if (i == g) {
+                return g;
+            } else if (i > g) {
+                break;
+            }
+        }
+
+        return rs;
+    }
+
+
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         // dfs
         TreeNode root = mergeNode(root1, root2);
