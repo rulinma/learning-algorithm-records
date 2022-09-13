@@ -13,48 +13,24 @@ import java.util.Collections;
 public class Test {
 
     public int maximumSwap(int num) {
-        // 第1个变化位，进行交换就可以
-        String v = String.valueOf(num);
-        Integer[] x = new Integer[v.length()];
-        char[] chars = v.toCharArray();
-        int i = 0;
-        for (char ch : chars) {
-            x[i++] = Integer.parseInt(String.valueOf(ch));
-        }
+        if (num % 10 == num) return num;
 
-        Integer[] y = x.clone();
-        Arrays.sort(y, Collections.reverseOrder());
-
-//        System.out.println(Arrays.toString(y));
-//        System.out.println(Arrays.toString(x));
-        // [2, 7, 3, 6]
-        // [7, 6, 3, 2]
-        //  7 2 3 6
-
-        for (int j = 0; j < x.length; j++) {
-            if (!x[j].equals(y[j])) {
-                // 此处应该是y[j], 当前j开始后的swap x[j] 和 y[j]
-                int t = x[j];
-                x[j] = y[j];
-                // 当前位置后的第一个y[j]值设置为t
-                for (int k = j + 1; k < x.length; k++) {
-                    //
-                    while (x[k].equals(y[j])) {
-                        k++;
-                    }
-                    if (x[k].equals(y[j])) {
-                        x[k] = t;
-                        break;
-                    }
+        char[] arr = String.valueOf(num).toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            // 从i后面选择一个最大的，这个最大的离i越远越好，比如1993，1交换第二个9更优，所以j倒序遍历
+            int maxIndex = i;
+            for (int j = arr.length - 1; j >= i + 1; j--) {
+                if (arr[j] > arr[maxIndex]) {
+                    maxIndex = j;
                 }
-                break;
             }
-        }
 
-        // 输出num
-        num = 0;
-        for (int k = 0; k < x.length; k++) {
-            num = num * 10 + x[k];
+            if (maxIndex != i) {
+                char tmp = arr[i];
+                arr[i] = arr[maxIndex];
+                arr[maxIndex] = tmp;
+                return Integer.parseInt(new String(arr));
+            }
         }
 
         return num;
@@ -148,8 +124,8 @@ public class Test {
 //        test.moveZeroes(nums1);
 //        System.out.println(Arrays.toString(nums1));
 
-//        System.out.println(test.maximumSwap(2736));
-//        System.out.println(test.maximumSwap(9973));
+        System.out.println(test.maximumSwap(2736));
+        System.out.println(test.maximumSwap(9973));
 
         System.out.println(test.maximumSwap(1993));
     }
