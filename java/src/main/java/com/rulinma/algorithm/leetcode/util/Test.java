@@ -10,6 +10,7 @@ import java.util.Arrays;
  */
 public class Test {
 
+
     /**
      * 670. 最大交换
      */
