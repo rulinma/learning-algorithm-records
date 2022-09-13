@@ -3,8 +3,6 @@ package com.rulinma.algorithm.leetcode.util;
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author 马如林
@@ -12,8 +10,13 @@ import java.util.Collections;
  */
 public class Test {
 
+    /**
+     * 670. 最大交换
+     */
     public int maximumSwap(int num) {
-        if (num % 10 == num) return num;
+        if (num % 10 == num) {
+            return num;
+        }
 
         char[] arr = String.valueOf(num).toCharArray();
         for (int i = 0; i < arr.length; i++) {
@@ -34,7 +37,6 @@ public class Test {
         }
 
         return num;
-
     }
 
     /**
