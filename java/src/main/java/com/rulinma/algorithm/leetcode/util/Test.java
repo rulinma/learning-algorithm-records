@@ -3,12 +3,63 @@ package com.rulinma.algorithm.leetcode.util;
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author 马如林
  * @Data 2022/9/9 21:25
  */
 public class Test {
+
+    public int maximumSwap(int num) {
+        // 第1个变化位，进行交换就可以
+        String v = String.valueOf(num);
+        Integer[] x = new Integer[v.length()];
+        char[] chars = v.toCharArray();
+        int i = 0;
+        for (char ch : chars) {
+            x[i++] = Integer.parseInt(String.valueOf(ch));
+        }
+
+        Integer[] y = x.clone();
+        Arrays.sort(y, Collections.reverseOrder());
+
+//        System.out.println(Arrays.toString(y));
+//        System.out.println(Arrays.toString(x));
+        // [2, 7, 3, 6]
+        // [7, 6, 3, 2]
+        //  7 2 3 6
+
+        for (int j = 0; j < x.length; j++) {
+            if (!x[j].equals(y[j])) {
+                // 此处应该是y[j], 当前j开始后的swap x[j] 和 y[j]
+                int t = x[j];
+                x[j] = y[j];
+                // 当前位置后的第一个y[j]值设置为t
+                for (int k = j + 1; k < x.length; k++) {
+                    //
+                    while (x[k].equals(y[j])) {
+                        k++;
+                    }
+                    if (x[k].equals(y[j])) {
+                        x[k] = t;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        // 输出num
+        num = 0;
+        for (int k = 0; k < x.length; k++) {
+            num = num * 10 + x[k];
+        }
+
+        return num;
+
+    }
 
     /**
      * 1608. 特殊数组的特征值
@@ -38,7 +89,6 @@ public class Test {
 
         return rs;
     }
-
 
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         // dfs
@@ -89,14 +139,19 @@ public class Test {
 
     public static void main(String[] args) {
         Test test = new Test();
+//
+//        int[] nums = new int[]{0, 1, 0, 3, 12};
+//        test.moveZeroes(nums);
+//        System.out.println(Arrays.toString(nums));
+//
+//        int[] nums1 = new int[]{0};
+//        test.moveZeroes(nums1);
+//        System.out.println(Arrays.toString(nums1));
 
-        int[] nums = new int[]{0, 1, 0, 3, 12};
-        test.moveZeroes(nums);
-        System.out.println(Arrays.toString(nums));
+//        System.out.println(test.maximumSwap(2736));
+//        System.out.println(test.maximumSwap(9973));
 
-        int[] nums1 = new int[]{0};
-        test.moveZeroes(nums1);
-        System.out.println(Arrays.toString(nums1));
+        System.out.println(test.maximumSwap(1993));
     }
 
 }
