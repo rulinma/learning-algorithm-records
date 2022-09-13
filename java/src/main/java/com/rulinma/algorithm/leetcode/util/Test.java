@@ -10,6 +10,9 @@ import java.util.Arrays;
  */
 public class Test {
 
+    /**
+     * 1608. 特殊数组的特征值
+     */
     public int specialArray(int[] nums) {
         int rs = -1;
         Arrays.sort(nums);
