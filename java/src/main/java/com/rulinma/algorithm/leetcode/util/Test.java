@@ -10,6 +10,25 @@ import java.util.Arrays;
  */
 public class Test {
 
+    /**
+     * 1619. 删除某些元素后的数组均值
+     */
+    public double trimMean(int[] arr) {
+        int len = (int) Math.round(arr.length * 0.05);
+        int left = len;
+        int right = arr.length - len;
+        Arrays.sort(arr);
+        int sum = 0;
+        for (int i = left; i < right; i++) {
+            // [5 95)
+            sum += arr[i];
+        }
+
+        double v = new Double(sum) / (right - left);
+
+        return v;
+    }
+
 
     /**
      * 670. 最大交换
