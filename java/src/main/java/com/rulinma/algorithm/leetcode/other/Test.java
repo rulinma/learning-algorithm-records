@@ -101,7 +101,6 @@ public class Test {
         return max;
     }
 
-
     public int mySqrt(int x) {
         if (x == 0) {
             return 0;
@@ -252,6 +251,6 @@ public class Test {
 //        System.out.println(new Test().lengthOfLongestSubstring("pwwkew"));
 
 //        System.out.println(new Test().divisorSubstrings(240, 2));
-        System.out.println(new Test().divisorSubstrings(430043, 2));
+//        System.out.println(new Test().divisorSubstrings(430043, 2));
     }
 }
