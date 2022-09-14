@@ -33,6 +33,35 @@ public class Test {
      * 670. 最大交换
      */
     public int maximumSwap(int num) {
+        // 暴力求解
+        if (num < 10) {
+            return num;
+        }
+
+        // 8位
+        char[] arr = String.valueOf(num).toCharArray();
+        int max = num;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i; j < arr.length; j++) {
+                swap(arr, i, j);
+                max = Math.max(max, Integer.parseInt(new String(arr)));
+                swap(arr, i, j);
+            }
+        }
+
+        return max;
+    }
+
+    private void swap(char[] arr, int i, int j) {
+        char t = arr[j];
+        arr[j] = arr[i];
+        arr[i] = t;
+    }
+
+    /**
+     * 670. 最大交换
+     */
+    public int maximumSwap1(int num) {
         if (num % 10 == num) {
             return num;
         }
