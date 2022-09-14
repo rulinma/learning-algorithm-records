@@ -14,7 +14,7 @@ public class BinarySearch {
         int r = num.length;
         while (l + 1 != r) {
             int m = (l + r) / 2;
-            if (num[m] <= target) {
+            if (isBlue(num[m], target)) {
                 l = m;
             } else {
                 r = m;
@@ -22,6 +22,10 @@ public class BinarySearch {
         }
 
         return l;
+    }
+
+    private boolean isBlue(int i, int target) {
+        return i <= target;
     }
 
     public static void main(String[] args) {
