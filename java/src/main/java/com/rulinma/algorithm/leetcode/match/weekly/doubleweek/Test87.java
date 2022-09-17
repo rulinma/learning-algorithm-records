@@ -1,10 +1,40 @@
 package com.rulinma.algorithm.leetcode.match.weekly.doubleweek;
 
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @author 马如林
  * @Data 2022/9/17 22:52
  */
 public class Test87 {
+
+    public int matchPlayersAndTrainers(int[] players, int[] trainers) {
+        int c = 0;
+        Arrays.sort(players);
+        Arrays.sort(trainers);
+
+        Deque<Integer> deque = new LinkedList<>();
+        for (int n : trainers) {
+            deque.add(n);
+        }
+
+        for (int i : players) {
+            // trainers
+            while (!deque.isEmpty()) {
+                if (deque.peek() >= i) {
+                    c++;
+                    deque.poll();
+                    break;
+                }
+                deque.poll();
+            }
+        }
+
+        return c;
+    }
+
 
     public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
         int ans = 0;
