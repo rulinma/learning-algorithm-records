@@ -10,6 +10,9 @@ import java.util.LinkedList;
  */
 public class Test87 {
 
+    /**
+     * 6185. 运动员和训练师的最大匹配数
+     */
     public int matchPlayersAndTrainers(int[] players, int[] trainers) {
         int c = 0;
         Arrays.sort(players);
@@ -35,7 +38,9 @@ public class Test87 {
         return c;
     }
 
-
+    /**
+     * 6184. 统计共同度过的日子数
+     */
     public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
         int ans = 0;
 
