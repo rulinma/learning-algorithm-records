@@ -8,10 +8,58 @@ import java.util.*;
  */
 public class Test310 {
 
+    public int lengthOfLIS(int[] nums, int k) {
+        SegTree st = new SegTree(0, 100005, 0);
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int len = 1 + findMax(st, Math.max(0, nums[i] - k), Math.max(0, nums[i] - 1));
+            ans = Math.max(ans, len);
+            update(st, nums[i], len);
+        }
+        return ans;
+    }
+
+    int findMax(SegTree st, int a, int b) {
+        if (st == null || a > b) {
+            return 0;
+        }
+        int l = st.l, r = st.r;
+        if (l == a && b == r) {
+            return st.max;
+        }
+        int mid = (l + r) >> 1;
+        if (b <= mid) {
+            return findMax(st.left, a, b);
+        }
+        if (a > mid) {
+            return findMax(st.right, a, b);
+        }
+        return Math.max(findMax(st.left, a, mid), findMax(st.right, mid + 1, b));
+    }
+
+    void update(SegTree st, int idx, int a) {
+        st.max = Math.max(st.max, a);
+        int l = st.l, r = st.r, mid = (l + r) >> 1;
+        if (l == r) {
+            return;
+        }
+        if (idx <= mid) {
+            if (st.left == null) {
+                st.left = new SegTree(l, mid, 0);
+            }
+            update(st.left, idx, a);
+        } else {
+            if (st.right == null) {
+                st.right = new SegTree(mid + 1, r, 0);
+            }
+            update(st.right, idx, a);
+        }
+    }
+
     /**
      * 6206. 最长递增子序列 II
      */
-    public int lengthOfLIS(int[] nums, int k) {
+    public int lengthOfLIS1(int[] nums, int k) {
 
         // 下一个比自己大的数，并且差值小于3
         int[] dp = new int[nums.length];
@@ -253,5 +301,16 @@ public class Test310 {
 
         int[] nums2 = new int[]{1, 5};
         System.out.println(new Test310().lengthOfLIS(nums2, 1));
+    }
+}
+
+class SegTree {
+    int l, r, max;
+    SegTree left, right;
+
+    public SegTree(int l, int r, int max) {
+        this.l = l;
+        this.r = r;
+        this.max = max;
     }
 }
