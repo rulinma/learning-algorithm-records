@@ -10,6 +10,21 @@ import java.util.*;
  */
 public class Test {
 
+    public int maxLengthBetweenEqualCharacters(String s) {
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map1 = new HashMap<>();
+        int max = -1;
+        for (char ch : chars) {
+            Integer index = s.indexOf(ch);
+            Integer lastIndex = s.lastIndexOf(ch);
+            max = Math.max(max, lastIndex - index - 1);
+        }
+
+        return max;
+    }
+
+
     public int divisorSubstrings(int num, int k) {
         int ans = 0;
 
