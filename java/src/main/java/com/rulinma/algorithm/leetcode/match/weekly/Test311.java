@@ -10,6 +10,9 @@ import java.util.*;
  */
 public class Test311 {
 
+    /**
+     * 6183. 字符串的前缀分数和
+     */
     public int[] sumPrefixScores(String[] words) {
 
         String[] cp = Arrays.copyOfRange(words, 0, words.length);
