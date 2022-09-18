@@ -14,31 +14,15 @@ public class Test311 {
      * 6183. 字符串的前缀分数和
      */
     public int[] sumPrefixScores(String[] words) {
-
-        String[] cp = Arrays.copyOfRange(words, 0, words.length);
-        Arrays.sort(cp);
-
-        int[] ans = new int[words.length];
-
-        Map<String, Integer> map = new HashMap<>();
-
+        Trie trie = new Trie();
         for (int i = 0; i < words.length; i++) {
-            int sum = 0;
-            String[] rs = getPrefix(words[i]);
-            for (String x : rs) {
-                if (map.get(x) != null) {
-                    sum += map.get(x);
-                } else {
-                    int v = getStrCount(x, cp);
-                    map.put(x, v);
-                    sum += v;
-                }
-            }
-
-            ans[i] = sum;
+            trie.insert(words[i]);
         }
-
-        return ans;
+        int[] answer = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            answer[i] = trie.searchPrefix(words[i]);
+        }
+        return answer;
     }
 
     private int getStrCount(String x, String[] cp) {
@@ -192,5 +176,43 @@ public class Test311 {
         int[] rs = test311.sumPrefixScores(words);
         System.out.println(Arrays.toString(rs));
 
+    }
+}
+
+class Trie {
+    public Trie[] children;
+    public int cnt;
+
+    public Trie() {
+        children = new Trie[26];
+        cnt = 0;
+    }
+
+    public void insert(String word) {
+        Trie node = this;
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            int index = ch - 'a';
+            if (node.children[index] == null) {
+                node.children[index] = new Trie();
+            }
+            node = node.children[index];
+            node.cnt++;
+        }
+    }
+
+    public int searchPrefix(String prefix) {
+        int res = 0;
+        Trie node = this;
+        for (int i = 0; i < prefix.length(); i++) {
+            char ch = prefix.charAt(i);
+            int index = ch - 'a';
+            // if (node.children[index] == null) {
+            //     return res;
+            // }
+            node = node.children[index];
+            res += node.cnt;
+        }
+        return res;
     }
 }
