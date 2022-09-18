@@ -11,9 +11,63 @@ import java.util.*;
 public class Test311 {
 
     public int[] sumPrefixScores(String[] words) {
+
+        String[] cp = Arrays.copyOfRange(words, 0, words.length);
+        Arrays.sort(cp);
+
         int[] ans = new int[words.length];
 
+        Map<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < words.length; i++) {
+            int sum = 0;
+            String[] rs = getPrefix(words[i]);
+            for (String x : rs) {
+                if (map.get(x) != null) {
+                    sum += map.get(x);
+                } else {
+                    int v = getStrCount(x, cp);
+                    map.put(x, v);
+                    sum += v;
+                }
+            }
+
+            ans[i] = sum;
+        }
+
         return ans;
+    }
+
+    private int getStrCount(String x, String[] cp) {
+        int c = 0;
+        for (String s : cp) {
+            if (s.startsWith(x) || s.equals(x)) {
+                c++;
+            }
+
+            // cp: ab abc b bc
+            // ab abc
+//            if (x.compareTo(s) > 0) {
+//                break;
+//            }
+//
+//            if (s.compareTo(x) > 0) {
+//                break;
+//            }
+
+        }
+
+        return c;
+    }
+
+    public String[] getPrefix(String s) {
+        String[] rs = new String[s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            rs[i] = s.substring(0, i + 1);
+        }
+
+        return rs;
     }
 
     public TreeNode reverseOddLevels(TreeNode root) {
@@ -120,16 +174,20 @@ public class Test311 {
 //        int rs = test311.longestContinuousSubstring(s);
 //        System.out.println(rs);
 
-        TreeNode t1 = new TreeNode(7);
-        TreeNode t2 = new TreeNode(13);
-        TreeNode t3 = new TreeNode(11);
+//        TreeNode t1 = new TreeNode(7);
+//        TreeNode t2 = new TreeNode(13);
+//        TreeNode t3 = new TreeNode(11);
+//
+//        t1.left = t2;
+//        t1.right = t3;
+//
+//        TreeNode root = test311.reverseOddLevels(t1);
+//
+//        System.out.println(root);
 
-        t1.left = t2;
-        t1.right = t3;
-
-        TreeNode root = test311.reverseOddLevels(t1);
-
-        System.out.println(root);
+        String[] words = new String[]{"abc", "ab", "bc", "b"};
+        int[] rs = test311.sumPrefixScores(words);
+        System.out.println(Arrays.toString(rs));
 
     }
 }
