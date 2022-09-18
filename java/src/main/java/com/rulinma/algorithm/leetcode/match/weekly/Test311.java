@@ -21,7 +21,6 @@ public class Test311 {
         Deque<TreeNode> deque = new LinkedList<>();
         // 遍历后重新构建
         List<TreeNode> list = new ArrayList<>();
-        list.add(root);
         deque.add(root);
         int level = 0;
         while (!deque.isEmpty()) {
@@ -52,7 +51,6 @@ public class Test311 {
         }
 
         // 根据list重新构建tree
-        list.remove(0);
         buildTree(list.get(0), 0, list);
 
         return root;
