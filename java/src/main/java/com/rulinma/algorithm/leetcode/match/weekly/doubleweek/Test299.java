@@ -11,7 +11,6 @@ public class Test299 {
      */
     public int countHousePlacements(int n) {
         int MOD = (int) 1e9 + 7;
-        int MX = (int) 1e4 + 1;
         int[] f = new int[n + 1];
         if (n == 1) {
             return 4;
