@@ -6,6 +6,9 @@ package com.rulinma.algorithm.leetcode.match.weekly.doubleweek;
  */
 public class Test299 {
 
+    /**
+     * 2320. 统计放置房子的方式数
+     */
     public int countHousePlacements(int n) {
         int MOD = (int) 1e9 + 7;
         int MX = (int) 1e4 + 1;
