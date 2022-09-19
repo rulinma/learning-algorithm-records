@@ -42,11 +42,7 @@ public class Trie {
             node = node.children[index];
         }
 
-        if (node.isEnd == true) {
-            return true;
-        }
-
-        return false;
+        return node.isEnd ;
     }
 
     public boolean startsWith(String prefix) {
