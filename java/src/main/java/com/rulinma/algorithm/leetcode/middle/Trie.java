@@ -5,77 +5,93 @@ package com.rulinma.algorithm.leetcode.middle;
  * @Data 2022/9/19 21:21
  */
 public class Trie {
-
-    private Trie[] children;
-    private boolean isEnd;
+    private Ttree root;
 
     public Trie() {
-        children = new Trie[26];
-        isEnd = false;
+        root = new Ttree();
     }
 
     public void insert(String word) {
-        // 1.
-        Trie node = this;
+        Ttree node = root;
         char[] chars = word.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char ch = chars[i];
+        for (char ch : chars) {
             int index = ch - 'a';
-            if (node.children[index] == null) {
-                node.children[index] = new Trie();
+            if (node.getNodes()[index] == null) {
+                Ttree t = new Ttree();
+                node.getNodes()[index] = t;
             }
-            node = node.children[index];
+            node = node.getNodes()[index];
         }
 
-        node.isEnd = true;
+        node.setEnd(true);
     }
 
     public boolean search(String word) {
-        Trie node = this;
+        Ttree node = root;
         char[] chars = word.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char ch = chars[i];
+        for (char ch : chars) {
             int index = ch - 'a';
-            if (node.children[index] == null) {
+            if (node.getNodes()[index] == null) {
                 return false;
             }
-            node = node.children[index];
+            node = node.getNodes()[index];
         }
 
-        return node.isEnd ;
+        return node.isEnd();
     }
 
     public boolean startsWith(String prefix) {
-        Trie node = this;
+        Ttree node = root;
         char[] chars = prefix.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char ch = chars[i];
+        for (char ch : chars) {
             int index = ch - 'a';
-            if (node.children[index] == null) {
+            if (node.getNodes()[index] == null) {
                 return false;
             }
-            node = node.children[index];
+            node = node.getNodes()[index];
         }
 
         return true;
     }
 
-    public static void main(String[] args) {
-        Trie trie = new Trie();
-        trie.insert("apple");
-        boolean rs = trie.search("apple");
-        // 返回 True
-        System.out.println(rs);
-        rs = trie.search("app");
-        // 返回 False
-        System.out.println(rs);
-        rs = trie.startsWith("app");
-        // 返回 True
-        System.out.println(rs);
-        trie.insert("app");
+//    public static void main(String[] args) {
+//        TrieTree trie = new TrieTree();
+//        trie.insert("apple");
+//        boolean rs = trie.search("apple");
+//        // 返回 True
+//        System.out.println(rs);
+//        rs = trie.search("app");
+//        // 返回 False
+//        System.out.println(rs);
+//        rs = trie.startsWith("app");
+//        // 返回 True
+//        System.out.println(rs);
+//        trie.insert("app");
+//
+//        rs = trie.search("app");
+//        // 返回 True
+//        System.out.println(rs);
+//    }
+}
 
-        rs = trie.search("app");
-        // 返回 True
-        System.out.println(rs);
+
+class Ttree {
+    private Ttree[] nodes = new Ttree[26];
+    private boolean isEnd;
+
+    public Ttree[] getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Ttree[] nodes) {
+        this.nodes = nodes;
+    }
+
+    public boolean isEnd() {
+        return isEnd;
+    }
+
+    public void setEnd(boolean end) {
+        isEnd = end;
     }
 }
