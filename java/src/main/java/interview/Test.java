@@ -9,6 +9,33 @@ import java.util.*;
  * @Data 2022/8/29 10:25
  */
 public class Test {
+    int ans = 0;
+
+    /**
+     * 647. 回文子串
+     * @param s
+     * @return
+     */
+    public int countSubstrings(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            extendPalindrome(s, i, i);
+            extendPalindrome(s, i, i + 1);
+        }
+
+        return ans;
+    }
+
+    public void extendPalindrome(String s, int l, int r) {
+        while (l >= 0  && r < s.length()  && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
+            ans++;
+        }
+    }
 
     /**
      * 49. 字母异位词分组
@@ -27,11 +54,7 @@ public class Test {
             map.put(String.valueOf(chars), list);
         }
 
-        Iterator<String> iterable = map.keySet().iterator();
-        while (iterable.hasNext()) {
-            String key = iterable.next();
-            ans.add(map.get(key));
-        }
+        ans.addAll(map.values());
 
         return ans;
     }
@@ -147,13 +170,17 @@ public class Test {
 //        int[] rs = test.dailyTemperatures(t);
 //        System.out.println(Arrays.toString(rs));
 
-        int[] t = new int[]{1, 1, 1, 2, 2, 3};
-        int[] rs = test.topKFrequent(t, 2);
-        System.out.println(Arrays.toString(rs));
+//        int[] t = new int[]{1, 1, 1, 2, 2, 3};
+//        int[] rs = test.topKFrequent(t, 2);
+//        System.out.println(Arrays.toString(rs));
+//
+//        int[] t1 = new int[]{1};
+//        int[] rs1 = test.topKFrequent(t1, 1);
+//        System.out.println(Arrays.toString(rs1));
 
-        int[] t1 = new int[]{1};
-        int[] rs1 = test.topKFrequent(t1, 1);
-        System.out.println(Arrays.toString(rs1));
+//        System.out.println(test.countSubstrings("abc"));
+        System.out.println(test.countSubstrings("aaa"));
+
     }
 
 }
