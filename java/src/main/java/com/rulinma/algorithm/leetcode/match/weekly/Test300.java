@@ -11,6 +11,33 @@ import java.util.*;
  */
 public class Test300 {
 
+    int MOD = (int) 1e9 + 7;
+
+    public int peopleAwareOfSecret(int n, int delay, int forget) {
+        //dp[i] 表示第 i 天新增了多少人
+        int[] dp = new int[n + 1];
+
+        dp[1] = 1;
+
+        for (int i = 2; i < n + 1; i++) {
+            // 找第 i 天前，能对第 i 天造成影响的日子，
+            // 1. 在 i - forget 以前的新增都忘记了，所以无影响
+            // 2. 在 i -delay 之后的日子，还没有开始传播，所以无影响
+            // 有密码 没有忘记 能传播的人数
+            for (int j = Math.max(i - forget + 1, 0); j <= i - delay; j++) {
+                dp[i] = (dp[i] + dp[j]) % MOD;
+            }
+        }
+
+        int res = 0;
+
+        //第 n 天还剩余的人数，为最后几天新增的人数之和
+        for (int i = n - forget + 1; i <= n; i++) {
+            res = (res + dp[i]) % MOD;
+        }
+        return res;
+    }
+
     /**
      * 2326. 螺旋矩阵 IV
      */
@@ -133,38 +160,45 @@ public class Test300 {
 //        String rs = new Test300().decodeMessage(key, message);
 //        System.out.println(rs);
 
-        int m = 3;
-        int n = 5;
-        ListNode head = new ListNode(3);
-        ListNode l1 = new ListNode(0);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(6);
-        ListNode l4 = new ListNode(8);
-        ListNode l5 = new ListNode(1);
-        ListNode l6 = new ListNode(7);
-        ListNode l7 = new ListNode(9);
-        ListNode l8 = new ListNode(4);
-        ListNode l9 = new ListNode(2);
-        ListNode l10 = new ListNode(5);
-        ListNode l11 = new ListNode(5);
-        ListNode l12 = new ListNode(0);
+//        int m = 3;
+//        int n = 5;
+//        ListNode head = new ListNode(3);
+//        ListNode l1 = new ListNode(0);
+//        ListNode l2 = new ListNode(2);
+//        ListNode l3 = new ListNode(6);
+//        ListNode l4 = new ListNode(8);
+//        ListNode l5 = new ListNode(1);
+//        ListNode l6 = new ListNode(7);
+//        ListNode l7 = new ListNode(9);
+//        ListNode l8 = new ListNode(4);
+//        ListNode l9 = new ListNode(2);
+//        ListNode l10 = new ListNode(5);
+//        ListNode l11 = new ListNode(5);
+//        ListNode l12 = new ListNode(0);
+//
+//        head.next = l1;
+//        l1.next = l2;
+//        l2.next = l3;
+//        l3.next = l4;
+//        l4.next = l5;
+//        l5.next = l6;
+//        l6.next = l7;
+//        l7.next = l8;
+//        l8.next = l9;
+//        l9.next = l10;
+//        l10.next = l11;
+//        l11.next = l12;
+//
+//        int[][] ans = new Test300().spiralMatrix(m, n, head);
+//
+//        System.out.println(ans);
 
-        head.next = l1;
-        l1.next = l2;
-        l2.next = l3;
-        l3.next = l4;
-        l4.next = l5;
-        l5.next = l6;
-        l6.next = l7;
-        l7.next = l8;
-        l8.next = l9;
-        l9.next = l10;
-        l10.next = l11;
-        l11.next = l12;
+        int n = 6, delay = 2, forget = 4;
+        Test300 test300 = new Test300();
+        int rs = test300.peopleAwareOfSecret(n, delay, forget);
+        System.out.println(rs);
 
-        int[][] ans = new Test300().spiralMatrix(m, n, head);
-
-        System.out.println(ans);
+        System.out.println(test300.peopleAwareOfSecret(4, 1, 3));
     }
 
 }
