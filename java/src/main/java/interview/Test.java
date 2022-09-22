@@ -11,6 +11,32 @@ import java.util.*;
  */
 public class Test {
 
+    /**
+     * 49. 字母异位词分组
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ans = new ArrayList<>();
+
+        // 每个字符串进行再排序，如果相同放入到同一组中
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String s : strs) {
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            List<String> list = map.getOrDefault(String.valueOf(chars), new ArrayList<>());
+            list.add(s);
+            map.put(String.valueOf(chars), list);
+        }
+
+        Iterator<String> iterable = map.keySet().iterator();
+        while (iterable.hasNext()) {
+            String key = iterable.next();
+            ans.add(map.get(key));
+        }
+
+        return ans;
+    }
+
     public int[] topKFrequent(int[] nums, int k) {
         int[] ans = new int[k];
 
@@ -36,7 +62,6 @@ public class Test {
 
         return ans;
     }
-
 
     public int[] dailyTemperatures(int[] temperatures) {
         // 单调栈
