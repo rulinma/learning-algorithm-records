@@ -37,6 +37,9 @@ public class Test {
         return ans;
     }
 
+    /**
+     * 347. 前 K 个高频元素
+     */
     public int[] topKFrequent(int[] nums, int k) {
         int[] ans = new int[k];
 
