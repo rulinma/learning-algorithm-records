@@ -3,6 +3,8 @@ package interview;
 import javafx.util.Pair;
 
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -11,10 +13,57 @@ import java.util.Stack;
  */
 public class Test {
 
+    public int[] dailyTemperatures(int[] temperatures) {
+        // 单调栈
+        int[] ans = new int[temperatures.length];
+
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!deque.isEmpty() && temperatures[i] > temperatures[deque.peek()]) {
+                // 弹出deque
+                int index = deque.pop();
+                ans[index] = i - index;
+            }
+            // 插入当前值
+            deque.push(i);
+        }
+
+        // 栈的剩余元素补0
+        while (!deque.isEmpty()) {
+            ans[deque.pop()] = 0;
+        }
+
+        return ans;
+    }
+
+    public int[] dailyTemperatures2(int[] temperatures) {
+        // 单调栈
+        int[] ans = new int[temperatures.length];
+
+        Stack<Integer> deque = new Stack<>();
+        // 后续一旦>stack顶元素，则弹出栈内元素<val, index>
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!deque.isEmpty() && temperatures[i] > temperatures[deque.peek()]) {
+                // 弹出deque
+                int index = deque.pop();
+                ans[index] = i - index;
+            }
+            // 插入当前值
+            deque.add(i);
+        }
+
+        // 栈的剩余元素补0
+        while (!deque.isEmpty()) {
+            ans[deque.pop()] = 0;
+        }
+
+        return ans;
+    }
+
     /**
      * 739. 每日温度
      */
-    public int[] dailyTemperatures(int[] temperatures) {
+    public int[] dailyTemperatures1(int[] temperatures) {
         // 单调栈
         int[] ans = new int[temperatures.length];
 
