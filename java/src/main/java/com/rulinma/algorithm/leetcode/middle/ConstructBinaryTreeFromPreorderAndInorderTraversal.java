@@ -2,6 +2,9 @@ package com.rulinma.algorithm.leetcode.middle;
 
 import com.rulinma.algorithm.leetcode.common.TreeNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 105. 从前序与中序遍历序列构造二叉树
  * <p>
@@ -37,31 +40,57 @@ import com.rulinma.algorithm.leetcode.common.TreeNode;
  */
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return buildNode(preorder, 0, preorder.length, inorder, 0, inorder.length);
+        Map<Integer, Integer> map = new HashMap<>();
+        int i = 0;
+        for (int x : inorder) {
+            map.put(x, i++);
+        }
+
+        return buildTree(preorder, 0, preorder.length - 1, map, 0, inorder.length - 1);
     }
 
-    public TreeNode buildNode(int[] preorder, int pStart, int pEnd, int[] inorder, int iStart, int iEnd) {
-        if (pStart == pEnd) {
+    private TreeNode buildTree(int[] preorder, int preStart, int preEnd, Map<Integer, Integer> map, int iStart, int iEnd) {
+        if (preStart > preEnd) {
             return null;
         }
 
-        TreeNode treeNode = new TreeNode(preorder[pStart]);
-        // 查找inorder
-        int num = 0;
-        for (int i = iStart; i < iEnd; i++) {
-            if (inorder[i] == preorder[pStart]) {
-                num = i;
-                break;
-            }
-        }
-        int leftNum = num - iStart;
+        TreeNode treeNode = new TreeNode(preorder[preStart]);
 
-        treeNode.left = buildNode(preorder, pStart + 1, pStart + leftNum + 1, inorder, iStart, num);
-        treeNode.right = buildNode(preorder, pStart + leftNum + 1, pEnd, inorder, num + 1, iEnd);
+        int pivot = map.get(preorder[preStart]);
+
+        treeNode.left = buildTree(preorder, preStart + 1, pivot - iStart + preStart, map, iStart, pivot - 1);
+        treeNode.right = buildTree(preorder, pivot - iStart + preStart + 1, preEnd, map, pivot + 1, iEnd);
 
         return treeNode;
     }
+
+//    public TreeNode buildTree(int[] preorder, int[] inorder) {
+//        return buildNode(preorder, 0, preorder.length, inorder, 0, inorder.length);
+//    }
+//
+//    public TreeNode buildNode(int[] preorder, int pStart, int pEnd, int[] inorder, int iStart, int iEnd) {
+//        if (pStart == pEnd) {
+//            return null;
+//        }
+//
+//        TreeNode treeNode = new TreeNode(preorder[pStart]);
+//        // 查找inorder
+//        int num = 0;
+//        for (int i = iStart; i < iEnd; i++) {
+//            if (inorder[i] == preorder[pStart]) {
+//                num = i;
+//                break;
+//            }
+//        }
+//        int leftNum = num - iStart;
+//
+//        treeNode.left = buildNode(preorder, pStart + 1, pStart + leftNum + 1, inorder, iStart, num);
+//        treeNode.right = buildNode(preorder, pStart + leftNum + 1, pEnd, inorder, num + 1, iEnd);
+//
+//        return treeNode;
+//    }
 
 
 //
