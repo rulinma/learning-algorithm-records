@@ -9,10 +9,64 @@ import java.util.*;
  * @Data 2022/8/29 10:25
  */
 public class Test {
+
+    public int maximalNetworkRank(int n, int[][] roads) {
+        // n1 + n2 - 1 相邻节点的所有联通数 取最大值
+        int max = 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        boolean[][] edges = new boolean[n][n];
+        for (int[] x : roads) {
+            int r = x[0];
+            int c = x[1];
+            edges[r][c] = true;
+            edges[c][r] = true;
+            int count = map.getOrDefault(r, 0);
+            map.put(r, count + 1);
+
+            int count1 = map.getOrDefault(c, 0);
+            map.put(c, count1 + 1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                if (edges[i][j]) {
+                    int rs = map.getOrDefault(i,0) + map.getOrDefault(j,0) - 1;
+                    max = Math.max(rs, max);
+                } else {
+                    int rs = map.getOrDefault(i,0) + map.getOrDefault(j,0) ;
+                    max = Math.max(rs, max);
+                }
+            }
+        }
+
+        return max;
+    }
+
+    public int maxDepth(String s) {
+        int depth = 0;
+        char[] chars = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : chars) {
+            if (ch == ')') {
+                depth = Math.max(depth, stack.size());
+                stack.pop();
+            } else if (ch == '(') {
+                stack.push(ch);
+            }
+        }
+
+        return depth;
+    }
+
+
     int ans = 0;
 
     /**
      * 647. 回文子串
+     *
      * @param s
      * @return
      */
@@ -30,7 +84,7 @@ public class Test {
     }
 
     public void extendPalindrome(String s, int l, int r) {
-        while (l >= 0  && r < s.length()  && s.charAt(l) == s.charAt(r)) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
             l--;
             r++;
             ans++;
