@@ -8,6 +8,58 @@ import java.util.*;
  */
 public class Test312 {
 
+    int rs = 0;
+
+    public int numberOfGoodPaths(int[] vals, int[][] edges) {
+        // graph
+
+        // 1. 开始==结束
+        // 2. 中间节点小于开始和结束
+        // bfs
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int[] e : edges) {
+            int e0 = e[0];
+            int e1 = e[1];
+            List<Integer> list1 = map.getOrDefault(e0, new ArrayList<>());
+            list1.add(e1);
+            map.put(e0, list1);
+
+            List<Integer> list2 = map.getOrDefault(e1, new ArrayList<>());
+            list2.add(e0);
+            map.put(e1, list2);
+        }
+
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < vals.length; i++) {
+            bfs(vals, edges, list, i, map);
+        }
+
+
+        return rs;
+    }
+
+    public void bfs(int[] vals, int[][] edges, List<Integer> list, Integer node, Map<Integer, List<Integer>> map) {
+        if (list.isEmpty()) {
+            rs++;
+            list.add(node);
+            return;
+        } else if (!list.isEmpty() && list.get(list.size() - 1) <= node && list.get(0).equals(node)) {
+            rs++;
+            return;
+        }
+
+        // 选择边
+        while (map.get(node) != null) {
+            List<Integer> es = map.getOrDefault(node, new ArrayList<>());
+            for (Integer i : es) {
+                bfs(vals, edges, list, i, map);
+            }
+        }
+
+        // 移除选择边
+    }
+
     /**
      * 6190. 找到所有好下标
      */
