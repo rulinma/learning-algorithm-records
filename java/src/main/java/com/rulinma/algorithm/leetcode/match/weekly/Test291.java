@@ -38,7 +38,6 @@ public class Test291 {
         return ans + 1;
     }
 
-
     /**
      * 2259. 移除指定数字得到的最大结果
      */
