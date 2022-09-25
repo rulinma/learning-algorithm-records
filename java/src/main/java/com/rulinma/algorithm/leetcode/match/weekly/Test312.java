@@ -19,9 +19,7 @@ public class Test312 {
         if (k > maxI) {
             return ans;
         }
-
 //        nums = [2,1,1,1,3,4,1], k = 2
-
         // i的k个之前非递增的和k个之后非递减的  2k+1 个元素
         // 获取每个元素的非递增个数
         int[] a = new int[nums.length];
