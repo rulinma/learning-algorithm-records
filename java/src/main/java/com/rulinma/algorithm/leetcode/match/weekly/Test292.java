@@ -39,4 +39,7 @@ public class Test292 {
         return max;
     }
 
+    public static void main(String[] args) {
+
+    }
 }
