@@ -10,6 +10,13 @@ import java.util.Map;
  */
 public class Test291 {
 
+    public int countDistinct(int[] nums, int k, int p) {
+        int ans = 0;
+
+
+        return ans;
+    }
+
     /**
      * 2260. 必须拿起的最小连续卡牌数
      */
