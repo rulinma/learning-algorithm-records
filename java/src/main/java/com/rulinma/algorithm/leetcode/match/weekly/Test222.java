@@ -9,6 +9,9 @@ import java.util.Comparator;
  */
 public class Test222 {
 
+    /**
+     * 面试题 01.02. 判定是否互为字符重排
+     */
     public boolean CheckPermutation(String s1, String s2) {
         if (s1.length() != s2.length()) {
             return false;
