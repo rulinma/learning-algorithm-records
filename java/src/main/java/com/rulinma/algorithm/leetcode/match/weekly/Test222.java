@@ -9,6 +9,51 @@ import java.util.Comparator;
  */
 public class Test222 {
 
+    public boolean CheckPermutation(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        int[] cnt = new int[26];
+
+        char[] chars1 = s1.toCharArray();
+        char[] chars2 = s2.toCharArray();
+
+        for (int i = 0; i < s1.length(); i++) {
+            cnt[chars1[i] - 'a']++;
+        }
+
+        for (int i = 0; i < s2.length(); i++) {
+            cnt[chars2[i] - 'a']--;
+            if (cnt[chars2[i] - 'a'] < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    public boolean CheckPermutation1(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        char[] chars1 = s1.toCharArray();
+        char[] chars2 = s2.toCharArray();
+
+        Arrays.sort(chars1);
+        Arrays.sort(chars2);
+
+//        for (int i = 0; i < s1.length(); i++) {
+//            if (chars1[i] != chars2[i]) {
+//                return false;
+//            }
+//        }
+        return Arrays.equals(chars1, chars2);
+//        return true;
+    }
+
     /**
      * 1710. 卡车上的最大单元数
      */
@@ -44,12 +89,11 @@ public class Test222 {
     }
 
     public static void main(String[] args) {
-        int[][] boxTypes = new int[][]{{1, 3}, { 2, 2 }, {3, 1}};
+        int[][] boxTypes = new int[][]{{1, 3}, {2, 2}, {3, 1}};
 
         Test222 test222 = new Test222();
 //        int rs = test222.maximumUnits(boxTypes, 4);
 //        System.out.println(rs);
-
 
 
     }
