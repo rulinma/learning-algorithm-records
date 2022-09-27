@@ -47,9 +47,11 @@ public class Test222 {
         int[][] boxTypes = new int[][]{{1, 3}, { 2, 2 }, {3, 1}};
 
         Test222 test222 = new Test222();
-        int rs = test222.maximumUnits(boxTypes, 4);
-        System.out.println(rs);
+//        int rs = test222.maximumUnits(boxTypes, 4);
+//        System.out.println(rs);
+
+
 
     }
 
-    }
+}
