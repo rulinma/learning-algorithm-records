@@ -1,13 +1,36 @@
 package com.rulinma.algorithm.leetcode.match.weekly;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * @author 马如林
  * @Data 2022/9/26 11:22
  */
 public class Test222 {
+
+    public int getKthMagicNumber(int k) {
+        int[] i = new int[]{3, 5, 7};
+        int ans = 1;
+        int j = 0;
+        PriorityQueue<Long> priorityQueue = new PriorityQueue<>();
+        Set<Long> set = new HashSet<>();
+        priorityQueue.add(1L);
+        j = 1;
+
+        while (j <= k) {
+            long m = priorityQueue.poll();
+            ans = (int) m;
+            for (int x : i) {
+                long r = m * x;
+                if (set.add(r)) {
+                    priorityQueue.add(r);
+                }
+            }
+            j++;
+        }
+
+        return ans;
+    }
 
     /**
      * 面试题 01.02. 判定是否互为字符重排
