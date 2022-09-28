@@ -8,6 +8,9 @@ import java.util.*;
  */
 public class Test222 {
 
+    /**
+     * 面试题 17.09. 第 k 个数
+     */
     public int getKthMagicNumber(int k) {
         int[] i = new int[]{3, 5, 7};
         int ans = 1;
